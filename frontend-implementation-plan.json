@@ -1,0 +1,90 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add Internet Identity Auth, User Registration, Profile Modal, Admin Panel, and React Query Hooks",
+  "requirements": [
+    {
+      "id": "REQ-27",
+      "summary": "Add Internet Identity sign-in/sign-out UI to the Header component with profile-triggered modal opening",
+      "acceptanceCriteria": [
+        "'Sign In' button is visible in the header when not authenticated",
+        "Clicking 'Sign In' triggers the Internet Identity login flow",
+        "After login, the header shows the user's name or truncated principal",
+        "A 'Sign Out' option is available and logs the user out",
+        "If no profile exists after login, the ProfileModal is opened automatically"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Add Internet Identity authentication UI to the Header. When not authenticated, display a 'Sign In' button styled with brand colors (#FFD700/#FF8C42). When authenticated, show a small avatar icon with the user's name (from useMyProfile hook) or a truncated principal if no profile exists, along with an inline or dropdown 'Sign Out' option. Use the existing useInternetIdentity hook to manage auth state. On successful login, check if the user has a profile using useMyProfile; if the profile is null, open the ProfileModal. Ensure proper loading states are handled to prevent flashing content."
+        }
+      ]
+    },
+    {
+      "id": "REQ-28",
+      "summary": "Create a ProfileModal component for first-time user registration with service area selection",
+      "acceptanceCriteria": [
+        "Modal renders as a centered overlay with semi-transparent backdrop",
+        "Form has Full Name, Phone Number, and Service Area fields",
+        "Service Area select lists all six localities",
+        "'Save Profile' calls registerUser and closes modal on success",
+        "React Query profile cache is invalidated after successful save",
+        "'Skip for now' closes modal without any backend call",
+        "Design matches dark theme with #FFD700/#FF8C42 accents"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ProfileModal.tsx",
+          "operation": "create",
+          "description": "Create a ProfileModal component that appears as a centered modal overlay. The modal must contain a form with three fields: Full Name (text input), Phone Number (text input), and Service Area (select with options: Mahipalpur Extension, Mahipalpur Village, Aerocity, Vasant Kunj, Rangpuri, Nagal Dewat). Include a 'Save Profile' button that calls the useRegisterUser mutation hook with the form data, then closes the modal and invalidates the React Query profile cache on success. Include a 'Skip for now' link that dismisses the modal without saving. Style the modal with a dark theme: #111111 background, #FFD700/#FF8C42 accents for buttons and highlights, white text, and a semi-transparent backdrop. Ensure the modal accepts isOpen and onClose props for external control."
+        }
+      ]
+    },
+    {
+      "id": "REQ-29",
+      "summary": "Create an AdminPage component with user management and feedback deletion capabilities",
+      "acceptanceCriteria": [
+        "Navigating to /admin while unauthenticated shows 'Access Denied' with a home link",
+        "Navigating to /admin as a non-admin authenticated user shows 'Access Denied'",
+        "Admin user sees a Registered Users table with all specified columns",
+        "Admin user sees a Customer Feedback table with all specified columns",
+        "Delete button on feedback row calls deleteFeedback and refreshes the list",
+        "Delete button on user row calls deleteUser and refreshes the list",
+        "Both tables use React Query with the authenticated actor",
+        "Design matches dark theme specification"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AdminPage.tsx",
+          "operation": "create",
+          "description": "Create an AdminPage component that checks if the authenticated user is an admin using the isCallerAdmin backend capability via React Query. If not authenticated or not admin, display an 'Access Denied' message with a link back to the homepage. For admin users, display two tables: (1) 'Registered Users' table with columns for Principal (truncated), Name, Phone, Service Area, Signup Date, and a Delete button per row that calls the useDeleteUser mutation hook; (2) 'Customer Feedback' table with columns for Reviewer Name, Rating (stars), Message, Date, and a Delete button per row that calls the useDeleteFeedback mutation hook. Both tables are fetched via the useAllUsers and useAllFeedback React Query hooks. Style the page with a dark theme: #0d0d0d background, #FFD700/#FF8C42 accents, and white text."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add a /admin route to the application routing structure (using hash-based routing or React Router consistent with existing patterns). Import and render the AdminPage component at this route. Ensure the route is accessible from the navigation or by direct URL entry."
+        }
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "summary": "Add React Query hooks for user profile and admin operations",
+      "acceptanceCriteria": [
+        "`useMyProfile` returns the current user's profile when authenticated, disabled when no actor",
+        "`useAllUsers` returns all users when authenticated, disabled when no actor",
+        "`useRegisterUser` mutation calls registerUser and invalidates the profile cache on success",
+        "`useDeleteUser` mutation calls deleteUser and invalidates the users list cache on success",
+        "`useDeleteFeedback` mutation calls deleteFeedback and invalidates the feedback cache on success",
+        "All hooks follow the existing actor/query patterns in useQueries.ts"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add React Query hooks for the new backend capabilities: (1) useMyProfile() — fetches the authenticated user's profile using getMyProfile() from the actor, enabled only when the actor is available and not fetching; use the same pattern as other hooks to prevent profile modal flashing by checking actorFetching state; (2) useAllUsers() — fetches all registered users using getUsers() from the actor, enabled only when the authenticated actor is available; (3) useRegisterUser() — a mutation hook that calls registerUser(name, phone, area) on the actor and invalidates the 'currentUserProfile' query key on success; (4) useDeleteUser() — a mutation hook that calls deleteUser(principal) on the actor and invalidates the users list query on success; (5) useDeleteFeedback() — a mutation hook that calls deleteFeedback(id) on the actor and invalidates the feedback list query on success. Follow the existing useActor hook pattern for all implementations."
+        }
+      ]
+    }
+  ]
+}
