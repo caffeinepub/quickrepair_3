@@ -1,75 +1,77 @@
-import { SiWhatsapp } from 'react-icons/si';
-import { LucideIcon } from 'lucide-react';
+import React from 'react';
+import { MessageCircle, Clock } from 'lucide-react';
+import { useFadeIn } from '../hooks/useFadeIn';
 
-interface ServiceCardProps {
+const WHATSAPP_NUMBER = '919999999999';
+
+interface Service {
+  id: number;
+  icon: string;
   name: string;
-  price: string;
-  icon: LucideIcon;
   description: string;
-  whatsappMessage: string;
-  delay?: number;
+  price: string;
+  duration: string;
+  popular: boolean;
 }
 
-export default function ServiceCard({
-  name,
-  price,
-  icon: Icon,
-  description,
-  whatsappMessage,
-  delay = 0,
-}: ServiceCardProps) {
+interface ServiceCardProps {
+  service: Service;
+  index: number;
+}
+
+export default function ServiceCard({ service, index }: ServiceCardProps) {
+  const { ref, isVisible } = useFadeIn();
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%2C%20I%20want%20to%20book%20${encodeURIComponent(service.name)}%20service.`;
+
   return (
-    <a
-      href={`https://wa.me/8447978940?text=${encodeURIComponent(whatsappMessage)}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="service-card block rounded-2xl p-6 cursor-pointer group"
-      style={{
-        backgroundColor: '#161616',
-        border: '1px solid #252525',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.4)',
-        animationDelay: `${delay}ms`,
-      }}
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`white-card white-card-hover rounded-2xl p-6 transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+      style={{ transitionDelay: `${index * 80}ms` }}
     >
-      {/* Icon */}
-      <div
-        className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110"
-        style={{
-          background: 'linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,66,0.15))',
-          border: '1px solid rgba(255,140,66,0.2)',
-        }}
-      >
-        <Icon className="w-7 h-7" style={{ color: '#FF8C42' }} />
-      </div>
-
-      {/* Content */}
-      <h3 className="text-white font-bold text-lg mb-1 group-hover:text-brand-yellow transition-colors duration-200">
-        {name}
-      </h3>
-      <p className="text-gray-500 text-sm mb-4 leading-relaxed">{description}</p>
-
-      {/* Price & CTA */}
-      <div className="flex items-center justify-between">
-        <div>
-          <span className="text-xs text-gray-600 uppercase tracking-wider">Starting at</span>
-          <div
-            className="text-2xl font-black"
-            style={{ color: '#FFD700' }}
-          >
-            ₹{price}
-          </div>
-        </div>
+      {/* Popular Badge */}
+      {service.popular && (
         <div
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 group-hover:scale-105"
-          style={{
-            backgroundColor: '#25D366',
-            color: '#fff',
-          }}
+          className="inline-flex items-center gap-1 text-xs font-bold text-black px-3 py-1 rounded-full mb-3"
+          style={{ background: 'linear-gradient(135deg, #FFD700, #FF8C42)' }}
         >
-          <SiWhatsapp className="w-4 h-4" />
-          Book
+          ⭐ Most Popular
+        </div>
+      )}
+
+      {/* Icon */}
+      <div className="text-4xl mb-3">{service.icon}</div>
+
+      {/* Name */}
+      <h3 className="text-lg font-bold text-gray-900 mb-2 font-heading">{service.name}</h3>
+
+      {/* Description */}
+      <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
+
+      {/* Price & Duration */}
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-xl font-black" style={{ color: '#FF8C42' }}>
+          {service.price}
+        </span>
+        <div className="flex items-center gap-1 text-gray-500 text-sm">
+          <Clock size={14} />
+          <span>{service.duration}</span>
         </div>
       </div>
-    </a>
+
+      {/* Book Button */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-sm text-black transition-all hover:scale-105 active:scale-95"
+        style={{ background: 'linear-gradient(135deg, #FFD700, #FF8C42)' }}
+      >
+        <MessageCircle size={16} />
+        Book Now
+      </a>
+    </div>
   );
 }

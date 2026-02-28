@@ -1,87 +1,50 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-27T16:51:04.929Z",
-  "summary": "The diff implements the four main requirements (REQ-26 through REQ-30) with most features present. However, several specific acceptance criteria are not fully met: the admin principal constant is not a simple hardcoded value at the top of main.mo (it is delegated to an AccessControl module), the deleteFeedback implementation has a bug (uses removeLast instead of removing the matched entry), and several unrequested features were added including an AccessControl module, migration file, and extra hooks.",
+  "generatedAt": "2026-02-28T14:39:18.778Z",
+  "summary": "The diff implements both REQ-36 (English text conversion) and REQ-37 (white accent design) across all major components. All visible text is in English, white-card CSS classes are applied to service cards, FAQ items, feedback cards, HowItWorks step cards, ContactSection cards, and AboutSection cards. Brand accent colors #FFD700/#FF8C42 are preserved. Form inputs in ProfileModal and ScrollRatingPopup have white/light borders. However, some specific acceptance criteria need closer examination — notably section dividers between major sections and HowItWorksSection connector lines with white accents.",
   "missing_requirements": [
     {
-      "id": "REQ-26",
-      "requirement": "Admin principal constant must be defined at the top of the actor, initially set to '2vxsx-fae' with a comment instructing the deployer to replace it with their actual Internet Identity principal.",
-      "reason": "The diff uses an AccessControl module and MixinAuthorization mixin instead of a hardcoded admin principal constant at the top of the actor. There is no literal '2vxsx-fae' constant with a replacement comment visible in backend/main.mo.",
+      "requirement": "Add white/light-tinted section dividers or subtle white borders between major sections (REQ-37 AC: Section background alternates or uses subtle white accents/borders to separate sections)",
+      "reason": "The diff shows sections using bg-background and bg-surface-50 alternating, and border-y border-white/10 on TrustStatsBar, but no explicit white-tinted section divider elements are inserted between major sections in App.tsx or individual section components.",
       "evidence": [
-        "backend/main.mo"
+        "frontend/src/App.tsx",
+        "frontend/src/index.css"
       ]
     },
     {
-      "id": "REQ-26",
-      "requirement": "deleteFeedback removes the feedback entry with the matching id.",
-      "reason": "The implementation finds the matching index but then calls feedbackStore.removeLast() instead of removing the item at the found index. This means a non-last entry with the given id would not be correctly deleted.",
+      "requirement": "HowItWorksSection connector lines between steps should use white/light accents (REQ-37 item 3)",
+      "reason": "The HowItWorksSection shows no connector line elements between the 3 step cards. The relative div wrapper is present but no horizontal connector line with white/light styling is implemented.",
       "evidence": [
-        "backend/main.mo"
+        "frontend/src/components/HowItWorksSection.tsx"
       ]
     }
   ],
-  "hallucinated_features": [
-    {
-      "description": "AccessControl module and MixinAuthorization mixin for admin checking, plus _initializeAccessControlWithSecret and isCallerAdmin() backend functions, and a caffeineAdminToken URL parameter mechanism.",
-      "reason": "The build request only asked for a single hardcoded admin principal constant with a simple equality check. The diff introduces a full AccessControl/authorization module system, secret token initialization, and an isCallerAdmin query — none of which were requested.",
-      "evidence": [
-        "backend/main.mo",
-        "frontend/src/hooks/useActor.ts",
-        "frontend/src/hooks/useQueries.ts",
-        "frontend/src/utils/urlParams.ts"
-      ]
-    },
-    {
-      "description": "getCallerUserProfile(), saveCallerUserProfile(), and getUserProfile(user: Principal) backend functions.",
-      "reason": "The build request only asked for registerUser, getMyProfile, getUsers, deleteUser, and deleteFeedback. These additional profile functions were not requested.",
-      "evidence": [
-        "backend/main.mo"
-      ]
-    },
-    {
-      "description": "backend/migration.mo file for migrating old feedback store format.",
-      "reason": "The build request did not ask for a migration module. It only asked to add an id field to stored feedback. A separate migration.mo file was not requested.",
-      "evidence": [
-        "backend/migration.mo"
-      ]
-    },
-    {
-      "description": "useAllFeedbackAdmin hook in useQueries.ts for admin feedback fetching.",
-      "reason": "The build request specified hooks: useMyProfile, useAllUsers, useRegisterUser, useDeleteUser, useDeleteFeedback. A separate useAllFeedbackAdmin hook was not requested.",
-      "evidence": [
-        "frontend/src/hooks/useQueries.ts",
-        "frontend/src/components/AdminPage.tsx"
-      ]
-    },
-    {
-      "description": "useIsCallerAdmin React Query hook that calls actor.isCallerAdmin().",
-      "reason": "The build request did not request this hook. Admin status was to be determined by comparing the authenticated principal to the hardcoded constant on the frontend side.",
-      "evidence": [
-        "frontend/src/hooks/useQueries.ts",
-        "frontend/src/components/AdminPage.tsx"
-      ]
-    },
-    {
-      "description": "frontend/src/utils/urlParams.ts utility with URL parameter, sessionStorage persistence, and secret token extraction functions.",
-      "reason": "This utility was not requested in any of the requirements. It appears added to support the hallucinated AccessControl token mechanism.",
-      "evidence": [
-        "frontend/src/utils/urlParams.ts"
-      ]
-    }
-  ],
+  "hallucinated_features": [],
   "confidence": 0.78,
   "changed_files": [
-    "backend/main.mo",
-    "backend/migration.mo",
     "frontend-file-summaries.txt",
     "frontend/src/App.tsx",
+    "frontend/src/components/AboutSection.tsx",
     "frontend/src/components/AdminPage.tsx",
+    "frontend/src/components/ContactSection.tsx",
+    "frontend/src/components/FAQSection.tsx",
+    "frontend/src/components/FeedbackSection.tsx",
+    "frontend/src/components/FloatingCallButton.tsx",
+    "frontend/src/components/FloatingWhatsAppButton.tsx",
+    "frontend/src/components/Footer.tsx",
     "frontend/src/components/Header.tsx",
+    "frontend/src/components/HeroSection.tsx",
+    "frontend/src/components/HowItWorksSection.tsx",
+    "frontend/src/components/NavigationDrawer.tsx",
     "frontend/src/components/ProfileModal.tsx",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/utils/urlParams.ts",
+    "frontend/src/components/ScrollLoginPopup.tsx",
+    "frontend/src/components/ScrollRatingPopup.tsx",
+    "frontend/src/components/ServiceCard.tsx",
+    "frontend/src/components/ServicesSection.tsx",
+    "frontend/src/components/TrustStatsBar.tsx",
+    "frontend/src/index.css",
+    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

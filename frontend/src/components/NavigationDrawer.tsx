@@ -1,107 +1,99 @@
-import { useScrollSpy } from '../hooks/useScrollSpy';
-import { SiWhatsapp } from 'react-icons/si';
-import { Home, Wrench, Info, Phone, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { MessageCircle, Phone } from 'lucide-react';
 
 interface NavigationDrawerProps {
   isOpen: boolean;
-  onClose: () => void;
+  activeSection: string;
+  onNavClick: (sectionId: string) => void;
 }
 
 const navItems = [
-  { id: 'home', label: 'Home', icon: Home },
-  { id: 'services', label: 'Services', icon: Wrench },
-  { id: 'about', label: 'About', icon: Info },
-  { id: 'contact', label: 'Contact', icon: Phone },
+  { id: 'home', label: 'Home', emoji: '🏠' },
+  { id: 'services', label: 'Services', emoji: '🔧' },
+  { id: 'about', label: 'About', emoji: '⭐' },
+  { id: 'how-it-works', label: 'How It Works', emoji: '📋' },
+  { id: 'contact', label: 'Contact', emoji: '📞' },
+  { id: 'faq', label: 'FAQ', emoji: '❓' },
+  { id: 'feedback', label: 'Reviews', emoji: '💬' },
 ];
 
-export default function NavigationDrawer({ isOpen, onClose }: NavigationDrawerProps) {
-  const activeSection = useScrollSpy(['home', 'services', 'about', 'contact']);
+const WHATSAPP_NUMBER = '919999999999';
+const PHONE_NUMBER = '+91-99999-99999';
 
-  const handleNavClick = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    onClose();
-  };
+export default function NavigationDrawer({ isOpen, activeSection, onNavClick }: NavigationDrawerProps) {
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%2C%20I%20need%20car%20repair%20service.`;
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-72 z-50 flex flex-col transition-transform duration-300 ease-in-out md:hidden ${
+      className={`fixed top-0 right-0 h-full w-72 z-50 transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
-      style={{ backgroundColor: '#161616', borderLeft: '1px solid #252525' }}
+      style={{ background: 'oklch(14% 0.025 260)' }}
     >
-      {/* Drawer Header */}
-      <div
-        className="flex items-center justify-between px-6 py-5 border-b"
-        style={{ borderColor: '#252525' }}
-      >
-        <div className="flex items-center gap-1">
-          <span className="font-display text-xl font-black" style={{ color: '#FFD700' }}>Quick</span>
-          <span className="font-display text-xl font-black" style={{ color: '#FF8C42' }}>Repair</span>
-        </div>
-        <button
-          onClick={onClose}
-          className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-200"
-          aria-label="Close menu"
-        >
-          ✕
-        </button>
+      {/* Header */}
+      <div className="p-6 border-b border-white/10">
+        <img
+          src="/assets/generated/quickrepair-logo.dim_400x120.png"
+          alt="QuickRepair"
+          className="h-8 w-auto"
+        />
       </div>
 
       {/* Nav Items */}
-      <nav className="flex-1 px-4 py-6 space-y-1">
-        {navItems.map(({ id, label, icon: Icon }) => {
-          const isActive = activeSection === id;
-          return (
-            <button
-              key={id}
-              onClick={() => handleNavClick(id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 group ${
-                isActive
-                  ? 'text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-white/5'
-              }`}
-              style={isActive ? {
-                background: 'linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,66,0.15))',
-                borderLeft: '3px solid #FF8C42',
-              } : {}}
-            >
-              <Icon
-                className="w-5 h-5 flex-shrink-0"
-                style={{ color: isActive ? '#FF8C42' : undefined }}
-              />
-              <span className="font-medium text-sm">{label}</span>
-              {isActive && (
-                <ChevronRight className="w-4 h-4 ml-auto" style={{ color: '#FF8C42' }} />
-              )}
-            </button>
-          );
-        })}
-
-        {/* Become a Mechanic */}
-        <div className="pt-4">
-          <a
-            href="https://wa.me/8447978940?text=Hi%2C%20I%20want%20to%20become%20a%20mechanic%20at%20QuickRepair"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={onClose}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-95"
-            style={{
-              background: 'linear-gradient(135deg, #FFD700, #FF8C42)',
-              color: '#0d0d0d',
-            }}
+      <nav className="p-4 space-y-1">
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => onNavClick(item.id)}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-all ${
+              activeSection === item.id
+                ? 'text-black'
+                : 'text-white/70 hover:text-white hover:bg-white/10'
+            }`}
+            style={
+              activeSection === item.id
+                ? { background: 'linear-gradient(135deg, #FFD700, #FF8C42)', color: '#000' }
+                : {}
+            }
           >
-            <SiWhatsapp className="w-5 h-5" />
-            <span>Become a Mechanic</span>
-          </a>
-        </div>
+            <span className="text-xl">{item.emoji}</span>
+            <span>{item.label}</span>
+          </button>
+        ))}
       </nav>
 
-      {/* Drawer Footer */}
-      <div className="px-6 py-4 border-t" style={{ borderColor: '#252525' }}>
-        <p className="text-xs text-gray-500 text-center">
-          📞 <a href="tel:8447978940" className="hover:text-gray-300 transition-colors">8447978940</a>
-        </p>
-        <p className="text-xs text-gray-600 text-center mt-1">8 AM – 8 PM, All Days</p>
+      {/* Divider */}
+      <div className="mx-4 border-t border-white/10 my-2" />
+
+      {/* Become a Mechanic */}
+      <div className="px-4 py-2">
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=I%20want%20to%20become%20a%20mechanic%20partner.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-all font-medium"
+        >
+          <span className="text-xl">🔩</span>
+          <span>Become a Mechanic</span>
+        </a>
+      </div>
+
+      {/* Footer */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hello%2C%20I%20need%20car%20repair%20service.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-black mb-3"
+          style={{ background: 'linear-gradient(135deg, #FFD700, #FF8C42)' }}
+        >
+          <MessageCircle size={18} />
+          Book on WhatsApp
+        </a>
+        <div className="flex items-center justify-center gap-2 text-white/50 text-sm">
+          <Phone size={14} />
+          <span>{PHONE_NUMBER}</span>
+        </div>
       </div>
     </div>
   );

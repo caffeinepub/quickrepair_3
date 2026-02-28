@@ -1,119 +1,134 @@
-import typography from '@tailwindcss/typography';
-import containerQueries from '@tailwindcss/container-queries';
-import animate from 'tailwindcss-animate';
-
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ['class'],
-  content: ['index.html', 'src/**/*.{js,ts,jsx,tsx,html,css}'],
+  darkMode: ["class"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px'
-      }
-    },
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Poppins', 'Inter', 'sans-serif'],
+        heading: ['Poppins', 'system-ui', 'sans-serif'],
       },
       colors: {
-        border: 'oklch(var(--border))',
-        input: 'oklch(var(--input))',
-        ring: 'oklch(var(--ring) / <alpha-value>)',
-        background: 'oklch(var(--background))',
-        foreground: 'oklch(var(--foreground))',
+        background: 'oklch(var(--background) / <alpha-value>)',
+        foreground: 'oklch(var(--foreground) / <alpha-value>)',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
         primary: {
-          DEFAULT: 'oklch(var(--primary) / <alpha-value>)',
-          foreground: 'oklch(var(--primary-foreground))'
+          DEFAULT: 'oklch(82% 0.18 85)',
+          foreground: 'oklch(15% 0.02 260)',
         },
         secondary: {
-          DEFAULT: 'oklch(var(--secondary) / <alpha-value>)',
-          foreground: 'oklch(var(--secondary-foreground))'
+          DEFAULT: 'oklch(70% 0.16 55)',
+          foreground: 'oklch(15% 0.02 260)',
         },
         destructive: {
-          DEFAULT: 'oklch(var(--destructive) / <alpha-value>)',
-          foreground: 'oklch(var(--destructive-foreground))'
+          DEFAULT: 'oklch(55% 0.22 25)',
+          foreground: 'oklch(95% 0.01 260)',
         },
         muted: {
-          DEFAULT: 'oklch(var(--muted) / <alpha-value>)',
-          foreground: 'oklch(var(--muted-foreground) / <alpha-value>)'
+          DEFAULT: 'oklch(22% 0.02 260)',
+          foreground: 'oklch(65% 0.02 260)',
         },
         accent: {
-          DEFAULT: 'oklch(var(--accent) / <alpha-value>)',
-          foreground: 'oklch(var(--accent-foreground))'
+          DEFAULT: 'oklch(82% 0.18 85)',
+          foreground: 'oklch(15% 0.02 260)',
         },
         popover: {
-          DEFAULT: 'oklch(var(--popover))',
-          foreground: 'oklch(var(--popover-foreground))'
+          DEFAULT: 'oklch(16% 0.025 260)',
+          foreground: 'oklch(95% 0.01 260)',
         },
         card: {
-          DEFAULT: 'oklch(var(--card))',
-          foreground: 'oklch(var(--card-foreground))'
+          DEFAULT: 'oklch(16% 0.025 260)',
+          foreground: 'oklch(95% 0.01 260)',
+          light: 'oklch(99% 0.002 260)',
+          'light-foreground': 'oklch(15% 0.02 260)',
         },
+        // Brand colors
         brand: {
           yellow: '#FFD700',
           orange: '#FF8C42',
-          green: '#25D366',
-          'green-dark': '#128C7E',
         },
+        // Surface shades
         surface: {
-          1: '#0d0d0d',
-          2: '#161616',
-          3: '#1e1e1e',
-          4: '#252525',
-        }
+          50: 'oklch(18% 0.02 260)',
+          100: 'oklch(20% 0.025 260)',
+          200: 'oklch(24% 0.025 260)',
+          300: 'oklch(30% 0.03 260)',
+          400: 'oklch(45% 0.03 260)',
+          500: 'oklch(55% 0.03 260)',
+          600: 'oklch(65% 0.03 260)',
+          700: 'oklch(75% 0.02 260)',
+          800: 'oklch(85% 0.01 260)',
+          900: 'oklch(92% 0.01 260)',
+        },
+        // White card
+        'white-card': 'oklch(99% 0.002 260)',
+        'white-card-border': 'oklch(88% 0.01 260)',
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        sm: 'calc(var(--radius) - 4px)',
       },
       boxShadow: {
-        xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
-        card: '0 4px 24px rgba(0,0,0,0.4)',
-        'card-hover': '0 20px 40px rgba(255,140,66,0.2), 0 8px 16px rgba(0,0,0,0.4)',
-        glow: '0 0 20px rgba(255,215,0,0.3)',
-        'glow-orange': '0 0 20px rgba(255,140,66,0.3)',
+        'card': '0 2px 12px oklch(8% 0.02 260 / 0.15)',
+        'card-hover': '0 8px 32px oklch(8% 0.02 260 / 0.25)',
+        'white-card': '0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.10)',
+        'white-card-hover': '0 8px 32px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.12)',
+        'glow-yellow': '0 0 20px rgba(255, 215, 0, 0.3)',
+        'glow-orange': '0 0 20px rgba(255, 140, 66, 0.3)',
       },
       keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' }
+        slideUpFadeIn: {
+          from: { opacity: '0', transform: 'translateY(40px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' }
+        bounceIn: {
+          '0%': { opacity: '0', transform: 'scale(0.3)' },
+          '50%': { opacity: '1', transform: 'scale(1.05)' },
+          '70%': { transform: 'scale(0.9)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
-        'fade-in-up': {
-          from: { opacity: '0', transform: 'translateY(30px)' },
-          to: { opacity: '1', transform: 'translateY(0)' }
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
         },
-        'fade-in': {
-          from: { opacity: '0' },
-          to: { opacity: '1' }
+        particleFloat: {
+          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)', opacity: '0.6' },
+          '33%': { transform: 'translateY(-20px) rotate(120deg)', opacity: '1' },
+          '66%': { transform: 'translateY(-10px) rotate(240deg)', opacity: '0.8' },
         },
         'pulse-ring': {
-          '0%': { boxShadow: '0 0 0 0 rgba(37,211,102,0.6)' },
-          '70%': { boxShadow: '0 0 0 16px rgba(37,211,102,0)' },
-          '100%': { boxShadow: '0 0 0 0 rgba(37,211,102,0)' }
+          '0%': { transform: 'scale(1)', opacity: '0.8' },
+          '100%': { transform: 'scale(1.6)', opacity: '0' },
         },
-        'slide-in-right': {
-          from: { transform: 'translateX(100%)' },
-          to: { transform: 'translateX(0)' }
-        }
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        scaleIn: {
+          from: { opacity: '0', transform: 'scale(0.92)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
       },
       animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in-up': 'fade-in-up 0.7s ease-out forwards',
-        'fade-in': 'fade-in 0.5s ease-out forwards',
-        'pulse-ring': 'pulse-ring 2s infinite',
-        'slide-in-right': 'slide-in-right 0.3s ease-out',
-      }
-    }
+        'slide-up': 'slideUpFadeIn 0.7s ease forwards',
+        'bounce-in': 'bounceIn 0.6s ease forwards',
+        'shimmer': 'shimmer 1.5s infinite',
+        'particle': 'particleFloat 4s ease-in-out infinite',
+        'pulse-ring': 'pulse-ring 1.5s ease-out infinite',
+        'fade-in': 'fadeIn 0.3s ease forwards',
+        'scale-in': 'scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+      },
+    },
   },
-  plugins: [typography, containerQueries, animate]
-};
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/container-queries'),
+  ],
+}

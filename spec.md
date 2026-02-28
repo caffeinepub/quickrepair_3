@@ -1,13 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Add Internet Identity authentication, user registration with a profile modal, an admin panel, and React Query hooks to the QuickRepair application.
+**Goal:** Convert all website text to English and enhance the dark theme with white color accents across all components.
 
 **Planned changes:**
-- Extend the Motoko backend (`backend/main.mo`) with `registerUser`, `getMyProfile`, `getUsers`, `deleteUser`, and `deleteFeedback` functions; add a hardcoded admin principal constant (`"2vxsx-fae"`); add a unique Nat `id` field to stored feedback entries
-- Update the `Header` component to show a "Sign In" / "Sign Out" button using the existing `useInternetIdentity` hook; display the user's name or truncated principal when authenticated; auto-open ProfileModal on first login when no profile exists
-- Create `ProfileModal.tsx`: a centered dark-themed modal with Full Name, Phone Number, and Service Area (six localities) fields; "Save Profile" calls `registerUser` and invalidates the profile cache; "Skip for now" dismisses without saving
-- Create `AdminPage.tsx` and add a `/admin` route; show "Access Denied" to unauthenticated or non-admin users; show a Registered Users table and a Customer Feedback table with delete actions per row; both tables fetched via React Query
-- Add React Query hooks to `frontend/src/hooks/useQueries.ts`: `useMyProfile`, `useAllUsers`, `useRegisterUser` mutation, `useDeleteUser` mutation, and `useDeleteFeedback` mutation
+- Replace all non-English (Hindi/mixed) text with English equivalents in every component: HeroSection, ServicesSection, AboutSection, ContactSection, FAQSection, FeedbackSection, HowItWorksSection, TrustStatsBar, Header, NavigationDrawer, Footer, ScrollLoginPopup, ScrollRatingPopup, ProfileModal, FloatingCallButton, FloatingWhatsAppButton
+- Apply white/off-white card backgrounds to service cards, feedback review cards, FAQ accordion items, HowItWorksSection step cards, and ContactSection info cards, with dark text for contrast
+- Add subtle white borders or dividers between major sections
+- Use white/light accents on TrustStatsBar labels and HowItWorksSection connector lines
+- Give form inputs in FeedbackSection, ProfileModal, and ScrollRatingPopup white or light-bordered styling
+- Preserve existing #FFD700 and #FF8C42 accent colors on headings, icons, badges, and CTA buttons
 
-**User-visible outcome:** Users can sign in with Internet Identity, complete a profile on first login, and view their session in the header. An admin visiting `/admin` can view all registered users and feedback entries and delete individual records.
+**User-visible outcome:** The entire website displays in English, and the visual design presents an attractive dark-and-white mixed theme with white card surfaces contrasting against the dark background, while retaining the original brand accent colors.

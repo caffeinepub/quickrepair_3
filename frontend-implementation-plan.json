@@ -1,88 +1,192 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add Internet Identity Auth, User Registration, Profile Modal, Admin Panel, and React Query Hooks",
+  "title": "Convert all website content to English and add white color accents to the design",
   "requirements": [
     {
-      "id": "REQ-27",
-      "summary": "Add Internet Identity sign-in/sign-out UI to the Header component with profile-triggered modal opening",
+      "id": "REQ-36",
+      "summary": "Convert all user-facing text throughout the website to English, replacing any Hindi, mixed-language, or non-English text with clear English equivalents",
       "acceptanceCriteria": [
-        "'Sign In' button is visible in the header when not authenticated",
-        "Clicking 'Sign In' triggers the Internet Identity login flow",
-        "After login, the header shows the user's name or truncated principal",
-        "A 'Sign Out' option is available and logs the user out",
-        "If no profile exists after login, the ProfileModal is opened automatically"
+        "Every visible text element across all components is in English",
+        "HeroSection headline, tagline, and CTA buttons are in English",
+        "NavigationDrawer and Header menu items are in English",
+        "ServicesSection card titles, descriptions, and CTA are in English",
+        "AboutSection, ContactSection, FAQSection, FeedbackSection headings and body text are in English",
+        "HowItWorksSection step titles and descriptions are in English",
+        "TrustStatsBar labels are in English",
+        "ScrollLoginPopup and ScrollRatingPopup text, prompts, and buttons are in English",
+        "Footer copyright and nav links are in English",
+        "ProfileModal form labels and buttons are in English",
+        "No Hindi or mixed-language strings remain in any rendered component"
       ],
       "file_operations": [
+        {
+          "path": "frontend/src/components/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Convert the Hindi headline text (currently 'महीपलपुर में कार रिपेयर' or similar) to English equivalent (e.g., 'Car Repair in Mahipalpur'), convert tagline and subtitle text to English, convert WhatsApp and call CTA button labels to English, and convert stats row labels (happy customers, response time, rating) to English"
+        },
         {
           "path": "frontend/src/components/Header.tsx",
           "operation": "modify",
-          "description": "Add Internet Identity authentication UI to the Header. When not authenticated, display a 'Sign In' button styled with brand colors (#FFD700/#FF8C42). When authenticated, show a small avatar icon with the user's name (from useMyProfile hook) or a truncated principal if no profile exists, along with an inline or dropdown 'Sign Out' option. Use the existing useInternetIdentity hook to manage auth state. On successful login, check if the user has a profile using useMyProfile; if the profile is null, open the ProfileModal. Ensure proper loading states are handled to prevent flashing content."
-        }
-      ]
-    },
-    {
-      "id": "REQ-28",
-      "summary": "Create a ProfileModal component for first-time user registration with service area selection",
-      "acceptanceCriteria": [
-        "Modal renders as a centered overlay with semi-transparent backdrop",
-        "Form has Full Name, Phone Number, and Service Area fields",
-        "Service Area select lists all six localities",
-        "'Save Profile' calls registerUser and closes modal on success",
-        "React Query profile cache is invalidated after successful save",
-        "'Skip for now' closes modal without any backend call",
-        "Design matches dark theme with #FFD700/#FF8C42 accents"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/ProfileModal.tsx",
-          "operation": "create",
-          "description": "Create a ProfileModal component that appears as a centered modal overlay. The modal must contain a form with three fields: Full Name (text input), Phone Number (text input), and Service Area (select with options: Mahipalpur Extension, Mahipalpur Village, Aerocity, Vasant Kunj, Rangpuri, Nagal Dewat). Include a 'Save Profile' button that calls the useRegisterUser mutation hook with the form data, then closes the modal and invalidates the React Query profile cache on success. Include a 'Skip for now' link that dismisses the modal without saving. Style the modal with a dark theme: #111111 background, #FFD700/#FF8C42 accents for buttons and highlights, white text, and a semi-transparent backdrop. Ensure the modal accepts isOpen and onClose props for external control."
-        }
-      ]
-    },
-    {
-      "id": "REQ-29",
-      "summary": "Create an AdminPage component with user management and feedback deletion capabilities",
-      "acceptanceCriteria": [
-        "Navigating to /admin while unauthenticated shows 'Access Denied' with a home link",
-        "Navigating to /admin as a non-admin authenticated user shows 'Access Denied'",
-        "Admin user sees a Registered Users table with all specified columns",
-        "Admin user sees a Customer Feedback table with all specified columns",
-        "Delete button on feedback row calls deleteFeedback and refreshes the list",
-        "Delete button on user row calls deleteUser and refreshes the list",
-        "Both tables use React Query with the authenticated actor",
-        "Design matches dark theme specification"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/AdminPage.tsx",
-          "operation": "create",
-          "description": "Create an AdminPage component that checks if the authenticated user is an admin using the isCallerAdmin backend capability via React Query. If not authenticated or not admin, display an 'Access Denied' message with a link back to the homepage. For admin users, display two tables: (1) 'Registered Users' table with columns for Principal (truncated), Name, Phone, Service Area, Signup Date, and a Delete button per row that calls the useDeleteUser mutation hook; (2) 'Customer Feedback' table with columns for Reviewer Name, Rating (stars), Message, Date, and a Delete button per row that calls the useDeleteFeedback mutation hook. Both tables are fetched via the useAllUsers and useAllFeedback React Query hooks. Style the page with a dark theme: #0d0d0d background, #FFD700/#FF8C42 accents, and white text."
+          "description": "Convert any navigation menu item labels to English if they contain Hindi or mixed-language text, convert login/logout button text to English, and convert profile dropdown menu items to English"
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/NavigationDrawer.tsx",
           "operation": "modify",
-          "description": "Add a /admin route to the application routing structure (using hash-based routing or React Router consistent with existing patterns). Import and render the AdminPage component at this route. Ensure the route is accessible from the navigation or by direct URL entry."
+          "description": "Convert all navigation link labels (Services, About, Contact, FAQ, etc.) to English, convert the 'Become a Mechanic' link text to English, and convert footer phone label text to English"
+        },
+        {
+          "path": "frontend/src/components/ServicesSection.tsx",
+          "operation": "modify",
+          "description": "Convert the section heading to English (e.g., 'Our Services'), convert the bottom WhatsApp CTA button text to English, and ensure all ServiceCard component props pass English text for service names and descriptions"
+        },
+        {
+          "path": "frontend/src/components/ServiceCard.tsx",
+          "operation": "modify",
+          "description": "Convert the 'Book Now' or equivalent WhatsApp booking button text to English if it contains Hindi"
+        },
+        {
+          "path": "frontend/src/components/AboutSection.tsx",
+          "operation": "modify",
+          "description": "Convert the section heading to English (e.g., 'About Us' or 'Why Choose Us'), convert all highlight card titles (response time, verified experts, fixed pricing, coverage area) to English, and convert card descriptions to English"
+        },
+        {
+          "path": "frontend/src/components/HowItWorksSection.tsx",
+          "operation": "modify",
+          "description": "Convert the section heading to English (e.g., 'How It Works'), convert all three step titles (Book, Mechanic Arrives, Problem Solved) to English, convert step descriptions to English, and convert the bottom WhatsApp CTA button text to English"
+        },
+        {
+          "path": "frontend/src/components/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Convert the section heading to English (e.g., 'Contact Us'), convert all contact card labels (phone, email, hours) to English, convert service area list heading to English, and convert all area names to English where applicable"
+        },
+        {
+          "path": "frontend/src/components/FAQSection.tsx",
+          "operation": "modify",
+          "description": "Convert the section heading to English (e.g., 'Frequently Asked Questions'), convert all nine FAQ question texts to English, and convert all FAQ answer texts to English"
+        },
+        {
+          "path": "frontend/src/components/FeedbackSection.tsx",
+          "operation": "modify",
+          "description": "Convert the section heading to English (e.g., 'Customer Reviews' or 'What Our Customers Say'), convert the feedback form heading to English, convert form labels (name, rating, message) to English, convert placeholder text to English, convert submit button text to English, and convert any hardcoded sample review text to English"
+        },
+        {
+          "path": "frontend/src/components/TrustStatsBar.tsx",
+          "operation": "modify",
+          "description": "Convert all stat labels to English (e.g., 'Happy Customers', 'Minutes Response Time', 'Average Rating')"
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Convert copyright text to English, convert navigation link labels to English, convert WhatsApp booking button text to English, and ensure the caffeine.ai attribution text is in English"
+        },
+        {
+          "path": "frontend/src/components/ScrollLoginPopup.tsx",
+          "operation": "modify",
+          "description": "Convert the popup heading to English (e.g., 'Join QuickRepair'), convert feature highlight text to English, convert login prompt text to English, convert login button text to English, and convert close button aria-label to English"
+        },
+        {
+          "path": "frontend/src/components/ScrollRatingPopup.tsx",
+          "operation": "modify",
+          "description": "Convert the popup heading to English (e.g., 'Rate Your Experience'), convert form labels (name, rating, comment) to English, convert placeholder text to English, convert submit button text to English, convert success/error messages to English, and convert close button aria-label to English"
+        },
+        {
+          "path": "frontend/src/components/ProfileModal.tsx",
+          "operation": "modify",
+          "description": "Convert modal heading to English (e.g., 'Complete Your Profile'), convert form field labels (name, phone, area) to English, convert placeholder text to English, convert dropdown options to English, convert submit button text to English, and convert validation error messages to English"
+        },
+        {
+          "path": "frontend/src/components/FloatingCallButton.tsx",
+          "operation": "modify",
+          "description": "Convert button aria-label or tooltip text to English (e.g., 'Call Us Now')"
+        },
+        {
+          "path": "frontend/src/components/FloatingWhatsAppButton.tsx",
+          "operation": "modify",
+          "description": "Convert button aria-label or tooltip text to English (e.g., 'Chat on WhatsApp')"
+        },
+        {
+          "path": "frontend/src/components/AdminPage.tsx",
+          "operation": "modify",
+          "description": "Convert page heading to English (e.g., 'Admin Dashboard'), convert user list and feedback list headings to English, convert table column headers to English, convert delete button text to English, and convert any empty state or loading messages to English"
         }
       ]
     },
     {
-      "id": "REQ-30",
-      "summary": "Add React Query hooks for user profile and admin operations",
+      "id": "REQ-37",
+      "summary": "Enhance the visual design by mixing white accents into the existing dark theme with white card backgrounds, light borders, and subtle white section dividers while preserving #FFD700/#FF8C42 brand colors",
       "acceptanceCriteria": [
-        "`useMyProfile` returns the current user's profile when authenticated, disabled when no actor",
-        "`useAllUsers` returns all users when authenticated, disabled when no actor",
-        "`useRegisterUser` mutation calls registerUser and invalidates the profile cache on success",
-        "`useDeleteUser` mutation calls deleteUser and invalidates the users list cache on success",
-        "`useDeleteFeedback` mutation calls deleteFeedback and invalidates the feedback cache on success",
-        "All hooks follow the existing actor/query patterns in useQueries.ts"
+        "Service cards have a white or near-white card background with readable dark text",
+        "Feedback review cards use a white/light card background contrasting against the dark section background",
+        "FAQ accordion items have a white or light-surfaced background when viewed",
+        "HowItWorksSection step cards use white/light card backgrounds",
+        "ContactSection info cards use white/light card backgrounds",
+        "Form inputs have white or light borders/backgrounds for clear visibility",
+        "Section background alternates or uses subtle white accents/borders to separate sections",
+        "Brand accent colors #FFD700 and #FF8C42 are preserved on headings, icons, badges, and CTA buttons",
+        "No contrast issues: dark text is used on white/light surfaces, white text on dark surfaces",
+        "The overall page appears as an attractive dark-and-white mixed theme, not purely dark"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useQueries.ts",
+          "path": "frontend/src/components/ServiceCard.tsx",
           "operation": "modify",
-          "description": "Add React Query hooks for the new backend capabilities: (1) useMyProfile() — fetches the authenticated user's profile using getMyProfile() from the actor, enabled only when the actor is available and not fetching; use the same pattern as other hooks to prevent profile modal flashing by checking actorFetching state; (2) useAllUsers() — fetches all registered users using getUsers() from the actor, enabled only when the authenticated actor is available; (3) useRegisterUser() — a mutation hook that calls registerUser(name, phone, area) on the actor and invalidates the 'currentUserProfile' query key on success; (4) useDeleteUser() — a mutation hook that calls deleteUser(principal) on the actor and invalidates the users list query on success; (5) useDeleteFeedback() — a mutation hook that calls deleteFeedback(id) on the actor and invalidates the feedback list query on success. Follow the existing useActor hook pattern for all implementations."
+          "description": "Change card background from dark (current bg-surface or bg-surface-variant) to white or near-white (bg-white or bg-gray-50/95), change text color to dark (text-gray-900 or text-gray-800) for readability, ensure icon and price retain brand accent colors (#FFD700 or #FF8C42), add subtle shadow or border for card definition against dark page background, and verify sufficient contrast between white card and surrounding dark section"
+        },
+        {
+          "path": "frontend/src/components/ServicesSection.tsx",
+          "operation": "modify",
+          "description": "Ensure section heading and description text use white or light colors against the dark background, preserve brand accent colors on the heading or decorative elements, and confirm the grid of ServiceCards renders with white/light card backgrounds"
+        },
+        {
+          "path": "frontend/src/components/FeedbackSection.tsx",
+          "operation": "modify",
+          "description": "Change customer review card backgrounds to white or near-white (bg-white or bg-gray-50), change review text and star ratings to dark colors for readability on white cards, update form input fields to have white or light backgrounds with subtle borders, ensure form labels and headings are white/light against the dark section background, preserve brand accent colors on submit button and decorative elements, and add subtle shadows or borders to cards for visual separation"
+        },
+        {
+          "path": "frontend/src/components/AboutSection.tsx",
+          "operation": "modify",
+          "description": "Change highlight card backgrounds from dark to white or near-white (bg-white or bg-gray-50), change card text to dark colors (text-gray-900 or text-gray-800), preserve brand accent colors (#FFD700 or #FF8C42) on icons and key metrics, ensure section heading uses white/light text against dark background, and add subtle borders or shadows to cards for definition"
+        },
+        {
+          "path": "frontend/src/components/HowItWorksSection.tsx",
+          "operation": "modify",
+          "description": "Change step card backgrounds to white or near-white (bg-white or bg-gray-50), change step text to dark colors for readability, preserve brand accent colors on step numbers and icons, ensure connector lines between steps use white/light accents, ensure section heading is white/light against dark background, and add subtle shadows to step cards"
+        },
+        {
+          "path": "frontend/src/components/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Change contact info card backgrounds (phone, email, hours) to white or near-white (bg-white or bg-gray-50), change card text to dark colors, preserve brand accent colors on icons, ensure section heading and area list text are white/light against dark background, and add subtle borders or shadows to cards"
+        },
+        {
+          "path": "frontend/src/components/FAQSection.tsx",
+          "operation": "modify",
+          "description": "Change FAQ accordion item backgrounds to white or near-white when expanded or always visible, change question and answer text to dark colors for readability on white surfaces, preserve brand accent colors on expand/collapse icons or decorators, ensure section heading is white/light against dark background, and add subtle borders between FAQ items"
+        },
+        {
+          "path": "frontend/src/components/ProfileModal.tsx",
+          "operation": "modify",
+          "description": "Ensure modal background is white or near-white, change all form input fields to have white backgrounds with light borders, ensure text labels and headings are dark for readability inside the white modal, preserve brand accent colors on the submit button, and add proper contrast for form validation messages"
+        },
+        {
+          "path": "frontend/src/components/ScrollRatingPopup.tsx",
+          "operation": "modify",
+          "description": "Ensure popup modal background is white or near-white, change form input fields (name, rating, message) to white backgrounds with light borders, ensure text and labels are dark for readability on white surface, preserve brand accent colors on submit button and star rating elements, and verify proper contrast for all text"
+        },
+        {
+          "path": "frontend/src/components/TrustStatsBar.tsx",
+          "operation": "modify",
+          "description": "Add white/light accent borders or dividers between stat items, ensure stat numbers and labels use appropriate contrast (white text if bar is dark, dark text if bar is light), and preserve brand accent colors on key numbers or icons"
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add new CSS custom properties or utility classes for white card backgrounds (e.g., --card-light: oklch(98% 0 0)), add utility classes for light borders and dividers (e.g., border-white/10), ensure existing brand accent color tokens (#FFD700, #FF8C42) remain unchanged, and add any global card shadow or border styles needed for white cards on dark backgrounds"
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend the theme with white/light card background colors if needed (e.g., 'card-light': 'oklch(98% 0 0)' or 'rgba(255,255,255,0.95)'), add light border color variants (e.g., 'border-light': 'rgba(255,255,255,0.1)'), ensure brand accent colors remain in the palette, and add any custom box-shadow utilities for cards if not already present"
         }
       ]
     }

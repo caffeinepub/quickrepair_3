@@ -1,166 +1,124 @@
-import { useEffect, useState } from 'react';
-import { SiWhatsapp } from 'react-icons/si';
-import { Clock, MapPin, Star } from 'lucide-react';
+import React from 'react';
+import { Phone, MessageCircle, Star, Clock, Users, ChevronDown } from 'lucide-react';
+
+const WHATSAPP_NUMBER = '919999999999';
+const PHONE_NUMBER = '+91-99999-99999';
 
 export default function HeroSection() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%2C%20I%20need%20car%20repair%20service%20in%20Mahipalpur.`;
 
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#0d0d0d' }}
+      style={{
+        backgroundImage: 'url(/assets/generated/hero-bg.dim_1440x900.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
     >
-      {/* Background image with overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url(/assets/generated/hero-bg.dim_1440x900.png)',
-        }}
-      />
-      {/* Dark gradient overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.75) 50%, rgba(13,13,13,0.88) 100%)',
-        }}
-      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
 
-      {/* Decorative glow */}
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #FF8C42, transparent)' }}
-      />
+      {/* Particle effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              width: `${6 + (i % 3) * 4}px`,
+              height: `${6 + (i % 3) * 4}px`,
+              background: i % 2 === 0 ? '#FFD700' : '#FF8C42',
+              left: `${10 + i * 11}%`,
+              top: `${20 + (i % 4) * 15}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${3 + i * 0.4}s`,
+              opacity: 0.4,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         {/* Badge */}
-        <div
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
-          style={{
-            background: 'rgba(255,140,66,0.15)',
-            border: '1px solid rgba(255,140,66,0.4)',
-            color: '#FF8C42',
-            transitionDelay: '0ms',
-          }}
-        >
-          <Clock className="w-4 h-4" />
-          <span>10-Minute Response Guaranteed</span>
+        <div className="hero-animate hero-animate-1 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
+          <span className="text-2xl">🔧</span>
+          <span className="text-white/90 text-sm font-medium">Mahipalpur's #1 Car Repair Service</span>
+          <span className="text-2xl">⭐</span>
         </div>
 
-        {/* Main heading */}
-        <h1
-          className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-4 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '150ms' }}
-        >
-          <span style={{ color: '#FFD700' }}>Quick</span>
-          <span style={{ color: '#FF8C42' }}>Repair</span>
+        {/* Main Headline */}
+        <h1 className="hero-animate hero-animate-2 text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-4 font-heading">
+          Car Repair in{' '}
+          <span
+            className="relative inline-block"
+            style={{ color: '#FFD700' }}
+          >
+            Mahipalpur
+            <span
+              className="absolute bottom-0 left-0 h-1 rounded-full"
+              style={{
+                background: 'linear-gradient(90deg, #FFD700, #FF8C42)',
+                animation: 'underlineWipe 1s ease 0.8s forwards',
+                width: '0%',
+              }}
+            />
+          </span>
         </h1>
 
         {/* Tagline */}
-        <p
-          className={`text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-3 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '250ms' }}
-        >
-          10 Minute Service at Your Doorstep
+        <p className="hero-animate hero-animate-3 text-lg md:text-2xl text-white/85 mb-3 font-medium">
+          Fast • Reliable • Affordable
         </p>
-
-        <p
-          className={`text-base sm:text-lg text-gray-400 mb-8 max-w-xl mx-auto transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '350ms' }}
-        >
-          Professional home repair services in Mahipalpur, Delhi. Fast, reliable, and affordable.
+        <p className="hero-animate hero-animate-3 text-base md:text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+          Expert mechanics at your doorstep — AC repair, engine service, tyre change & more. Available 7 days a week.
         </p>
 
         {/* CTA Buttons */}
-        <div
-          className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '450ms' }}
-        >
+        <div className="hero-animate hero-animate-4 flex flex-col sm:flex-row gap-4 justify-center mb-10">
           <a
-            href="https://wa.me/8447978940?text=Hi%2C%20I%20need%20a%20service%20from%20QuickRepair"
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(37,211,102,0.4)] active:scale-95"
-            style={{
-              backgroundColor: '#25D366',
-              color: '#fff',
-            }}
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-lg text-black shadow-lg hover:scale-105 active:scale-95 transition-transform"
+            style={{ background: 'linear-gradient(135deg, #FFD700, #FF8C42)' }}
           >
-            <SiWhatsapp className="w-6 h-6" />
-            Book Now on WhatsApp
+            <MessageCircle size={22} />
+            Book on WhatsApp
           </a>
-
           <a
-            href="#services"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold text-base transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{
-              border: '2px solid rgba(255,215,0,0.5)',
-              color: '#FFD700',
-              backgroundColor: 'rgba(255,215,0,0.08)',
-            }}
+            href={`tel:${PHONE_NUMBER}`}
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-lg text-white border-2 border-white/40 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:scale-105 active:scale-95 transition-all"
           >
-            View Services
+            <Phone size={22} />
+            Call Now
           </a>
         </div>
 
-        {/* Stats */}
-        <div
-          className={`flex flex-wrap justify-center gap-6 sm:gap-10 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '550ms' }}
-        >
+        {/* Stats Row */}
+        <div className="hero-animate hero-animate-5 flex flex-wrap justify-center gap-6 md:gap-10">
           {[
-            { icon: Clock, value: '10 Min', label: 'Response Time' },
-            { icon: Star, value: '5 Services', label: 'Available' },
-            { icon: MapPin, value: '6 Areas', label: 'Covered' },
-          ].map(({ icon: Icon, value, label }) => (
-            <div key={label} className="flex items-center gap-2 text-center">
-              <Icon className="w-5 h-5" style={{ color: '#FF8C42' }} />
+            { icon: <Users size={20} />, value: '500+', label: 'Happy Customers' },
+            { icon: <Clock size={20} />, value: '30 min', label: 'Response Time' },
+            { icon: <Star size={20} />, value: '4.9★', label: 'Average Rating' },
+          ].map((stat, i) => (
+            <div key={i} className="flex items-center gap-2 text-white/90">
+              <span style={{ color: '#FFD700' }}>{stat.icon}</span>
               <div className="text-left">
-                <div className="text-white font-bold text-sm">{value}</div>
-                <div className="text-gray-500 text-xs">{label}</div>
+                <div className="font-bold text-lg leading-tight">{stat.value}</div>
+                <div className="text-xs text-white/60">{stat.label}</div>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-700 ${
-          visible ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ transitionDelay: '700ms' }}
-      >
-        <span className="text-xs text-gray-500 tracking-widest uppercase">Scroll</span>
-        <div
-          className="w-0.5 h-8 rounded-full"
-          style={{
-            background: 'linear-gradient(to bottom, #FF8C42, transparent)',
-            animation: 'pulse 2s infinite',
-          }}
-        />
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator">
+        <ChevronDown size={32} className="text-white/50" />
       </div>
     </section>
   );

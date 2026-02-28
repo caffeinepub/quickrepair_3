@@ -1,91 +1,121 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-27T16:51:04.935Z",
+  "generatedAt": "2026-02-28T14:39:18.786Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 5,
-    "implemented": 4,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-26",
-        "summary": "Extend the Motoko backend actor in backend/main.mo with user registration and admin-only functions: (1) `registerUser(name: Text, phone: Text, area: Text)` — stores a user profile keyed by the caller's principal, recording name, phone, service area, and signup timestamp; if the principal already exists, update the profile; (2) `getMyProfile()` — returns the caller's own profile as an optional record; (3) `getUsers()` — admin-only, returns all registered user profiles as an array; (4) `deleteUser(p: Principal)` — admin-only, removes the user profile for the given principal; (5) `deleteFeedback(id: Nat)` — admin-only, removes the feedback entry with the matching id (add an id field to stored feedback if not already present). Admin-only functions must check that the caller's principal matches a hardcoded admin principal constant defined at the top of the actor, initially set to `\"2vxsx-fae\"` with a comment instructing the deployer to replace it with their actual Internet Identity principal.",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-27",
-        "summary": "Add Internet Identity sign-in/sign-out UI to the Header component (`frontend/src/components/Header.tsx`). When the user is not authenticated, show a 'Sign In' button styled with brand colors (#FFD700/#FF8C42). When authenticated, show a small avatar icon with the user's name (if a profile exists) or a truncated principal, and a 'Sign Out' option inline or in a dropdown. Use the existing `useInternetIdentity` hook to manage auth state. On successful login, if the user has no stored profile (checked via `useMyProfile`), open the ProfileModal.",
+        "id": "REQ-36",
+        "summary": "Convert all user-facing text throughout the website to English. This includes all headings, subheadings, taglines, button labels, section titles, card text, placeholder text, error messages, and any other visible copy in every component (HeroSection, ServicesSection, AboutSection, ContactSection, FAQSection, FeedbackSection, HowItWorksSection, TrustStatsBar, Header, NavigationDrawer, Footer, ScrollLoginPopup, ScrollRatingPopup, ProfileModal, FloatingCallButton, FloatingWhatsAppButton). Replace any Hindi, mixed-language, or non-English text with clear English equivalents that preserve the original meaning and tone.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Header.tsx"
+          "frontend/src/components/HeroSection.tsx",
+          "frontend/src/components/Header.tsx",
+          "frontend/src/components/NavigationDrawer.tsx",
+          "frontend/src/components/ServicesSection.tsx",
+          "frontend/src/components/ServiceCard.tsx",
+          "frontend/src/components/AboutSection.tsx",
+          "frontend/src/components/HowItWorksSection.tsx",
+          "frontend/src/components/ContactSection.tsx",
+          "frontend/src/components/FAQSection.tsx",
+          "frontend/src/components/FeedbackSection.tsx",
+          "frontend/src/components/TrustStatsBar.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/ScrollLoginPopup.tsx",
+          "frontend/src/components/ScrollRatingPopup.tsx",
+          "frontend/src/components/ProfileModal.tsx",
+          "frontend/src/components/FloatingCallButton.tsx",
+          "frontend/src/components/FloatingWhatsAppButton.tsx",
+          "frontend/src/components/AdminPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/Header.tsx"
+          "frontend/src/components/HeroSection.tsx",
+          "frontend/src/components/Header.tsx",
+          "frontend/src/components/NavigationDrawer.tsx",
+          "frontend/src/components/ServicesSection.tsx",
+          "frontend/src/components/ServiceCard.tsx",
+          "frontend/src/components/AboutSection.tsx",
+          "frontend/src/components/HowItWorksSection.tsx",
+          "frontend/src/components/ContactSection.tsx",
+          "frontend/src/components/FAQSection.tsx",
+          "frontend/src/components/FeedbackSection.tsx",
+          "frontend/src/components/TrustStatsBar.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/ScrollLoginPopup.tsx",
+          "frontend/src/components/ScrollRatingPopup.tsx",
+          "frontend/src/components/ProfileModal.tsx",
+          "frontend/src/components/FloatingCallButton.tsx",
+          "frontend/src/components/FloatingWhatsAppButton.tsx",
+          "frontend/src/components/AdminPage.tsx"
         ]
       },
       {
-        "id": "REQ-28",
-        "summary": "Create a ProfileModal React component at `frontend/src/components/ProfileModal.tsx` that appears as a centered modal overlay after first login when no profile exists. It must contain a form with three fields: Full Name (text input), Phone Number (text input), and Service Area (a select listing: Mahipalpur Extension, Mahipalpur Village, Aerocity, Vasant Kunj, Rangpuri, Nagal Dewat). A 'Save Profile' button calls the backend `registerUser` function via the actor, then closes the modal and invalidates the React Query cache for the profile query. A 'Skip for now' link dismisses the modal without saving. The modal must match the dark-themed design (#111111 background, #FFD700/#FF8C42 accents, white text, semi-transparent backdrop).",
+        "id": "REQ-37",
+        "summary": "Enhance the visual design by mixing white accents into the existing dark theme to make the website more attractive and visually distinct. Apply the following changes across all components: (1) Service cards, feedback review cards, FAQ accordion items, HowItWorksSection step cards, and ContactSection info cards should use white or off-white card backgrounds (e.g., #ffffff or rgba(255,255,255,0.06)–0.10) with dark text, creating a contrast against the dark page background; (2) Add white/light-tinted section dividers or subtle white borders between major sections; (3) TrustStatsBar and HowItWorksSection connector lines can use white/light accents; (4) Form inputs in FeedbackSection, ProfileModal, and ScrollRatingPopup should have white or light-bordered inputs; (5) Maintain the existing #FFD700/#FF8C42 accent colors for headings, icons, and CTA buttons — do not replace them; (6) Ensure sufficient contrast: dark text on white card backgrounds, white text on dark section backgrounds; (7) Apply the white card / light accent treatment consistently so the overall effect is a polished dark-and-white mixed theme.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/ProfileModal.tsx"
+          "frontend/src/components/ServiceCard.tsx",
+          "frontend/src/components/ServicesSection.tsx",
+          "frontend/src/components/FeedbackSection.tsx",
+          "frontend/src/components/AboutSection.tsx",
+          "frontend/src/components/HowItWorksSection.tsx",
+          "frontend/src/components/ContactSection.tsx",
+          "frontend/src/components/FAQSection.tsx",
+          "frontend/src/components/ProfileModal.tsx",
+          "frontend/src/components/ScrollRatingPopup.tsx",
+          "frontend/src/components/TrustStatsBar.tsx",
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js"
         ],
         "matchedFiles": [
-          "frontend/src/components/ProfileModal.tsx"
-        ]
-      },
-      {
-        "id": "REQ-29",
-        "summary": "Create an AdminPage React component at `frontend/src/components/AdminPage.tsx` and add a `/admin` route in the application (using React Router or hash-based routing consistent with existing patterns). The page must: (1) check if the authenticated user's principal matches the hardcoded admin principal — if not authenticated or not admin, display an 'Access Denied' message with a link back to the homepage; (2) show a 'Registered Users' table with columns: Principal (truncated), Name, Phone, Service Area, Signup Date; (3) show a 'Customer Feedback' table with columns: Reviewer Name, Rating (stars), Message, Date, and a Delete button per row; (4) the Delete button in the Feedback table calls the backend `deleteFeedback(id)` function and refreshes the feedback list; (5) the Delete button in the Users table calls `deleteUser(principal)` and refreshes the users list; (6) both tables are fetched via React Query using the authenticated actor; (7) match the dark-themed design (#0d0d0d background, #FFD700/#FF8C42 accents, white text).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/AdminPage.tsx",
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/AdminPage.tsx",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-30",
-        "summary": "Add React Query hooks to `frontend/src/hooks/useQueries.ts` for the new backend functions: (1) `useMyProfile()` — fetches the authenticated user's profile using `getMyProfile()`, enabled only when the actor is available; (2) `useAllUsers()` — fetches all registered users using `getUsers()`, enabled only when the authenticated actor is available; (3) a mutation hook `useRegisterUser()` — calls `registerUser(name, phone, area)` on the actor and invalidates the profile query on success; (4) a mutation hook `useDeleteUser()` — calls `deleteUser(principal)` and invalidates the users list query on success; (5) a mutation hook `useDeleteFeedback()` — calls `deleteFeedback(id)` and invalidates the feedback list query on success. All hooks must follow the existing `useActor` hook pattern already present in the codebase.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/components/ServiceCard.tsx",
+          "frontend/src/components/ServicesSection.tsx",
+          "frontend/src/components/FeedbackSection.tsx",
+          "frontend/src/components/AboutSection.tsx",
+          "frontend/src/components/HowItWorksSection.tsx",
+          "frontend/src/components/ContactSection.tsx",
+          "frontend/src/components/FAQSection.tsx",
+          "frontend/src/components/ProfileModal.tsx",
+          "frontend/src/components/ScrollRatingPopup.tsx",
+          "frontend/src/components/TrustStatsBar.tsx",
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js"
         ]
       }
     ]
   },
   "changedFiles": [
-    "backend/authorization/MixinAuthorization.mo",
-    "backend/authorization/access-control.mo",
-    "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
-    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/App.tsx",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
+    "frontend/src/components/AboutSection.tsx",
     "frontend/src/components/AdminPage.tsx",
+    "frontend/src/components/ContactSection.tsx",
+    "frontend/src/components/FAQSection.tsx",
+    "frontend/src/components/FeedbackSection.tsx",
+    "frontend/src/components/FloatingCallButton.tsx",
+    "frontend/src/components/FloatingWhatsAppButton.tsx",
+    "frontend/src/components/Footer.tsx",
     "frontend/src/components/Header.tsx",
+    "frontend/src/components/HeroSection.tsx",
+    "frontend/src/components/HowItWorksSection.tsx",
+    "frontend/src/components/NavigationDrawer.tsx",
     "frontend/src/components/ProfileModal.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/utils/urlParams.ts",
+    "frontend/src/components/ScrollLoginPopup.tsx",
+    "frontend/src/components/ScrollRatingPopup.tsx",
+    "frontend/src/components/ServiceCard.tsx",
+    "frontend/src/components/ServicesSection.tsx",
+    "frontend/src/components/TrustStatsBar.tsx",
+    "frontend/src/index.css",
+    "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
