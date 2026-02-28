@@ -1,80 +1,39 @@
 {
   "kind": "build_request",
-  "title": "Convert all website content to English and add white color accents to the design",
-  "projectName": "QuickRepair",
+  "title": "Restore website to Version 8 state",
+  "projectName": "QuickRepair Mahipalpur",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-36",
-      "text": "Convert all user-facing text throughout the website to English. This includes all headings, subheadings, taglines, button labels, section titles, card text, placeholder text, error messages, and any other visible copy in every component (HeroSection, ServicesSection, AboutSection, ContactSection, FAQSection, FeedbackSection, HowItWorksSection, TrustStatsBar, Header, NavigationDrawer, Footer, ScrollLoginPopup, ScrollRatingPopup, ProfileModal, FloatingCallButton, FloatingWhatsAppButton). Replace any Hindi, mixed-language, or non-English text with clear English equivalents that preserve the original meaning and tone.",
+      "id": "REQ-1",
+      "text": "Restore the frontend to its Version 8 state by reverting all changes made after Version 8. This includes removing any English text conversion changes, white-accent dark theme modifications, and any other improvements or alterations applied in versions 9 and 10. The site should look and function exactly as it did at Version 8.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-1",
+          "msg-2"
         ],
         "quotes": [
-          "Puri website English mein bnao",
-          "Convert all website content/text to English (all headings, buttons, section text, labels)"
+          "Website version 8 me jaise thi vaise hi kar do version 8 ke bad jo kuch maine improve karne ko bola sab hata do"
         ]
       },
       "acceptanceCriteria": [
-        "Every visible text element across all components is in English",
-        "HeroSection headline, tagline, and CTA buttons are in English",
-        "NavigationDrawer and Header menu items are in English",
-        "ServicesSection card titles, descriptions, and CTA are in English",
-        "AboutSection, ContactSection, FAQSection, FeedbackSection headings and body text are in English",
-        "HowItWorksSection step titles and descriptions are in English",
-        "TrustStatsBar labels are in English",
-        "ScrollLoginPopup and ScrollRatingPopup text, prompts, and buttons are in English",
-        "Footer copyright and nav links are in English",
-        "ProfileModal form labels and buttons are in English",
-        "No Hindi or mixed-language strings remain in any rendered component"
-      ]
-    },
-    {
-      "id": "REQ-37",
-      "text": "Enhance the visual design by mixing white accents into the existing dark theme to make the website more attractive and visually distinct. Apply the following changes across all components: (1) Service cards, feedback review cards, FAQ accordion items, HowItWorksSection step cards, and ContactSection info cards should use white or off-white card backgrounds (e.g., #ffffff or rgba(255,255,255,0.06)–0.10) with dark text, creating a contrast against the dark page background; (2) Add white/light-tinted section dividers or subtle white borders between major sections; (3) TrustStatsBar and HowItWorksSection connector lines can use white/light accents; (4) Form inputs in FeedbackSection, ProfileModal, and ScrollRatingPopup should have white or light-bordered inputs; (5) Maintain the existing #FFD700/#FF8C42 accent colors for headings, icons, and CTA buttons — do not replace them; (6) Ensure sufficient contrast: dark text on white card backgrounds, white text on dark section backgrounds; (7) Apply the white card / light accent treatment consistently so the overall effect is a polished dark-and-white mixed theme.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "white color jyada add karo Thoda Sa",
-          "white bhi ho color mix sab bhi ho",
-          "white card backgrounds, white accents, light sections blend",
-          "Add white color accents to the design — mix white with the dark theme (white card backgrounds, white accents, light sections blend) to make the website more attractive and visually distinct"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Service cards have a white or near-white card background with readable dark text",
-        "Feedback review cards use a white/light card background contrasting against the dark section background",
-        "FAQ accordion items have a white or light-surfaced background when viewed",
-        "HowItWorksSection step cards use white/light card backgrounds",
-        "ContactSection info cards use white/light card backgrounds",
-        "Form inputs have white or light borders/backgrounds for clear visibility",
-        "Section background alternates or uses subtle white accents/borders to separate sections",
-        "Brand accent colors #FFD700 and #FF8C42 are preserved on headings, icons, badges, and CTA buttons",
-        "No contrast issues: dark text is used on white/light surfaces, white text on dark surfaces",
-        "The overall page appears as an attractive dark-and-white mixed theme, not purely dark"
+        "All post-Version 8 changes (English text conversion, white-accent dark theme, and any other improvements) are fully removed",
+        "The website appearance, content, and functionality match Version 8 exactly",
+        "No remnants of Version 9 or Version 10 changes remain in the codebase",
+        "All components render correctly without errors"
       ]
     }
   ],
   "constraints": [
-    "Do not change any backend Motoko logic",
-    "Do not modify files in frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
-    "Preserve all existing #FFD700 and #FF8C42 brand accent colors — only add white/light accents, do not replace the brand palette",
-    "Do not alter any SEO meta tags, JSON-LD structured data, or Google Search Console verification tag in frontend/index.html",
-    "All WhatsApp links, phone links, and email links must remain functional and unchanged"
+    "Do not introduce any new features or improvements beyond restoring Version 8",
+    "Do not modify backend logic — only frontend changes are in scope",
+    "Do not alter immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui"
   ],
   "nonGoals": [
-    "Adding new sections or page components",
-    "Changing the layout structure or component order in App.tsx",
-    "Modifying backend data models or API functions",
-    "Adding a light/dark mode toggle",
-    "Changing brand accent colors #FFD700 or #FF8C42",
-    "Modifying authentication or admin panel logic",
-    "Changing prices, phone numbers, email addresses, or business information"
+    "Adding new features or enhancements",
+    "Applying any improvements suggested after Version 8",
+    "Modifying backend/main.mo"
   ],
   "imageRequirements": {
     "required": [],

@@ -1,192 +1,112 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Convert all website content to English and add white color accents to the design",
+  "title": "Restore website to Version 8 state",
   "requirements": [
     {
-      "id": "REQ-36",
-      "summary": "Convert all user-facing text throughout the website to English, replacing any Hindi, mixed-language, or non-English text with clear English equivalents",
+      "id": "REQ-1",
+      "summary": "Restore the frontend to its Version 8 state by reverting all changes made after Version 8, including English text conversion changes, white-accent dark theme modifications, and any other improvements or alterations applied in versions 9 and 10",
       "acceptanceCriteria": [
-        "Every visible text element across all components is in English",
-        "HeroSection headline, tagline, and CTA buttons are in English",
-        "NavigationDrawer and Header menu items are in English",
-        "ServicesSection card titles, descriptions, and CTA are in English",
-        "AboutSection, ContactSection, FAQSection, FeedbackSection headings and body text are in English",
-        "HowItWorksSection step titles and descriptions are in English",
-        "TrustStatsBar labels are in English",
-        "ScrollLoginPopup and ScrollRatingPopup text, prompts, and buttons are in English",
-        "Footer copyright and nav links are in English",
-        "ProfileModal form labels and buttons are in English",
-        "No Hindi or mixed-language strings remain in any rendered component"
+        "All post-Version 8 changes (English text conversion, white-accent dark theme, and any other improvements) are fully removed",
+        "The website appearance, content, and functionality match Version 8 exactly",
+        "No remnants of Version 9 or Version 10 changes remain in the codebase",
+        "All components render correctly without errors"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/HeroSection.tsx",
-          "operation": "modify",
-          "description": "Convert the Hindi headline text (currently 'महीपलपुर में कार रिपेयर' or similar) to English equivalent (e.g., 'Car Repair in Mahipalpur'), convert tagline and subtitle text to English, convert WhatsApp and call CTA button labels to English, and convert stats row labels (happy customers, response time, rating) to English"
-        },
-        {
           "path": "frontend/src/components/Header.tsx",
           "operation": "modify",
-          "description": "Convert any navigation menu item labels to English if they contain Hindi or mixed-language text, convert login/logout button text to English, and convert profile dropdown menu items to English"
+          "description": "Revert to Version 8 content: restore Hindi/Hinglish text for navigation items and UI elements that were converted to English in later versions"
         },
         {
-          "path": "frontend/src/components/NavigationDrawer.tsx",
+          "path": "frontend/src/components/HeroSection.tsx",
           "operation": "modify",
-          "description": "Convert all navigation link labels (Services, About, Contact, FAQ, etc.) to English, convert the 'Become a Mechanic' link text to English, and convert footer phone label text to English"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish headline, tagline, and CTA button text that were converted to English in later versions"
         },
         {
           "path": "frontend/src/components/ServicesSection.tsx",
           "operation": "modify",
-          "description": "Convert the section heading to English (e.g., 'Our Services'), convert the bottom WhatsApp CTA button text to English, and ensure all ServiceCard component props pass English text for service names and descriptions"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish service names, descriptions, and section heading text"
         },
         {
           "path": "frontend/src/components/ServiceCard.tsx",
           "operation": "modify",
-          "description": "Convert the 'Book Now' or equivalent WhatsApp booking button text to English if it contains Hindi"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish text labels for price, duration, and booking button"
         },
         {
           "path": "frontend/src/components/AboutSection.tsx",
           "operation": "modify",
-          "description": "Convert the section heading to English (e.g., 'About Us' or 'Why Choose Us'), convert all highlight card titles (response time, verified experts, fixed pricing, coverage area) to English, and convert card descriptions to English"
-        },
-        {
-          "path": "frontend/src/components/HowItWorksSection.tsx",
-          "operation": "modify",
-          "description": "Convert the section heading to English (e.g., 'How It Works'), convert all three step titles (Book, Mechanic Arrives, Problem Solved) to English, convert step descriptions to English, and convert the bottom WhatsApp CTA button text to English"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish section heading and feature card text"
         },
         {
           "path": "frontend/src/components/ContactSection.tsx",
           "operation": "modify",
-          "description": "Convert the section heading to English (e.g., 'Contact Us'), convert all contact card labels (phone, email, hours) to English, convert service area list heading to English, and convert all area names to English where applicable"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish contact labels, service areas text, and section heading"
         },
         {
           "path": "frontend/src/components/FAQSection.tsx",
           "operation": "modify",
-          "description": "Convert the section heading to English (e.g., 'Frequently Asked Questions'), convert all nine FAQ question texts to English, and convert all FAQ answer texts to English"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish FAQ questions and answers"
         },
         {
           "path": "frontend/src/components/FeedbackSection.tsx",
           "operation": "modify",
-          "description": "Convert the section heading to English (e.g., 'Customer Reviews' or 'What Our Customers Say'), convert the feedback form heading to English, convert form labels (name, rating, message) to English, convert placeholder text to English, convert submit button text to English, and convert any hardcoded sample review text to English"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish section heading, form labels, and button text"
+        },
+        {
+          "path": "frontend/src/components/HowItWorksSection.tsx",
+          "operation": "modify",
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish step titles, descriptions, and section heading"
         },
         {
           "path": "frontend/src/components/TrustStatsBar.tsx",
           "operation": "modify",
-          "description": "Convert all stat labels to English (e.g., 'Happy Customers', 'Minutes Response Time', 'Average Rating')"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish stat labels"
         },
         {
           "path": "frontend/src/components/Footer.tsx",
           "operation": "modify",
-          "description": "Convert copyright text to English, convert navigation link labels to English, convert WhatsApp booking button text to English, and ensure the caffeine.ai attribution text is in English"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish footer text, navigation labels, and CTA text"
+        },
+        {
+          "path": "frontend/src/components/NavigationDrawer.tsx",
+          "operation": "modify",
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish mobile navigation text"
+        },
+        {
+          "path": "frontend/src/components/ProfileModal.tsx",
+          "operation": "modify",
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish form labels and button text"
         },
         {
           "path": "frontend/src/components/ScrollLoginPopup.tsx",
           "operation": "modify",
-          "description": "Convert the popup heading to English (e.g., 'Join QuickRepair'), convert feature highlight text to English, convert login prompt text to English, convert login button text to English, and convert close button aria-label to English"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish popup heading, feature text, and button labels"
         },
         {
           "path": "frontend/src/components/ScrollRatingPopup.tsx",
           "operation": "modify",
-          "description": "Convert the popup heading to English (e.g., 'Rate Your Experience'), convert form labels (name, rating, comment) to English, convert placeholder text to English, convert submit button text to English, convert success/error messages to English, and convert close button aria-label to English"
-        },
-        {
-          "path": "frontend/src/components/ProfileModal.tsx",
-          "operation": "modify",
-          "description": "Convert modal heading to English (e.g., 'Complete Your Profile'), convert form field labels (name, phone, area) to English, convert placeholder text to English, convert dropdown options to English, convert submit button text to English, and convert validation error messages to English"
-        },
-        {
-          "path": "frontend/src/components/FloatingCallButton.tsx",
-          "operation": "modify",
-          "description": "Convert button aria-label or tooltip text to English (e.g., 'Call Us Now')"
-        },
-        {
-          "path": "frontend/src/components/FloatingWhatsAppButton.tsx",
-          "operation": "modify",
-          "description": "Convert button aria-label or tooltip text to English (e.g., 'Chat on WhatsApp')"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish popup heading, form labels, and button text"
         },
         {
           "path": "frontend/src/components/AdminPage.tsx",
           "operation": "modify",
-          "description": "Convert page heading to English (e.g., 'Admin Dashboard'), convert user list and feedback list headings to English, convert table column headers to English, convert delete button text to English, and convert any empty state or loading messages to English"
-        }
-      ]
-    },
-    {
-      "id": "REQ-37",
-      "summary": "Enhance the visual design by mixing white accents into the existing dark theme with white card backgrounds, light borders, and subtle white section dividers while preserving #FFD700/#FF8C42 brand colors",
-      "acceptanceCriteria": [
-        "Service cards have a white or near-white card background with readable dark text",
-        "Feedback review cards use a white/light card background contrasting against the dark section background",
-        "FAQ accordion items have a white or light-surfaced background when viewed",
-        "HowItWorksSection step cards use white/light card backgrounds",
-        "ContactSection info cards use white/light card backgrounds",
-        "Form inputs have white or light borders/backgrounds for clear visibility",
-        "Section background alternates or uses subtle white accents/borders to separate sections",
-        "Brand accent colors #FFD700 and #FF8C42 are preserved on headings, icons, badges, and CTA buttons",
-        "No contrast issues: dark text is used on white/light surfaces, white text on dark surfaces",
-        "The overall page appears as an attractive dark-and-white mixed theme, not purely dark"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/ServiceCard.tsx",
-          "operation": "modify",
-          "description": "Change card background from dark (current bg-surface or bg-surface-variant) to white or near-white (bg-white or bg-gray-50/95), change text color to dark (text-gray-900 or text-gray-800) for readability, ensure icon and price retain brand accent colors (#FFD700 or #FF8C42), add subtle shadow or border for card definition against dark page background, and verify sufficient contrast between white card and surrounding dark section"
-        },
-        {
-          "path": "frontend/src/components/ServicesSection.tsx",
-          "operation": "modify",
-          "description": "Ensure section heading and description text use white or light colors against the dark background, preserve brand accent colors on the heading or decorative elements, and confirm the grid of ServiceCards renders with white/light card backgrounds"
-        },
-        {
-          "path": "frontend/src/components/FeedbackSection.tsx",
-          "operation": "modify",
-          "description": "Change customer review card backgrounds to white or near-white (bg-white or bg-gray-50), change review text and star ratings to dark colors for readability on white cards, update form input fields to have white or light backgrounds with subtle borders, ensure form labels and headings are white/light against the dark section background, preserve brand accent colors on submit button and decorative elements, and add subtle shadows or borders to cards for visual separation"
-        },
-        {
-          "path": "frontend/src/components/AboutSection.tsx",
-          "operation": "modify",
-          "description": "Change highlight card backgrounds from dark to white or near-white (bg-white or bg-gray-50), change card text to dark colors (text-gray-900 or text-gray-800), preserve brand accent colors (#FFD700 or #FF8C42) on icons and key metrics, ensure section heading uses white/light text against dark background, and add subtle borders or shadows to cards for definition"
-        },
-        {
-          "path": "frontend/src/components/HowItWorksSection.tsx",
-          "operation": "modify",
-          "description": "Change step card backgrounds to white or near-white (bg-white or bg-gray-50), change step text to dark colors for readability, preserve brand accent colors on step numbers and icons, ensure connector lines between steps use white/light accents, ensure section heading is white/light against dark background, and add subtle shadows to step cards"
-        },
-        {
-          "path": "frontend/src/components/ContactSection.tsx",
-          "operation": "modify",
-          "description": "Change contact info card backgrounds (phone, email, hours) to white or near-white (bg-white or bg-gray-50), change card text to dark colors, preserve brand accent colors on icons, ensure section heading and area list text are white/light against dark background, and add subtle borders or shadows to cards"
-        },
-        {
-          "path": "frontend/src/components/FAQSection.tsx",
-          "operation": "modify",
-          "description": "Change FAQ accordion item backgrounds to white or near-white when expanded or always visible, change question and answer text to dark colors for readability on white surfaces, preserve brand accent colors on expand/collapse icons or decorators, ensure section heading is white/light against dark background, and add subtle borders between FAQ items"
-        },
-        {
-          "path": "frontend/src/components/ProfileModal.tsx",
-          "operation": "modify",
-          "description": "Ensure modal background is white or near-white, change all form input fields to have white backgrounds with light borders, ensure text labels and headings are dark for readability inside the white modal, preserve brand accent colors on the submit button, and add proper contrast for form validation messages"
-        },
-        {
-          "path": "frontend/src/components/ScrollRatingPopup.tsx",
-          "operation": "modify",
-          "description": "Ensure popup modal background is white or near-white, change form input fields (name, rating, message) to white backgrounds with light borders, ensure text and labels are dark for readability on white surface, preserve brand accent colors on submit button and star rating elements, and verify proper contrast for all text"
-        },
-        {
-          "path": "frontend/src/components/TrustStatsBar.tsx",
-          "operation": "modify",
-          "description": "Add white/light accent borders or dividers between stat items, ensure stat numbers and labels use appropriate contrast (white text if bar is dark, dark text if bar is light), and preserve brand accent colors on key numbers or icons"
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish admin page headings, labels, and button text"
         },
         {
           "path": "frontend/src/index.css",
           "operation": "modify",
-          "description": "Add new CSS custom properties or utility classes for white card backgrounds (e.g., --card-light: oklch(98% 0 0)), add utility classes for light borders and dividers (e.g., border-white/10), ensure existing brand accent color tokens (#FFD700, #FF8C42) remain unchanged, and add any global card shadow or border styles needed for white cards on dark backgrounds"
+          "description": "Revert to Version 8 theme: remove white-accent dark theme modifications and restore original color scheme CSS custom properties as they existed at Version 8"
         },
         {
           "path": "frontend/tailwind.config.js",
           "operation": "modify",
-          "description": "Extend the theme with white/light card background colors if needed (e.g., 'card-light': 'oklch(98% 0 0)' or 'rgba(255,255,255,0.95)'), add light border color variants (e.g., 'border-light': 'rgba(255,255,255,0.1)'), ensure brand accent colors remain in the palette, and add any custom box-shadow utilities for cards if not already present"
+          "description": "Revert to Version 8 theme: remove white-accent dark theme color token modifications and restore original Tailwind color configuration as it existed at Version 8"
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Revert to Version 8 content: restore original Hindi/Hinglish meta descriptions and title tags if they were modified in later versions"
         }
       ]
     }
