@@ -1,4 +1,63 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-when-a-user-signs-in-via-internet-identity-for-the-first-time-collect-their-phone-number-as-part-of-the-profile-setup-modal-in-addition-to-name-and-service-area-already-collected-in-profilemodal-store-the-phone-number-in-the-backend-user-profile",
+      "featureTitle": "When a user signs in via Internet Identity for the first time, collect their phone number as part of the profile setup modal (in addition to name and service area already collected in ProfileModal). Store the phone number in the backend user profile.",
+      "files": [
+        "frontend/src/components/ProfileModal.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-remove-the-emoji-from-the-confirm-booking-button-label-in-the-booking-form-the-button-text-should-read-confirm-booking-without-any-emoji",
+      "featureTitle": "Remove the ✅ emoji from the 'Confirm Booking' button label in the booking form. The button text should read 'Confirm Booking' without any emoji.",
+      "files": [
+        "frontend/src/components/BookingFormSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-fix-the-book-online-button-on-each-servicecard-so-that-clicking-it-navigates-the-user-to-a-dedicated-booking-page-e-g-booking-create-a-bookingpage-component-if-it-does-not-already-exist-containing-the-full-booking-form-wire-the-servicecard-button-to-route-to-this-page",
+      "featureTitle": "Fix the 'Book Online' button on each ServiceCard so that clicking it navigates the user to a dedicated booking page (e.g. /booking). Create a BookingPage component if it does not already exist, containing the full booking form. Wire the ServiceCard button to route to this page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ServiceCard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

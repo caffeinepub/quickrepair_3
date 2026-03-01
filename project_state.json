@@ -1,23 +1,52 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Website project where user wants to restore to Version 8 state, reverting all changes made after Version 8.",
-  "architectural_notes": [],
+  "summary": "A service booking website with admin panel. Features include service cards with 'Book Online' redirect to booking page, user sign-in with phone number collection, booking form submission, and admin panel showing all user data and bookings.",
+  "architectural_notes": [
+    "Service card 'Book Online' button redirects to a separate booking page",
+    "User sign-in collects phone number in addition to other details",
+    "Admin panel displays all signed-in users' full data including name, Principal ID, phone number, booking details, and sign-in time"
+  ],
   "known_issues": [],
   "isFixRequest": true,
-  "existing_features": [],
-  "new_feature_requests": [
+  "existing_features": [
     {
-      "id": "AR-1",
-      "summary": "Restore the frontend to its Version 8 state by reverting all changes made after Version 8. This includes removing any English text conversion changes, white-accent dark theme modifications, and any other improvements or alterations applied in versions 9 and 10. The site should look and function exactly as it did at Version 8.",
+      "id": "feature-when-a-user-signs-in-via-internet-identity-for-the-first-time-collect-their-phone-number-as-part-of-the-profile-setup-modal-in-addition-to-name-and-service-area-already-collected-in-profilemodal-store-the-phone-number-in-the-backend-user-profile",
+      "title": "When a user signs in via Internet Identity for the first time, collect their phone number as part of the profile setup modal (in addition to name and service area already collected in ProfileModal). Store the phone number in the backend user profile.",
       "reqIds": [
         "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-emoji-from-the-confirm-booking-button-label-in-the-booking-form-the-button-text-should-read-confirm-booking-without-any-emoji",
+      "title": "Remove the ✅ emoji from the 'Confirm Booking' button label in the booking form. The button text should read 'Confirm Booking' without any emoji.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-book-online-button-on-each-servicecard-so-that-clicking-it-navigates-the-user-to-a-dedicated-booking-page-e-g-booking-create-a-bookingpage-component-if-it-does-not-already-exist-containing-the-full-booking-form-wire-the-servicecard-button-to-route-to-this-page",
+      "title": "Fix the 'Book Online' button on each ServiceCard so that clicking it navigates the user to a dedicated booking page (e.g. /booking). Create a BookingPage component if it does not already exist, containing the full booking form. Wire the ServiceCard button to route to this page.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-4",
+      "summary": "Update the Admin panel to display a comprehensive list of all registered users with their full profile data: name, phone number, principal ID, service area, and sign-in/registration time. Also display all submitted bookings linked to each user where available.",
+      "reqIds": [
+        "REQ-4"
       ],
       "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "QuickRepair Mahipalpur",
+  "projectName": "QuickRepair",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

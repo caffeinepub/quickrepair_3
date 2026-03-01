@@ -1,140 +1,107 @@
-import React from 'react';
-import { Clock, Shield, DollarSign, MapPin } from 'lucide-react';
 import { useFadeIn } from '../hooks/useFadeIn';
+import { Clock, Shield, ThumbsUp, MapPin } from 'lucide-react';
 
-interface HighlightCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  index: number;
-}
-
-function HighlightCard({ icon, title, description, index }: HighlightCardProps) {
-  const { ref, isVisible } = useFadeIn();
-
-  return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={`white-card white-card-hover rounded-2xl p-6 transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
-      style={{ transitionDelay: `${index * 100}ms` }}
-    >
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-black"
-        style={{ background: 'linear-gradient(135deg, #FFD700, #FF8C42)' }}
-      >
-        {icon}
-      </div>
-      <h3 className="text-lg font-bold text-gray-900 mb-2 font-heading">{title}</h3>
-      <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-    </div>
-  );
-}
+const highlights = [
+  {
+    icon: Clock,
+    title: '10-Minute Response',
+    description: 'Our technicians reach your doorstep within 10 minutes of booking.',
+  },
+  {
+    icon: Shield,
+    title: 'Verified Professionals',
+    description: 'All our mechanics are background-verified and trained experts.',
+  },
+  {
+    icon: ThumbsUp,
+    title: 'Transparent Pricing',
+    description: 'Fixed prices with no hidden charges. What you see is what you pay.',
+  },
+  {
+    icon: MapPin,
+    title: 'Local Coverage',
+    description: 'Serving 6 areas across Mahipalpur and surrounding neighborhoods.',
+  },
+];
 
 export default function AboutSection() {
   const { ref, isVisible } = useFadeIn();
 
-  const highlights = [
-    {
-      icon: <Clock size={22} />,
-      title: '30-Min Response',
-      description: 'Our mechanics reach you within 30 minutes anywhere in Mahipalpur and surrounding areas.',
-    },
-    {
-      icon: <Shield size={22} />,
-      title: 'Verified Experts',
-      description: 'All our mechanics are background-verified, trained professionals with 5+ years of experience.',
-    },
-    {
-      icon: <DollarSign size={22} />,
-      title: 'Fixed Pricing',
-      description: 'No hidden charges. Get upfront pricing before we start any work on your vehicle.',
-    },
-    {
-      icon: <MapPin size={22} />,
-      title: 'Wide Coverage',
-      description: 'Serving Mahipalpur, Dwarka, Vasant Kunj, Kapashera, and all nearby areas.',
-    },
-  ];
-
   return (
-    <section id="about" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
-        <div
-          ref={ref as React.RefObject<HTMLDivElement>}
-          className={`text-center mb-14 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-4">
-            <span className="text-sm font-medium" style={{ color: '#FFD700' }}>Why Choose Us</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black text-white font-heading mb-4">
-            Delhi's Most{' '}
-            <span style={{ color: '#FFD700' }}>Trusted</span>{' '}
-            Car Repair
-          </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            We combine speed, expertise, and transparency to deliver the best car repair experience in Mahipalpur.
-          </p>
-        </div>
+    <section
+      id="about"
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-20 px-4 sm:px-6 lg:px-8 fade-in-section ${isVisible ? 'is-visible' : ''}`}
+      style={{ backgroundColor: '#111111' }}
+    >
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Text */}
+          <div>
+            <span
+              className="inline-block text-xs font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full mb-4"
+              style={{
+                background: 'rgba(255,215,0,0.1)',
+                color: '#FFD700',
+                border: '1px solid rgba(255,215,0,0.2)',
+              }}
+            >
+              About Us
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+              Delhi's Fastest{' '}
+              <span style={{ color: '#FF8C42' }}>Home Repair</span>{' '}
+              Service
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed mb-6">
+              <strong className="text-white">QuickRepair</strong> was founded with one mission: to make home repairs fast, affordable, and stress-free for residents of Mahipalpur and surrounding areas.
+            </p>
+            <p className="text-gray-400 leading-relaxed mb-6">
+              We understand that a broken pipe or faulty electrical connection can't wait. That's why our team of skilled professionals is always on standby, ready to reach your doorstep in just <strong className="text-white">10 minutes</strong>.
+            </p>
+            <p className="text-gray-400 leading-relaxed">
+              From plumbing and electrical work to AC repairs and general mechanics — we handle it all with professionalism, transparency, and a smile. No surprise bills, no delays.
+            </p>
 
-        {/* Highlight Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {highlights.map((h, i) => (
-            <HighlightCard key={i} icon={h.icon} title={h.title} description={h.description} index={i} />
-          ))}
-        </div>
-
-        {/* Company Description */}
-        <div
-          className={`mt-16 white-card rounded-3xl p-8 md:p-12 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-black text-gray-900 font-heading mb-4">
-                About QuickRepair
-              </h3>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                QuickRepair was founded with a simple mission: make car repair fast, affordable, and stress-free for everyone in Mahipalpur and Delhi NCR.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Our team of certified mechanics comes to your location — whether you're at home, office, or stuck on the road. No need to visit a garage or wait for hours.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {['ISO Certified', '5-Star Rated', '500+ Customers', 'Since 2019'].map((badge) => (
-                  <span
-                    key={badge}
-                    className="px-3 py-1.5 rounded-full text-xs font-bold text-black"
-                    style={{ background: 'linear-gradient(135deg, #FFD700, #FF8C42)' }}
-                  >
-                    {badge}
-                  </span>
-                ))}
+            {/* Working hours badge */}
+            <div
+              className="inline-flex items-center gap-3 mt-8 px-5 py-3 rounded-xl"
+              style={{
+                background: 'rgba(255,140,66,0.1)',
+                border: '1px solid rgba(255,140,66,0.2)',
+              }}
+            >
+              <Clock className="w-5 h-5" style={{ color: '#FF8C42' }} />
+              <div>
+                <div className="text-white font-semibold text-sm">Working Hours</div>
+                <div className="text-gray-400 text-xs">8:00 AM – 8:00 PM, Every Day</div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { value: '500+', label: 'Happy Customers' },
-                { value: '4.9★', label: 'Average Rating' },
-                { value: '30 min', label: 'Avg Response Time' },
-                { value: '7 Days', label: 'Available Weekly' },
-              ].map((stat, i) => (
+          </div>
+
+          {/* Right: Highlights */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {highlights.map(({ icon: Icon, title, description }) => (
+              <div
+                key={title}
+                className="p-5 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
+                style={{
+                  backgroundColor: '#1a1a1a',
+                  border: '1px solid #252525',
+                }}
+              >
                 <div
-                  key={i}
-                  className="bg-gray-50 rounded-2xl p-4 text-center border border-gray-100"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,66,0.15))',
+                  }}
                 >
-                  <div className="text-2xl font-black font-heading mb-1" style={{ color: '#FF8C42' }}>
-                    {stat.value}
-                  </div>
-                  <div className="text-gray-600 text-xs font-medium">{stat.label}</div>
+                  <Icon className="w-5 h-5" style={{ color: '#FFD700' }} />
                 </div>
-              ))}
-            </div>
+                <h3 className="text-white font-bold text-sm mb-1">{title}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed">{description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

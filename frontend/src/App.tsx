@@ -1,96 +1,117 @@
-import React, { Suspense, lazy, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
-import FloatingWhatsAppButton from './components/FloatingWhatsAppButton';
 import FloatingCallButton from './components/FloatingCallButton';
-import ScrollLoginPopup from './components/ScrollLoginPopup';
-import ScrollRatingPopup from './components/ScrollRatingPopup';
-import SkeletonLoader from './components/SkeletonLoader';
-import { useScrollSpy } from './hooks/useScrollSpy';
+import TrustStatsBar from './components/TrustStatsBar';
+import HowItWorksSection from './components/HowItWorksSection';
+import AdminPage from './components/AdminPage';
+import BookingPage from './pages/BookingPage';
 
-const TrustStatsBar = lazy(() => import('./components/TrustStatsBar'));
+// Lazy-load below-fold sections for faster initial paint
 const ServicesSection = lazy(() => import('./components/ServicesSection'));
-const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
-const AboutSection = lazy(() => import('./components/AboutSection'));
+const BookingFormSection = lazy(() => import('./components/BookingFormSection'));
 const FeedbackSection = lazy(() => import('./components/FeedbackSection'));
+const AboutSection = lazy(() => import('./components/AboutSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
 const FAQSection = lazy(() => import('./components/FAQSection'));
 const Footer = lazy(() => import('./components/Footer'));
-const AdminPage = lazy(() => import('./components/AdminPage'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5,
-      retry: 2,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
     },
   },
 });
 
-const SECTIONS = ['home', 'services', 'how-it-works', 'about', 'feedback', 'contact', 'faq'];
+function SectionFallback() {
+  return (
+    <div
+      className="w-full py-20 flex items-center justify-center"
+      style={{ backgroundColor: '#0d0d0d' }}
+    >
+      <div className="flex gap-2">
+        <span
+          className="w-2 h-2 rounded-full animate-bounce"
+          style={{ backgroundColor: '#FFD700', animationDelay: '0ms' }}
+        />
+        <span
+          className="w-2 h-2 rounded-full animate-bounce"
+          style={{ backgroundColor: '#FF8C42', animationDelay: '150ms' }}
+        />
+        <span
+          className="w-2 h-2 rounded-full animate-bounce"
+          style={{ backgroundColor: '#FFD700', animationDelay: '300ms' }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function useCurrentPath() {
+  const [path, setPath] = useState(() => window.location.pathname);
+  useEffect(() => {
+    const handler = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', handler);
+    return () => window.removeEventListener('popstate', handler);
+  }, []);
+  return path;
+}
 
 function MainSite() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const activeSection = useScrollSpy(SECTIONS);
-
-  const handleNavClick = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    setMenuOpen(false);
-  };
-
   return (
-    <>
-      <Header
-        activeSection={activeSection}
-        onNavClick={handleNavClick}
-        onMenuToggle={() => setMenuOpen((v) => !v)}
-        isMenuOpen={menuOpen}
-      />
+    <div className="min-h-screen" style={{ backgroundColor: '#0d0d0d' }}>
+      <Header />
       <main>
+        {/* Above-fold: loaded immediately */}
         <HeroSection />
-        <Suspense fallback={<SkeletonLoader height="80px" className="mx-4 my-2" />}>
-          <TrustStatsBar />
-        </Suspense>
-        <Suspense fallback={<SkeletonLoader height="400px" className="mx-4 my-4" />}>
+        <TrustStatsBar />
+        <HowItWorksSection />
+
+        {/* Below-fold: lazy loaded */}
+        <Suspense fallback={<SectionFallback />}>
           <ServicesSection />
         </Suspense>
-        <Suspense fallback={<SkeletonLoader height="300px" className="mx-4 my-4" />}>
-          <HowItWorksSection />
+        <Suspense fallback={<SectionFallback />}>
+          <BookingFormSection />
         </Suspense>
-        <Suspense fallback={<SkeletonLoader height="300px" className="mx-4 my-4" />}>
-          <AboutSection />
-        </Suspense>
-        <Suspense fallback={<SkeletonLoader height="400px" className="mx-4 my-4" />}>
+        <Suspense fallback={<SectionFallback />}>
           <FeedbackSection />
         </Suspense>
-        <Suspense fallback={<SkeletonLoader height="300px" className="mx-4 my-4" />}>
+        <Suspense fallback={<SectionFallback />}>
+          <AboutSection />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
           <ContactSection />
         </Suspense>
-        <Suspense fallback={<SkeletonLoader height="300px" className="mx-4 my-4" />}>
+        <Suspense fallback={<SectionFallback />}>
           <FAQSection />
         </Suspense>
       </main>
-      <Suspense fallback={<SkeletonLoader height="120px" />}>
+
+      <Suspense fallback={null}>
         <Footer />
       </Suspense>
-      <FloatingWhatsAppButton />
+
+      {/* Floating action button */}
       <FloatingCallButton />
-      <ScrollLoginPopup />
-      <ScrollRatingPopup />
-    </>
+    </div>
   );
 }
 
 export default function App() {
-  const path = window.location.pathname;
+  const path = useCurrentPath();
+  const isAdminRoute = path === '/admin' || path === '/admin/';
+  const isBookingRoute = path === '/booking' || path === '/booking/';
 
   return (
     <QueryClientProvider client={queryClient}>
-      {path === '/admin' ? (
-        <Suspense fallback={<SkeletonLoader height="100vh" />}>
-          <AdminPage />
-        </Suspense>
+      {isAdminRoute ? (
+        <AdminPage />
+      ) : isBookingRoute ? (
+        <BookingPage />
       ) : (
         <MainSite />
       )}

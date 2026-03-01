@@ -1,114 +1,177 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useFadeIn } from '../hooks/useFadeIn';
 
-const faqs = [
+const FAQS = [
   {
-    question: 'How quickly can a mechanic reach me?',
-    answer: 'Our mechanics typically arrive within 30 minutes of your booking. In peak hours, it may take up to 45 minutes. We always keep you updated via WhatsApp.',
-  },
-  {
-    question: 'What areas do you cover?',
-    answer: 'We cover Mahipalpur, Dwarka, Vasant Kunj, Kapashera, Palam, Uttam Nagar, Janakpuri, Rajouri Garden, and surrounding areas in Delhi NCR.',
-  },
-  {
-    question: 'Are your mechanics certified?',
-    answer: 'Yes, all our mechanics are background-verified and have 5+ years of professional experience. They are trained to handle all major car brands and models.',
-  },
-  {
-    question: 'What payment methods do you accept?',
-    answer: 'We accept cash, UPI (GPay, PhonePe, Paytm), and all major debit/credit cards. Payment is collected only after the work is completed.',
-  },
-  {
-    question: 'Do you provide a warranty on repairs?',
-    answer: 'Yes, we provide a 30-day warranty on all repair work and a 6-month warranty on parts replaced. If the same issue recurs, we fix it for free.',
-  },
-  {
-    question: 'Can you repair all car brands?',
-    answer: 'We service all major car brands including Maruti Suzuki, Hyundai, Honda, Toyota, Tata, Mahindra, Ford, Volkswagen, and more.',
-  },
-  {
-    question: 'What if the repair takes longer than expected?',
-    answer: 'We always give you an upfront time estimate. If the repair takes longer, we inform you immediately and get your approval before proceeding.',
-  },
-  {
-    question: 'Is there a call-out or inspection fee?',
-    answer: 'No, there is no call-out fee. The inspection is free. You only pay for the actual repair work done.',
+    question: 'How quickly will the mechanic arrive?',
+    answer:
+      'Our mechanics typically arrive within 10 minutes of booking. We have a network of verified local professionals stationed across Mahipalpur, Aerocity, Vasant Kunj, and nearby areas to ensure the fastest possible response.',
   },
   {
     question: 'How do I book a service?',
-    answer: 'Simply send us a WhatsApp message or call us. Share your car issue and location, and we will dispatch a mechanic to you right away.',
+    answer:
+      'Booking is simple — just tap the "Book on WhatsApp" button, send us a message describing your issue, and we will dispatch the nearest available mechanic immediately. No app download or registration required.',
+  },
+  {
+    question: 'What are the service charges?',
+    answer:
+      'Our charges are transparent and fixed: Plumber ₹499, Electrician ₹299, Fan/Cooler Repair ₹199, AC Repair ₹479, and General Mechanic ₹399. There are no hidden charges — you only pay after the work is done.',
+  },
+  {
+    question: 'Do you accept cash on delivery (COD)?',
+    answer:
+      'Yes! We operate on a "Pay After Work" model. You pay only after the repair is completed and you are fully satisfied. We accept cash on delivery — no advance payment required.',
+  },
+  {
+    question: 'Are your mechanics verified and trustworthy?',
+    answer:
+      'Absolutely. All our mechanics are background-checked, ID-verified, and trained professionals. We take safety seriously — every technician carries a verified ID card and is registered with QuickRepair before being dispatched.',
+  },
+  {
+    question: 'Which areas do you serve?',
+    answer:
+      'We currently serve Mahipalpur Extension, Mahipalpur Village, Aerocity, Vasant Kunj, Rangpuri, and Nagal Dewat. We are expanding rapidly — contact us on WhatsApp to check availability in your area.',
+  },
+  {
+    question: 'What are your working hours?',
+    answer:
+      'Our regular service hours are 8:00 AM to 8:00 PM, 7 days a week. For emergencies (water leaks, electrical faults, etc.), we are available 24×7. Just message us on WhatsApp anytime.',
+  },
+  {
+    question: 'What if I am not satisfied with the repair?',
+    answer:
+      'Customer satisfaction is our top priority. If you are not happy with the work, we will send another technician at no extra charge to fix the issue. We stand behind every repair we do.',
+  },
+  {
+    question: 'Can I get a service for my AC in summer?',
+    answer:
+      'Yes! AC repair and servicing is one of our most popular services. We handle gas refills, general servicing, split AC, window AC, and installation. Starting at just ₹479 — book now before the summer rush!',
   },
 ];
 
-interface FAQItemProps {
+function FAQItem({
+  question,
+  answer,
+  isOpen,
+  onToggle,
+}: {
   question: string;
   answer: string;
-  index: number;
-}
-
-function FAQItem({ question, answer, index }: FAQItemProps) {
-  const [open, setOpen] = useState(false);
-  const { ref, isVisible } = useFadeIn();
-
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
   return (
     <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={`white-card rounded-2xl overflow-hidden transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-      }`}
-      style={{ transitionDelay: `${index * 60}ms` }}
+      className="rounded-xl overflow-hidden transition-all duration-300"
+      style={{
+        backgroundColor: '#161616',
+        border: isOpen ? '1px solid rgba(255,215,0,0.25)' : '1px solid rgba(255,255,255,0.06)',
+      }}
     >
       <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
+        onClick={onToggle}
+        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left transition-colors duration-200"
+        style={{ color: isOpen ? '#FFD700' : '#f0f0f0' }}
+        aria-expanded={isOpen}
       >
-        <span className="font-semibold text-gray-900 pr-4">{question}</span>
+        <span className="font-semibold text-sm sm:text-base leading-snug">{question}</span>
         <ChevronDown
           size={20}
-          className={`shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
-          style={{ color: '#FF8C42' }}
+          className="flex-shrink-0 transition-transform duration-300"
+          style={{
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+            color: isOpen ? '#FFD700' : '#666',
+          }}
         />
       </button>
-      {open && (
-        <div className="px-5 pb-5 border-t border-gray-100">
-          <p className="text-gray-600 text-sm leading-relaxed pt-4">{answer}</p>
-        </div>
-      )}
+      <div
+        style={{
+          maxHeight: isOpen ? '400px' : '0',
+          overflow: 'hidden',
+          transition: 'max-height 0.35s ease',
+        }}
+      >
+        <p className="px-5 pb-5 text-gray-400 text-sm leading-relaxed">{answer}</p>
+      </div>
     </div>
   );
 }
 
 export default function FAQSection() {
-  const { ref, isVisible } = useFadeIn();
+  const { ref, isVisible } = useFadeIn(0.1);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  function toggle(i: number) {
+    setOpenIndex(openIndex === i ? null : i);
+  }
 
   return (
-    <section id="faq" className="py-20 bg-surface-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
-        <div
-          ref={ref as React.RefObject<HTMLDivElement>}
-          className={`text-center mb-14 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-4">
-            <span className="text-sm font-medium" style={{ color: '#FFD700' }}>FAQ</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black text-white font-heading mb-4">
+    <section
+      id="faq"
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-20 px-4 sm:px-6 lg:px-8 fade-in-section ${isVisible ? 'is-visible' : ''}`}
+      style={{ backgroundColor: '#0d0d0d' }}
+    >
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <span
+            className="inline-block text-xs font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full mb-4"
+            style={{
+              background: 'rgba(255,215,0,0.1)',
+              color: '#FFD700',
+              border: '1px solid rgba(255,215,0,0.2)',
+            }}
+          >
+            FAQ
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
             Frequently Asked{' '}
             <span style={{ color: '#FFD700' }}>Questions</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Everything you need to know about our car repair service.
+          <p className="text-gray-400 text-lg max-w-xl mx-auto">
+            Everything you need to know about QuickRepair services.
           </p>
         </div>
 
         {/* FAQ Items */}
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <FAQItem key={i} question={faq.question} answer={faq.answer} index={i} />
+        <div className="flex flex-col gap-3">
+          {FAQS.map((faq, i) => (
+            <FAQItem
+              key={i}
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={openIndex === i}
+              onToggle={() => toggle(i)}
+            />
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div
+          className="mt-10 p-6 rounded-2xl text-center"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255,215,0,0.07), rgba(255,140,66,0.07))',
+            border: '1px solid rgba(255,215,0,0.15)',
+          }}
+        >
+          <p className="text-white font-semibold mb-1">Still have questions?</p>
+          <p className="text-gray-400 text-sm mb-4">
+            Chat with us on WhatsApp — we reply in under 2 minutes.
+          </p>
+          <a
+            href="https://wa.me/8447978940?text=Hi%2C%20I%20have%20a%20question%20about%20QuickRepair"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95"
+            style={{
+              background: 'linear-gradient(135deg, #FFD700, #FF8C42)',
+              color: '#0d0d0d',
+            }}
+          >
+            Ask on WhatsApp
+          </a>
         </div>
       </div>
     </section>

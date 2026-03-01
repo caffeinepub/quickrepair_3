@@ -1,48 +1,75 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T17:07:57.643Z",
+  "generatedAt": "2026-03-01T12:38:17.972Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 0,
+    "total": 4,
+    "implemented": 3,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Restore the frontend to its Version 8 state by reverting all changes made after Version 8. This includes removing any English text conversion changes, white-accent dark theme modifications, and any other improvements or alterations applied in versions 9 and 10. The site should look and function exactly as it did at Version 8.",
+        "summary": "When a user signs in via Internet Identity for the first time, collect their phone number as part of the profile setup modal (in addition to name and service area already collected in ProfileModal). Store the phone number in the backend user profile.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ProfileModal.tsx",
+          "frontend/src/components/AdminPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/ProfileModal.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Remove the ✅ emoji from the 'Confirm Booking' button label in the booking form. The button text should read 'Confirm Booking' without any emoji.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/BookingFormSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/BookingFormSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Fix the 'Book Online' button on each ServiceCard so that clicking it navigates the user to a dedicated booking page (e.g. /booking). Create a BookingPage component if it does not already exist, containing the full booking form. Wire the ServiceCard button to route to this page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ServiceCard.tsx",
+          "frontend/src/components/BookingPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/ServiceCard.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Update the Admin panel to display a comprehensive list of all registered users with their full profile data: name, phone number, principal ID, service area, and sign-in/registration time. Also display all submitted bookings linked to each user where available.",
         "status": "missing",
         "plannedFiles": [
-          "frontend/src/components/Header.tsx",
-          "frontend/src/components/HeroSection.tsx",
-          "frontend/src/components/ServicesSection.tsx",
-          "frontend/src/components/ServiceCard.tsx",
-          "frontend/src/components/AboutSection.tsx",
-          "frontend/src/components/ContactSection.tsx",
-          "frontend/src/components/FAQSection.tsx",
-          "frontend/src/components/FeedbackSection.tsx",
-          "frontend/src/components/HowItWorksSection.tsx",
-          "frontend/src/components/TrustStatsBar.tsx",
-          "frontend/src/components/Footer.tsx",
-          "frontend/src/components/NavigationDrawer.tsx",
-          "frontend/src/components/ProfileModal.tsx",
-          "frontend/src/components/ScrollLoginPopup.tsx",
-          "frontend/src/components/ScrollRatingPopup.tsx",
-          "frontend/src/components/AdminPage.tsx",
-          "frontend/src/index.css",
-          "frontend/tailwind.config.js",
-          "frontend/index.html"
+          "frontend/src/components/AdminPage.tsx"
         ],
         "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
+    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/components/BookingFormSection.tsx",
+    "frontend/src/components/ProfileModal.tsx",
+    "frontend/src/components/ServiceCard.tsx",
+    "frontend/src/pages/BookingPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,112 +1,86 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Restore website to Version 8 state",
+  "title": "Collect phone number at sign-in, remove ✅ emoji from Confirm Booking button, fix Book Online redirect, show all user data in admin panel",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Restore the frontend to its Version 8 state by reverting all changes made after Version 8, including English text conversion changes, white-accent dark theme modifications, and any other improvements or alterations applied in versions 9 and 10",
+      "summary": "Collect phone number during first-time sign-in via ProfileModal and display it in the admin panel",
       "acceptanceCriteria": [
-        "All post-Version 8 changes (English text conversion, white-accent dark theme, and any other improvements) are fully removed",
-        "The website appearance, content, and functionality match Version 8 exactly",
-        "No remnants of Version 9 or Version 10 changes remain in the codebase",
-        "All components render correctly without errors"
+        "ProfileModal includes a required phone number input field",
+        "Phone number is submitted and saved to the backend user profile via registerUser",
+        "Admin panel displays the stored phone number for each user",
+        "Phone number field is validated (numeric, reasonable length)"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Header.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore Hindi/Hinglish text for navigation items and UI elements that were converted to English in later versions"
-        },
-        {
-          "path": "frontend/src/components/HeroSection.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish headline, tagline, and CTA button text that were converted to English in later versions"
-        },
-        {
-          "path": "frontend/src/components/ServicesSection.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish service names, descriptions, and section heading text"
-        },
-        {
-          "path": "frontend/src/components/ServiceCard.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish text labels for price, duration, and booking button"
-        },
-        {
-          "path": "frontend/src/components/AboutSection.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish section heading and feature card text"
-        },
-        {
-          "path": "frontend/src/components/ContactSection.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish contact labels, service areas text, and section heading"
-        },
-        {
-          "path": "frontend/src/components/FAQSection.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish FAQ questions and answers"
-        },
-        {
-          "path": "frontend/src/components/FeedbackSection.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish section heading, form labels, and button text"
-        },
-        {
-          "path": "frontend/src/components/HowItWorksSection.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish step titles, descriptions, and section heading"
-        },
-        {
-          "path": "frontend/src/components/TrustStatsBar.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish stat labels"
-        },
-        {
-          "path": "frontend/src/components/Footer.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish footer text, navigation labels, and CTA text"
-        },
-        {
-          "path": "frontend/src/components/NavigationDrawer.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish mobile navigation text"
-        },
-        {
           "path": "frontend/src/components/ProfileModal.tsx",
           "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish form labels and button text"
-        },
-        {
-          "path": "frontend/src/components/ScrollLoginPopup.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish popup heading, feature text, and button labels"
-        },
-        {
-          "path": "frontend/src/components/ScrollRatingPopup.tsx",
-          "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish popup heading, form labels, and button text"
+          "description": "The modal already collects name, phone, and service area. Verify that the phone field includes proper validation (numeric, reasonable length such as 10-15 digits) and that it is marked as required. Ensure the phone value is passed correctly to the useRegisterUser mutation hook."
         },
         {
           "path": "frontend/src/components/AdminPage.tsx",
           "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish admin page headings, labels, and button text"
+          "description": "Update the Users tab to display the phone number column for each registered user. The backend interface already returns phone as part of UserProfile via getUsers(). Add a table column or card field showing userProfile.phone for each user entry fetched from the backend."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Remove the ✅ emoji from the 'Confirm Booking' button label",
+      "acceptanceCriteria": [
+        "The Confirm Booking button contains no ✅ emoji anywhere in its label or children",
+        "Button text reads exactly 'Confirm Booking'"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/BookingFormSection.tsx",
+          "operation": "modify",
+          "description": "Locate the 'Confirm Booking' button element in the form submission section and remove any ✅ emoji from its label or children. Ensure the button text reads exactly 'Confirm Booking' with no emoji characters."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Fix 'Book Online' button on ServiceCard to navigate to a dedicated /booking page with the full booking form",
+      "acceptanceCriteria": [
+        "Clicking 'Book Online' on any ServiceCard navigates to a /booking route",
+        "The /booking route renders a full booking form",
+        "The booking form is functional and submits correctly",
+        "Navigation back to the main page is available from the booking page"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ServiceCard.tsx",
+          "operation": "modify",
+          "description": "Replace the 'Book Online' label or button with a clickable element that uses React Router's Link or useNavigate to navigate to '/booking'. Ensure the entire card or button triggers navigation when clicked."
         },
         {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Revert to Version 8 theme: remove white-accent dark theme modifications and restore original color scheme CSS custom properties as they existed at Version 8"
+          "path": "frontend/src/components/BookingPage.tsx",
+          "operation": "create",
+          "description": "Create a new BookingPage component that renders the full booking form. Extract the form logic and fields from BookingFormSection.tsx (name, phone, service selection, date/time, address, issue description, FormSubmit submission) into this dedicated page. Include a back navigation link or button to return to the home page. Style consistently with the existing dark theme and fade-in animations."
         },
         {
-          "path": "frontend/tailwind.config.js",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Revert to Version 8 theme: remove white-accent dark theme color token modifications and restore original Tailwind color configuration as it existed at Version 8"
-        },
+          "description": "Register the /booking route in the router configuration. Import the new BookingPage component and add a Route element that renders BookingPage at path='/booking'. Ensure the route is accessible without authentication if the existing booking form is publicly accessible."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Update Admin panel to display comprehensive user data including phone number, principal ID, service area, and registration time for all registered users",
+      "acceptanceCriteria": [
+        "Admin panel Users tab shows name, phone number, principal ID, service area, and registration timestamp for every registered user",
+        "All user records fetched from backend are displayed in a table or card list",
+        "Backend admin query returns phone number as part of user profile data",
+        "Admin panel is only accessible to the designated admin principal"
+      ],
+      "file_operations": [
         {
-          "path": "frontend/index.html",
+          "path": "frontend/src/components/AdminPage.tsx",
           "operation": "modify",
-          "description": "Revert to Version 8 content: restore original Hindi/Hinglish meta descriptions and title tags if they were modified in later versions"
+          "description": "Expand the Users tab display to show all user profile fields: name (userProfile.name), phone number (userProfile.phone), principal ID (user principal toString()), service area (userProfile.area), and registration timestamp (userProfile.signupTime converted to readable date format). The backend getUsers() already returns Array<[Principal, UserProfile]> with all required fields including phone. Present the data in a table with columns for each field or as detailed cards. Ensure the admin panel remains protected by the existing authorization checks."
         }
       ]
     }

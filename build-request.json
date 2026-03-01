@@ -1,39 +1,94 @@
 {
   "kind": "build_request",
-  "title": "Restore website to Version 8 state",
-  "projectName": "QuickRepair Mahipalpur",
+  "title": "Collect phone number at sign-in, remove ✅ emoji from Confirm Booking button, fix Book Online redirect, show all user data in admin panel",
+  "projectName": "QuickRepair",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Restore the frontend to its Version 8 state by reverting all changes made after Version 8. This includes removing any English text conversion changes, white-accent dark theme modifications, and any other improvements or alterations applied in versions 9 and 10. The site should look and function exactly as it did at Version 8.",
-      "target": "frontend",
+      "text": "When a user signs in via Internet Identity for the first time, collect their phone number as part of the profile setup modal (in addition to name and service area already collected in ProfileModal). Store the phone number in the backend user profile.",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-1",
-          "msg-2"
+          "msg-latest"
         ],
         "quotes": [
-          "Website version 8 me jaise thi vaise hi kar do version 8 ke bad jo kuch maine improve karne ko bola sab hata do"
+          "sign karte time user ka phone number bhi le Lena"
         ]
       },
       "acceptanceCriteria": [
-        "All post-Version 8 changes (English text conversion, white-accent dark theme, and any other improvements) are fully removed",
-        "The website appearance, content, and functionality match Version 8 exactly",
-        "No remnants of Version 9 or Version 10 changes remain in the codebase",
-        "All components render correctly without errors"
+        "ProfileModal includes a required phone number input field",
+        "Phone number is submitted and saved to the backend user profile via registerUser",
+        "Admin panel displays the stored phone number for each user",
+        "Phone number field is validated (numeric, reasonable length)"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Remove the ✅ emoji from the 'Confirm Booking' button label in the booking form. The button text should read 'Confirm Booking' without any emoji.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "Jo tumne confirm booking ke button pe ye wala emoji diya hai ise hata do ye wala ✅"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Confirm Booking button contains no ✅ emoji anywhere in its label or children",
+        "Button text reads exactly 'Confirm Booking'"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Fix the 'Book Online' button on each ServiceCard so that clicking it navigates the user to a dedicated booking page (e.g. /booking). Create a BookingPage component if it does not already exist, containing the full booking form. Wire the ServiceCard button to route to this page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-prev-1"
+        ],
+        "quotes": [
+          "Service card पर Book Online button — इसे click करने पर एक अलग booking page पर redirect होगा"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking 'Book Online' on any ServiceCard navigates to a /booking route",
+        "The /booking route renders a full booking form",
+        "The booking form is functional and submits correctly",
+        "Navigation back to the main page is available from the booking page"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Update the Admin panel to display a comprehensive list of all registered users with their full profile data: name, phone number, principal ID, service area, and sign-in/registration time. Also display all submitted bookings linked to each user where available.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-prev-1"
+        ],
+        "quotes": [
+          "Admin panel में sign-in किए हुए सभी users का पूरा data दिखेगा"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin panel Users tab shows name, phone number, principal ID, service area, and registration timestamp for every registered user",
+        "All user records fetched from backend are displayed in a table or card list",
+        "Backend admin query returns phone number as part of user profile data",
+        "Admin panel is only accessible to the designated admin principal"
       ]
     }
   ],
   "constraints": [
-    "Do not introduce any new features or improvements beyond restoring Version 8",
-    "Do not modify backend logic — only frontend changes are in scope",
-    "Do not alter immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui"
+    "Do not modify files listed in frontend.immutablePaths",
+    "All Motoko logic must remain in the single backend/main.mo actor",
+    "Preserve existing FormSubmit-based booking form submission mechanism unless replacing with a backend-stored booking"
   ],
   "nonGoals": [
-    "Adding new features or enhancements",
-    "Applying any improvements suggested after Version 8",
-    "Modifying backend/main.mo"
+    "SMS verification of phone number",
+    "Email notifications",
+    "Real-time updates in admin panel",
+    "Multi-admin support"
   ],
   "imageRequirements": {
     "required": [],
