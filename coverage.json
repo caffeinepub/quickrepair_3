@@ -1,117 +1,79 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-03-02T02:30:42.807Z",
+  "generatedAt": "2026-03-02T03:24:03.271Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 7,
-    "implemented": 7,
+    "total": 5,
+    "implemented": 4,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "In NavigationDrawer.tsx, remove the existing 'Become a Mechanic' WhatsApp link and replace it with a '👨‍🔧 Mechanic Registration' menu item that navigates to '/mechanic-registration' route. Keep all other menu options (Home, Services, About, Contact, Terms, Booking History) unchanged.",
-        "status": "implemented",
+        "summary": "Remove the scroll-to-top button (SVG icon and its anchor wrapper) identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] — this is the floating scroll-to-top anchor element in the page layout.",
+        "status": "missing",
         "plannedFiles": [
-          "frontend/src/components/NavigationDrawer.tsx"
+          "frontend/src/App.tsx"
         ],
-        "matchedFiles": [
-          "frontend/src/components/NavigationDrawer.tsx"
-        ]
+        "matchedFiles": []
       },
       {
         "id": "REQ-2",
-        "summary": "Remove the FloatingCallButton component (the fixed circular 'Call Now' button) from the website entirely. Remove its import and usage from wherever it is rendered (likely App.tsx or the main layout). The FloatingWhatsAppButton should remain untouched.",
+        "summary": "Remove the paragraph element (REQ XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/p[1]) and the button element (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/button[1]) from section 4 (likely the ServicesSection or a related section). Adjust surrounding layout to remain clean and smooth after removal.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/components/ServicesSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/components/ServicesSection.tsx"
         ]
       },
       {
         "id": "REQ-3",
-        "summary": "Create a new MechanicRegistrationPage component at frontend/src/pages/MechanicRegistrationPage.tsx. This is a standalone full page (not a modal) with the following form fields: Full Name (text, required), Phone Number (tel, required), Email (email, optional), Service Type (dropdown: Plumber, Electrician, Fan/Cooler Repair, AC Repair, Mechanic, required), Experience (dropdown: Less than 1 year, 1-3 years, 3-5 years, 5+ years, required), Address in Mahipalpur (textarea, required), Age (number, optional), Preferred Area (dropdown: Mahipalpur Extension, Village, Aerocity, Other, optional), Why want to join? (textarea, optional). The form must POST to https://formsubmit.co/pandeyxkanha@gmail.com with these hidden fields: _subject='👨‍🔧 New Mechanic Registration', _template='table', _captcha='false', _next='https://quickrepair-84g.caffeine.xyz/mechanic-thankyou.html', and a honeypot _honey field (display:none). On form submit (before redirect), show a full-screen GPay-style success overlay with animated green checkmark SVG and play the ascending C-E-G chime using the existing playSuccessSound utility, then after ~2 seconds allow the formsubmit redirect to proceed. Submit button text: '📝 Register as Mechanic', background: #ff8c42, hover scale 1.05. Page styling must match website theme: dark background (#0a2b3c), orange (#ff8c42), yellow (#FFD700), mobile-friendly.",
+        "summary": "Remove the logo text div from the header (XPath: /html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[1]/a[1]/div[2]) — this is the text label next to the logo image in the Header component. Keep the logo image/icon intact; only remove the text div.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/MechanicRegistrationPage.tsx",
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/components/Header.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/MechanicRegistrationPage.tsx",
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/components/Header.tsx"
         ]
       },
       {
         "id": "REQ-4",
-        "summary": "Add the /mechanic-registration route to App.tsx so that navigating to that path renders the new MechanicRegistrationPage component.",
+        "summary": "Remove the entire card/container div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]), including the inner content div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/div[1]) and anchor link (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/a[1]) from section 7 (likely ContactSection or FAQSection). Adjust the grid or flex layout of the parent container so remaining cards/items fill the space evenly.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/components/ContactSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/components/ContactSection.tsx"
         ]
       },
       {
         "id": "REQ-5",
-        "summary": "Fix the admin panel authorization issue: in the backend (main.mo), the 'addService' (and editService/deleteService) functions currently return an unauthorized error for the admin. Audit the role-based access control logic — the admin principal check must correctly identify the logged-in admin and permit service CRUD operations. Ensure the admin password session stored in AdminPage.tsx frontend state correctly pairs with whatever backend auth mechanism is used (or if the backend uses caller-based auth, ensure the frontend passes the authenticated actor). Services added/edited/deleted via admin must be persisted in backend stable storage.",
+        "summary": "Add a clearly visible Terms & Policy link in the website footer (Footer.tsx). The link should navigate to the /terms route. Place it in the navigation links area of the footer alongside existing footer links. Ensure it is styled consistently with other footer links.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/AdminPage.tsx"
+          "frontend/src/components/Footer.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/AdminPage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-6",
-        "summary": "Services added via the admin panel must appear on the website's ServicesSection. Currently ServicesSection.tsx renders five hardcoded services. Replace the hardcoded list with a dynamic fetch from the backend using the existing React Query hooks (e.g., useServices or equivalent). If no such query exists, add a getServices query in useQueries.ts and a corresponding getServices() query function in backend/main.mo that returns the stored services list. ServiceCard should render dynamically fetched services alongside (or replacing) any static defaults.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/ServicesSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/ServicesSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-7",
-        "summary": "Fix the admin panel to display mechanic registration details. Since mechanic registrations are submitted via formsubmit.co (external service) and not stored in the ICP backend, add a mechanism to also store mechanic registration data in the backend. Add a submitMechanicRegistration(name, phone, email, serviceType, experience, address, age, preferredArea, whyJoin) public shared func in main.mo that stores registrations in a stable array/list. Add a getMechanicRegistrations() admin-only query func that returns all registrations. In AdminPage.tsx, add a 'Mechanic Registrations' tab/section that fetches and displays all registrations with columns: Full Name, Phone, Email, Service Type, Experience, Address, Age, Preferred Area, Why Join. In MechanicRegistrationPage, after the form is built for formsubmit.co, also call submitMechanicRegistration() on the backend canister (fire-and-forget or alongside the form POST) so data is captured in the admin panel.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/AdminPage.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useQueries.ts",
-          "frontend/src/components/AdminPage.tsx"
+          "frontend/src/components/Footer.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
-    "frontend/src/components/AdminPage.tsx",
-    "frontend/src/components/NavigationDrawer.tsx",
+    "frontend/src/components/ContactSection.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Header.tsx",
     "frontend/src/components/ServicesSection.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/MechanicRegistrationPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

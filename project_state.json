@@ -1,72 +1,42 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "QuickRepair website — a service repair platform for Mahipalpur area. Features include mechanic registration, admin panel, and service listings.",
-  "architectural_notes": [
-    "Website theme: Dark Blue (#0a2b3c), Orange (#ff8c42), Yellow (#FFD700)",
-    "Form submissions go to pandeyxkanha@gmail.com via formsubmit.co with hidden fields for subject, template, captcha, and honeypot",
-    "Admin panel is at /admin route; services added there should reflect on the main website"
-  ],
+  "summary": "Website project with booking form, Terms & Policy page, and various UI elements. User requested removal of selected elements, layout smoothing, and adding a visible Terms & Policy link in the footer.",
+  "architectural_notes": [],
   "known_issues": [
-    "Admin panel shows 'Unauthorized User' error when trying to add services",
-    "User/mechanic registration data not visible in admin panel",
-    "Services added via admin panel do not appear on the website"
+    "Terms & Policy link is not visible anywhere on the website"
   ],
-  "isFixRequest": true,
+  "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-in-navigationdrawer-tsx-remove-the-existing-become-a-mechanic-whatsapp-link-and-replace-it-with-a-mechanic-registration-menu-item-that-navigates-to-mechanic-registration-route-keep-all-other-menu-options-home-services-about-contact-terms-booking-history-unchanged",
-      "title": "In NavigationDrawer.tsx, remove the existing 'Become a Mechanic' WhatsApp link and replace it with a '👨‍🔧 Mechanic Registration' menu item that navigates to '/mechanic-registration' route. Keep all other menu options (Home, Services, About, Contact, Terms, Booking History) unchanged.",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-the-floatingcallbutton-component-the-fixed-circular-call-now-button-from-the-website-entirely-remove-its-import-and-usage-from-wherever-it-is-rendered-likely-app-tsx-or-the-main-layout-the-floatingwhatsappbutton-should-remain-untouched",
-      "title": "Remove the FloatingCallButton component (the fixed circular 'Call Now' button) from the website entirely. Remove its import and usage from wherever it is rendered (likely App.tsx or the main layout). The FloatingWhatsAppButton should remain untouched.",
+      "id": "feature-remove-the-paragraph-element-req-xpath-html-1-body-1-div-1-div-1-main-1-section-4-div-1-div-3-p-1-and-the-button-element-xpath-html-1-body-1-div-1-div-1-main-1-section-4-div-1-div-3-button-1-from-section-4-likely-the-servicessection-or-a-related-section-adjust-surrounding-layout-to-remain-clean-and-smooth-after-removal",
+      "title": "Remove the paragraph element (REQ XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/p[1]) and the button element (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/button[1]) from section 4 (likely the ServicesSection or a related section). Adjust surrounding layout to remain clean and smooth after removal.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-a-new-mechanicregistrationpage-component-at-frontend-src-pages-mechanicregistrationpage-tsx-this-is-a-standalone-full-page-not-a-modal-with-the-following-form-fields-full-name-text-required-phone-number-tel-required-email-email-optional-service-type-dropdown-plumber-electrician-fan-cooler-repair-ac-repair-mechanic-required-experience-dropdown-less-than-1-year-1-3-years-3-5-years-5-years-required-address-in-mahipalpur-textarea-required-age-number-optional-preferred-area-dropdown-mahipalpur-extension-village-aerocity-other-optional-why-want-to-join-textarea-optional-the-form-must-post-to-https-formsubmit-co-pandeyxkanha-gmail-com-with-these-hidden-fields-subject-new-mechanic-registration-template-table-captcha-false-next-https-quickrepair-84g-caffeine-xyz-mechanic-thankyou-html-and-a-honeypot-honey-field-display-none-on-form-submit-before-redirect-show-a-full-screen-gpay-style-success-overlay-with-animated-green-checkmark-svg-and-play-the-ascending-c-e-g-chime-using-the-existing-playsuccesssound-utility-then-after-2-seconds-allow-the-formsubmit-redirect-to-proceed-submit-button-text-register-as-mechanic-background-ff8c42-hover-scale-1-05-page-styling-must-match-website-theme-dark-background-0a2b3c-orange-ff8c42-yellow-ffd700-mobile-friendly",
-      "title": "Create a new MechanicRegistrationPage component at frontend/src/pages/MechanicRegistrationPage.tsx. This is a standalone full page (not a modal) with the following form fields: Full Name (text, required), Phone Number (tel, required), Email (email, optional), Service Type (dropdown: Plumber, Electrician, Fan/Cooler Repair, AC Repair, Mechanic, required), Experience (dropdown: Less than 1 year, 1-3 years, 3-5 years, 5+ years, required), Address in Mahipalpur (textarea, required), Age (number, optional), Preferred Area (dropdown: Mahipalpur Extension, Village, Aerocity, Other, optional), Why want to join? (textarea, optional). The form must POST to https://formsubmit.co/pandeyxkanha@gmail.com with these hidden fields: _subject='👨‍🔧 New Mechanic Registration', _template='table', _captcha='false', _next='https://quickrepair-84g.caffeine.xyz/mechanic-thankyou.html', and a honeypot _honey field (display:none). On form submit (before redirect), show a full-screen GPay-style success overlay with animated green checkmark SVG and play the ascending C-E-G chime using the existing playSuccessSound utility, then after ~2 seconds allow the formsubmit redirect to proceed. Submit button text: '📝 Register as Mechanic', background: #ff8c42, hover scale 1.05. Page styling must match website theme: dark background (#0a2b3c), orange (#ff8c42), yellow (#FFD700), mobile-friendly.",
+      "id": "feature-remove-the-logo-text-div-from-the-header-xpath-html-1-body-1-div-1-div-1-header-1-div-1-div-1-a-1-div-2-this-is-the-text-label-next-to-the-logo-image-in-the-header-component-keep-the-logo-image-icon-intact-only-remove-the-text-div",
+      "title": "Remove the logo text div from the header (XPath: /html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[1]/a[1]/div[2]) — this is the text label next to the logo image in the Header component. Keep the logo image/icon intact; only remove the text div.",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-the-mechanic-registration-route-to-app-tsx-so-that-navigating-to-that-path-renders-the-new-mechanicregistrationpage-component",
-      "title": "Add the /mechanic-registration route to App.tsx so that navigating to that path renders the new MechanicRegistrationPage component.",
+      "id": "feature-remove-the-entire-card-container-div-xpath-html-1-body-1-div-1-div-1-main-1-section-7-div-1-div-2-div-3-including-the-inner-content-div-xpath-html-1-body-1-div-1-div-1-main-1-section-7-div-1-div-2-div-3-div-1-and-anchor-link-xpath-html-1-body-1-div-1-div-1-main-1-section-7-div-1-div-2-div-3-a-1-from-section-7-likely-contactsection-or-faqsection-adjust-the-grid-or-flex-layout-of-the-parent-container-so-remaining-cards-items-fill-the-space-evenly",
+      "title": "Remove the entire card/container div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]), including the inner content div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/div[1]) and anchor link (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/a[1]) from section 7 (likely ContactSection or FAQSection). Adjust the grid or flex layout of the parent container so remaining cards/items fill the space evenly.",
       "reqIds": [
         "REQ-4"
       ],
       "version": 1
     },
     {
-      "id": "feature-fix-the-admin-panel-authorization-issue-in-the-backend-main-mo-the-addservice-and-editservice-deleteservice-functions-currently-return-an-unauthorized-error-for-the-admin-audit-the-role-based-access-control-logic-the-admin-principal-check-must-correctly-identify-the-logged-in-admin-and-permit-service-crud-operations-ensure-the-admin-password-session-stored-in-adminpage-tsx-frontend-state-correctly-pairs-with-whatever-backend-auth-mechanism-is-used-or-if-the-backend-uses-caller-based-auth-ensure-the-frontend-passes-the-authenticated-actor-services-added-edited-deleted-via-admin-must-be-persisted-in-backend-stable-storage",
-      "title": "Fix the admin panel authorization issue: in the backend (main.mo), the 'addService' (and editService/deleteService) functions currently return an unauthorized error for the admin. Audit the role-based access control logic — the admin principal check must correctly identify the logged-in admin and permit service CRUD operations. Ensure the admin password session stored in AdminPage.tsx frontend state correctly pairs with whatever backend auth mechanism is used (or if the backend uses caller-based auth, ensure the frontend passes the authenticated actor). Services added/edited/deleted via admin must be persisted in backend stable storage.",
+      "id": "feature-add-a-clearly-visible-terms-policy-link-in-the-website-footer-footer-tsx-the-link-should-navigate-to-the-terms-route-place-it-in-the-navigation-links-area-of-the-footer-alongside-existing-footer-links-ensure-it-is-styled-consistently-with-other-footer-links",
+      "title": "Add a clearly visible Terms & Policy link in the website footer (Footer.tsx). The link should navigate to the /terms route. Place it in the navigation links area of the footer alongside existing footer links. Ensure it is styled consistently with other footer links.",
       "reqIds": [
         "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-services-added-via-the-admin-panel-must-appear-on-the-website-s-servicessection-currently-servicessection-tsx-renders-five-hardcoded-services-replace-the-hardcoded-list-with-a-dynamic-fetch-from-the-backend-using-the-existing-react-query-hooks-e-g-useservices-or-equivalent-if-no-such-query-exists-add-a-getservices-query-in-usequeries-ts-and-a-corresponding-getservices-query-function-in-backend-main-mo-that-returns-the-stored-services-list-servicecard-should-render-dynamically-fetched-services-alongside-or-replacing-any-static-defaults",
-      "title": "Services added via the admin panel must appear on the website's ServicesSection. Currently ServicesSection.tsx renders five hardcoded services. Replace the hardcoded list with a dynamic fetch from the backend using the existing React Query hooks (e.g., useServices or equivalent). If no such query exists, add a getServices query in useQueries.ts and a corresponding getServices() query function in backend/main.mo that returns the stored services list. ServiceCard should render dynamically fetched services alongside (or replacing) any static defaults.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-admin-panel-to-display-mechanic-registration-details-since-mechanic-registrations-are-submitted-via-formsubmit-co-external-service-and-not-stored-in-the-icp-backend-add-a-mechanism-to-also-store-mechanic-registration-data-in-the-backend-add-a-submitmechanicregistration-name-phone-email-servicetype-experience-address-age-preferredarea-whyjoin-public-shared-func-in-main-mo-that-stores-registrations-in-a-stable-array-list-add-a-getmechanicregistrations-admin-only-query-func-that-returns-all-registrations-in-adminpage-tsx-add-a-mechanic-registrations-tab-section-that-fetches-and-displays-all-registrations-with-columns-full-name-phone-email-service-type-experience-address-age-preferred-area-why-join-in-mechanicregistrationpage-after-the-form-is-built-for-formsubmit-co-also-call-submitmechanicregistration-on-the-backend-canister-fire-and-forget-or-alongside-the-form-post-so-data-is-captured-in-the-admin-panel",
-      "title": "Fix the admin panel to display mechanic registration details. Since mechanic registrations are submitted via formsubmit.co (external service) and not stored in the ICP backend, add a mechanism to also store mechanic registration data in the backend. Add a submitMechanicRegistration(name, phone, email, serviceType, experience, address, age, preferredArea, whyJoin) public shared func in main.mo that stores registrations in a stable array/list. Add a getMechanicRegistrations() admin-only query func that returns all registrations. In AdminPage.tsx, add a 'Mechanic Registrations' tab/section that fetches and displays all registrations with columns: Full Name, Phone, Email, Service Type, Experience, Address, Age, Preferred Area, Why Join. In MechanicRegistrationPage, after the form is built for formsubmit.co, also call submitMechanicRegistration() on the backend canister (fire-and-forget or alongside the form POST) so data is captured in the admin panel.",
-      "reqIds": [
-        "REQ-7"
       ],
       "version": 1
     }
@@ -74,26 +44,22 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Replace 'Become a Mechanic' in hamburger menu with '👨‍🔧 Mechanic Registration' option",
+      "summary": "Remove selected elements (logo text, scroll-to-top button, section 4 paragraph and button, section 7 card/div) and adjust layout to be smooth",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Create separate Mechanic Registration page with all required fields (Name, Phone, Service Type, Experience, Address, Age, Preferred Area, Why join), formsubmit.co POST to pandeyxkanha@gmail.com, and GPay-style success animation (green checkmark + sound)",
+      "summary": "Add visible Terms & Policy link on the website (e.g., in footer)",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Remove 'Call Now' circle button from the website",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Fix admin panel (/admin): show mechanic registration details (name, mobile, email, service type, address), fix 'Unauthorized User' error when adding services, and make added services appear on the website",
-      "reqIds": [],
+      "summary": "Remove the scroll-to-top button (SVG icon and its anchor wrapper) identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] — this is the floating scroll-to-top anchor element in the page layout.",
+      "reqIds": [
+        "REQ-1"
+      ],
       "status": "pending"
     }
   ],

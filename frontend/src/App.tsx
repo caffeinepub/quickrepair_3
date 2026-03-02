@@ -8,16 +8,16 @@ import AdminPage from './components/AdminPage';
 import BookingPage from './pages/BookingPage';
 import BookingHistoryPage from './pages/BookingHistoryPage';
 import MechanicRegistrationPage from './pages/MechanicRegistrationPage';
+import TermsPage from './pages/TermsPage';
+import FloatingCallButton from './components/FloatingCallButton';
 
 // Lazy-load below-fold sections for faster initial paint
 const ServicesSection = lazy(() => import('./components/ServicesSection'));
-const BookingFormSection = lazy(() => import('./components/BookingFormSection'));
 const FeedbackSection = lazy(() => import('./components/FeedbackSection'));
 const AboutSection = lazy(() => import('./components/AboutSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
 const FAQSection = lazy(() => import('./components/FAQSection'));
 const Footer = lazy(() => import('./components/Footer'));
-const FloatingWhatsAppButton = lazy(() => import('./components/FloatingWhatsAppButton'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,9 +77,6 @@ function MainSite() {
           <ServicesSection />
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
-          <BookingFormSection />
-        </Suspense>
-        <Suspense fallback={<SectionFallback />}>
           <FeedbackSection />
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
@@ -97,10 +94,8 @@ function MainSite() {
         <Footer />
       </Suspense>
 
-      {/* Floating WhatsApp button only */}
-      <Suspense fallback={null}>
-        <FloatingWhatsAppButton />
-      </Suspense>
+      {/* Floating Call button */}
+      <FloatingCallButton />
     </div>
   );
 }
@@ -112,6 +107,7 @@ export default function App() {
   const isBookingHistoryRoute = path === '/booking-history' || path === '/booking-history/';
   const isMechanicRegistrationRoute =
     path === '/mechanic-registration' || path === '/mechanic-registration/';
+  const isTermsRoute = path === '/terms' || path === '/terms/';
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -123,6 +119,8 @@ export default function App() {
         <BookingHistoryPage />
       ) : isMechanicRegistrationRoute ? (
         <MechanicRegistrationPage />
+      ) : isTermsRoute ? (
+        <TermsPage />
       ) : (
         <MainSite />
       )}

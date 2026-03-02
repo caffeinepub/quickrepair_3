@@ -114,24 +114,6 @@ export default function ServicesSection() {
                 ))}
           </div>
         )}
-
-        {/* Bottom CTA — scroll to booking form */}
-        <div className="text-center mt-12">
-          <p className="text-gray-500 text-sm mb-4">
-            Ready to book? Fill in our quick online form below.
-          </p>
-          <button
-            onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{
-              border: '1px solid rgba(255,215,0,0.3)',
-              color: '#FFD700',
-              backgroundColor: 'rgba(255,215,0,0.06)',
-            }}
-          >
-            Book a Service Now ↓
-          </button>
-        </div>
       </div>
     </section>
   );

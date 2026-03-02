@@ -91,7 +91,7 @@ export default function Header() {
             {/* Logo */}
             <a
               href="#home"
-              className="flex items-center gap-2 group"
+              className="flex items-center group"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
@@ -111,10 +111,6 @@ export default function Header() {
                   Repair
                 </span>
               </div>
-              <div
-                className="w-1.5 h-1.5 rounded-full mt-1"
-                style={{ backgroundColor: '#FF8C42' }}
-              />
             </a>
 
             {/* Desktop Nav */}

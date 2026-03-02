@@ -1,6 +1,5 @@
 import { useFadeIn } from '../hooks/useFadeIn';
-import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
-import { SiWhatsapp } from 'react-icons/si';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const serviceAreas = [
   'Mahipalpur Extension',
@@ -43,7 +42,7 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Contact Cards */}
           <div className="space-y-4">
             {/* Phone */}
@@ -141,50 +140,6 @@ export default function ContactSection() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* WhatsApp CTA */}
-          <div
-            className="p-6 rounded-2xl flex flex-col justify-between"
-            style={{
-              background: 'linear-gradient(135deg, #1a1a1a, #161616)',
-              border: '1px solid #252525',
-            }}
-          >
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <MessageCircle className="w-5 h-5" style={{ color: '#25D366' }} />
-                <h3 className="text-white font-bold text-lg">Quick Booking</h3>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                The fastest way to book a service is via WhatsApp. Send us a message and our team will respond instantly.
-              </p>
-              <div
-                className="p-4 rounded-xl mb-6"
-                style={{
-                  background: 'rgba(37,211,102,0.08)',
-                  border: '1px solid rgba(37,211,102,0.2)',
-                }}
-              >
-                <div className="text-xs text-gray-500 mb-1">Average response time</div>
-                <div className="text-white font-bold text-2xl" style={{ color: '#25D366' }}>
-                  &lt; 2 minutes
-                </div>
-              </div>
-            </div>
-            <a
-              href="https://wa.me/918004774839?text=Hi%2C%20I%20need%20a%20service%20from%20QuickRepair"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(37,211,102,0.35)] active:scale-95"
-              style={{
-                backgroundColor: '#25D366',
-                color: '#fff',
-              }}
-            >
-              <SiWhatsapp className="w-5 h-5" />
-              Chat on WhatsApp
-            </a>
           </div>
         </div>
       </div>

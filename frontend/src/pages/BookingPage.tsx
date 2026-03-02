@@ -6,6 +6,7 @@ import { useInternetIdentity } from '../hooks/useInternetIdentity';
 
 export default function BookingPage() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   const { identity, login, loginStatus, isInitializing } = useInternetIdentity();
@@ -14,6 +15,11 @@ export default function BookingPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!termsAccepted) {
+      return;
+    }
+
     const form = e.currentTarget;
 
     // Submit form data to FormSubmit via fetch (fire-and-forget)
@@ -33,6 +39,7 @@ export default function BookingPage() {
 
   const handleOverlayClose = () => {
     setShowSuccess(false);
+    setTermsAccepted(false);
     if (formRef.current) formRef.current.reset();
   };
 
@@ -354,14 +361,84 @@ export default function BookingPage() {
                   </select>
                 </div>
 
+                {/* Terms & Policies Checkbox */}
+                <div
+                  className="rounded-xl p-4"
+                  style={{
+                    backgroundColor: '#1a1a1a',
+                    border: `1px solid ${termsAccepted ? 'rgba(255,140,66,0.4)' : '#2e2e2e'}`,
+                  }}
+                >
+                  {/* Checkbox Row */}
+                  <label className="flex items-start gap-3 cursor-pointer select-none">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <input
+                        type="checkbox"
+                        id="terms-checkbox"
+                        checked={termsAccepted}
+                        onChange={(e) => setTermsAccepted(e.target.checked)}
+                        required
+                        className="sr-only"
+                      />
+                      {/* Custom checkbox */}
+                      <div
+                        onClick={() => setTermsAccepted(!termsAccepted)}
+                        className="w-5 h-5 rounded flex items-center justify-center transition-all duration-200 cursor-pointer"
+                        style={{
+                          backgroundColor: termsAccepted ? '#FF8C42' : 'transparent',
+                          border: `2px solid ${termsAccepted ? '#FF8C42' : '#555'}`,
+                        }}
+                      >
+                        {termsAccepted && (
+                          <svg
+                            width="12"
+                            height="9"
+                            viewBox="0 0 12 9"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M1 4L4.5 7.5L11 1"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm leading-relaxed">
+                      <span style={{ color: '#e0e0e0' }}>✅ I agree to the</span>
+                      <span style={{ color: '#e0e0e0' }}>Terms and Policies</span>
+                      <a
+                        href="/terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold transition-all duration-200 hover:underline"
+                        style={{ color: '#FF8C42' }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Read Terms &amp; Policies ↗
+                      </a>
+                    </div>
+                  </label>
+
+                  {/* Disclaimer */}
+                  <p className="mt-2.5 text-xs leading-relaxed" style={{ color: '#666', paddingLeft: '32px' }}>
+                    By clicking Confirm Booking, you accept our Terms and Policies.
+                  </p>
+                </div>
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-[1.02] active:scale-95 mt-2"
+                  disabled={!termsAccepted}
+                  className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-[1.02] active:scale-95 mt-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   style={{
                     backgroundColor: '#ff8c42',
                     color: '#fff',
-                    boxShadow: '0 6px 24px rgba(255,140,66,0.4)',
+                    boxShadow: termsAccepted ? '0 6px 24px rgba(255,140,66,0.4)' : 'none',
                   }}
                 >
                   Confirm Booking
