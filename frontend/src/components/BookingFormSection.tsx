@@ -139,7 +139,7 @@ export default function BookingFormSection() {
           >
             <form
               ref={formRef}
-              action="https://formsubmit.co/pandeyxkanha@gmail.com"
+              action="https://formsubmit.co/amitpanday96149@gmail.com"
               method="POST"
               onSubmit={handleSubmit}
               className="space-y-5"
@@ -361,6 +361,7 @@ export default function BookingFormSection() {
                 <select
                   id="preferredTime"
                   name="Preferred Time"
+                  defaultValue="Within 30 minutes"
                   className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
                   style={{
                     backgroundColor: '#1e1e1e',
@@ -370,12 +371,8 @@ export default function BookingFormSection() {
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
                 >
-                  <option value="ASAP">ASAP</option>
-                  <option value="Within 10 minutes">Within 10 minutes</option>
-                  <option value="Within 15 MINUTES">Within 15 MINUTES</option>
                   <option value="Within 30 minutes">Within 30 minutes</option>
                   <option value="Within 1 hour">Within 1 hour</option>
-                  <option value="Today">Today</option>
                 </select>
               </div>
 

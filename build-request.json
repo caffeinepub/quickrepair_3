@@ -1,48 +1,65 @@
 {
   "kind": "build_request",
-  "title": "Add IP-based location detection to booking form",
+  "title": "Remove ASAP/10min/15min/Today timing options and Live Location Tracking from booking form",
   "projectName": "QuickRepair",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-8",
-      "text": "In BookingPage.tsx and/or BookingFormSection.tsx, implement IP-based location detection using ipapi.co/json/ (no API key required). On component mount, use a useEffect + fetch call to ipapi.co/json/. Display a status message ('📍 Detecting location...', '✅ Location detected!', or '❌ Could not detect location. Please enter manually.' / '❌ Location service unavailable. Please enter manually.' on error). Auto-fill the address field with city, region, country_name from the API response if the field is empty. Store latitude and longitude values in hidden form fields (name='latitude', id='latitude' and name='longitude', id='longitude') that are submitted along with the booking form. Use React state and refs instead of direct DOM manipulation. Do not change any existing design, layout, animations, SEO content, or other functionality.",
+      "id": "REQ-11",
+      "text": "In BookingFormSection.tsx and BookingPage.tsx, remove the following options from the Service Timing dropdown: 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today'. Keep only 'Within 30 minutes' and 'Within 1 hour' as valid options. Do not change any other form fields, layout, styling, animations, or functionality.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6",
-          "msg-7"
+          "msg-recent"
         ],
         "quotes": [
-          "Add IP-based location detection using ip-api.com (no API key required).",
-          "fetch('https://ipapi.co/json/')",
-          "Auto-fill address if address field exists",
-          "Build aur jo maine code diya hai agar usme kuch galat ho to sahi kar ke daal dena"
+          "Within 10 minutes aur within 15 minutes Aur ASAP aur today wala hata do",
+          "Timing dropdown se hatayen: ASAP, Within 10 minutes, Within 15 MINUTES, Today",
+          "Rahene den: Within 30 minutes, Within 1 hour"
         ]
       },
       "acceptanceCriteria": [
-        "On page load, a status message '📍 Detecting location...' appears near the booking form.",
-        "A successful ipapi.co/json/ response auto-fills the address field with 'city, region, country_name' if the field was empty.",
-        "Latitude and longitude from the API response are stored in hidden form inputs and submitted with the form.",
-        "On API success, status message updates to '✅ Location detected!'.",
-        "On API failure or network error, status message updates to an appropriate error message prompting manual entry.",
-        "Implementation uses React useEffect and fetch (no plain <script> tags or direct document.getElementById DOM manipulation).",
-        "No changes to existing layout, animations, SEO content, or other form functionality."
+        "The timing dropdown in the booking form contains exactly two options: 'Within 30 minutes' and 'Within 1 hour'",
+        "Options 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today' are no longer present in the dropdown",
+        "All other form fields (name, phone, email, address, service, etc.) remain unchanged",
+        "Form layout, styling, and animations are unchanged"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "In BookingFormSection.tsx and BookingPage.tsx, remove the Live Location Tracking section/feature entirely from the booking form UI. The address input field must remain so users can manually type their address. Do not remove the IP-based auto-fill functionality for the address field (ipapi.co). Do not change any other form fields, layout, styling, animations, or functionality.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent"
+        ],
+        "quotes": [
+          "live location tracking wala bhi hata do",
+          "form address wala option rahene dena user address daal sake"
+        ]
+      },
+      "acceptanceCriteria": [
+        "No 'Live Location Tracking' button, map, or live GPS tracking UI element is visible in the booking form",
+        "The address text input field is still present and editable by the user",
+        "IP-based address auto-fill (city, region, country from ipapi.co) still works if previously implemented",
+        "Hidden latitude/longitude fields remain if previously added",
+        "Form layout, styling, and animations are unchanged"
       ]
     }
   ],
   "constraints": [
-    "Use ipapi.co/json/ as the location API endpoint — no API key required.",
-    "Do not use plain HTML <script> tags or direct DOM manipulation; use React hooks (useEffect, useState, useRef).",
-    "Do not change any existing design, layout, animations, SEO content, or form functionality.",
-    "Hidden latitude/longitude fields must be included in the form submission payload.",
-    "Address field should only be auto-filled if it is currently empty."
+    "Do not change any other section or page of the website",
+    "Do not remove the address input field from the booking form",
+    "Do not alter form layout, styling, or animations",
+    "Do not modify the FormSubmit action URL or any other hidden fields",
+    "Do not change IP-based address auto-fill functionality"
   ],
   "nonGoals": [
-    "GPS/browser geolocation API — only IP-based detection via ipapi.co.",
-    "Storing location data in the backend.",
-    "Any changes to SEO meta tags, headings, or existing content.",
-    "Any changes to authentication, booking logic, or success overlay behavior."
+    "Changes to any page other than the booking form",
+    "Modifying service options or other dropdowns",
+    "Changing SEO content, meta tags, or structured data",
+    "Altering the mechanic registration form",
+    "Any backend changes"
   ],
   "imageRequirements": {
     "required": [],

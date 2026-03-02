@@ -160,7 +160,7 @@ export default function BookingPage() {
             >
               <form
                 ref={formRef}
-                action="https://formsubmit.co/pandeyxkanha@gmail.com"
+                action="https://formsubmit.co/amitpanday96149@gmail.com"
                 method="POST"
                 onSubmit={handleSubmit}
                 className="space-y-5"
@@ -386,6 +386,7 @@ export default function BookingPage() {
                   <select
                     id="bp-preferredTime"
                     name="Preferred Time"
+                    defaultValue="Within 30 minutes"
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
                     style={{
                       backgroundColor: '#1e1e1e',
@@ -395,12 +396,8 @@ export default function BookingPage() {
                     onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
                     onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
                   >
-                    <option value="ASAP">ASAP</option>
-                    <option value="Within 10 minutes">Within 10 minutes</option>
-                    <option value="Within 15 MINUTES">Within 15 MINUTES</option>
                     <option value="Within 30 minutes">Within 30 minutes</option>
                     <option value="Within 1 hour">Within 1 hour</option>
-                    <option value="Today">Today</option>
                   </select>
                 </div>
 
@@ -451,26 +448,21 @@ export default function BookingPage() {
                         )}
                       </div>
                     </div>
-                    <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm leading-relaxed">
-                      <span style={{ color: '#e0e0e0' }}>✅ I agree to the</span>
-                      <span style={{ color: '#e0e0e0' }}>Terms and Policies</span>
+                    <span className="text-sm leading-relaxed" style={{ color: '#ccc' }}>
+                      I have read and agree to the{' '}
                       <a
                         href="/terms"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-semibold transition-all duration-200 hover:underline"
+                        className="font-semibold underline underline-offset-2"
                         style={{ color: '#FF8C42' }}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        Read Terms &amp; Policies ↗
+                        Terms &amp; Policies
                       </a>
-                    </div>
+                      , including the 10-minute response commitment and service area limits.
+                    </span>
                   </label>
-
-                  {/* Disclaimer */}
-                  <p className="mt-2.5 text-xs leading-relaxed" style={{ color: '#666', paddingLeft: '32px' }}>
-                    By clicking Confirm Booking, you accept our Terms and Policies.
-                  </p>
                 </div>
 
                 {/* Submit Button */}

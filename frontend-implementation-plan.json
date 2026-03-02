@@ -1,35 +1,50 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add IP-based location detection to booking form",
+  "title": "Remove ASAP/10min/15min/Today timing options and Live Location Tracking from booking form",
   "requirements": [
     {
-      "id": "REQ-8",
-      "summary": "Implement IP-based location detection in the booking form using ipapi.co/json/, auto-filling address and storing coordinates in hidden fields",
+      "id": "REQ-11",
+      "summary": "Remove 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today' options from the Service Timing dropdown, keeping only 'Within 30 minutes' and 'Within 1 hour'",
       "acceptanceCriteria": [
-        "On page load, a status message '📍 Detecting location...' appears near the booking form.",
-        "A successful ipapi.co/json/ response auto-fills the address field with 'city, region, country_name' if the field was empty.",
-        "Latitude and longitude from the API response are stored in hidden form inputs and submitted with the form.",
-        "On API success, status message updates to '✅ Location detected!'.",
-        "On API failure or network error, status message updates to an appropriate error message prompting manual entry.",
-        "Implementation uses React useEffect and fetch (no plain <script> tags or direct document.getElementById DOM manipulation).",
-        "No changes to existing layout, animations, SEO content, or other form functionality."
+        "The timing dropdown in the booking form contains exactly two options: 'Within 30 minutes' and 'Within 1 hour'",
+        "Options 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today' are no longer present in the dropdown",
+        "All other form fields (name, phone, email, address, service, etc.) remain unchanged",
+        "Form layout, styling, and animations are unchanged"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/hooks/useIpLocation.ts",
-          "operation": "create",
-          "description": "Create a custom React hook that handles IP-based location detection using ipapi.co/json/. Export useIpLocation hook that returns location state (city, region, country_name, latitude, longitude), loading status ('idle', 'detecting', 'success', 'error'), and error message. Use useEffect to fetch location data on mount, handle API response parsing, and manage state transitions. Include proper error handling for network failures and API errors."
-        },
-        {
           "path": "frontend/src/components/BookingFormSection.tsx",
           "operation": "modify",
-          "description": "Integrate IP-based location detection into the booking form. Import and use the useIpLocation hook. Add controlled state and refs for address field value. Display location detection status message with appropriate emoji based on loading state ('📍 Detecting location...', '✅ Location detected!', '❌ Could not detect location. Please enter manually.', '❌ Location service unavailable. Please enter manually.'). Auto-fill the address field with 'city, region, country_name' from location data only if the address field is currently empty. Add two hidden input fields (name='latitude', id='latitude' and name='longitude', id='longitude') that are populated with coordinate values from the location hook and submitted with the form. Position the status message near the address field without disrupting existing layout or design. Ensure all changes use React patterns (state, refs, controlled components) instead of direct DOM manipulation."
+          "description": "Remove the timing options 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today' from the Service Timing dropdown select element. Retain only 'Within 30 minutes' and 'Within 1 hour' as valid options. Update the default value if it was set to one of the removed options. Do not modify any other form fields, layout, styling, or animations."
         },
         {
           "path": "frontend/src/pages/BookingPage.tsx",
           "operation": "modify",
-          "description": "Integrate IP-based location detection into the BookingPage form if the form implementation exists here. Import and use the useIpLocation hook. Add controlled state for the address field. Display location detection status message with appropriate emoji based on loading state. Auto-fill address field with 'city, region, country_name' from location data only if empty. Add hidden latitude and longitude input fields that capture coordinate values and are submitted with the form. Position the status message appropriately without changing existing layout, animations, or design. Use React state and refs throughout, avoiding direct DOM manipulation."
+          "description": "Remove the timing options 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today' from the Service Timing dropdown select element. Retain only 'Within 30 minutes' and 'Within 1 hour' as valid options. Update the default value if it was set to one of the removed options. Do not modify any other form fields, layout, styling, or animations."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Remove the Live Location Tracking section/feature entirely from the booking form UI while preserving the address input field and IP-based auto-fill functionality",
+      "acceptanceCriteria": [
+        "No 'Live Location Tracking' button, map, or live GPS tracking UI element is visible in the booking form",
+        "The address text input field is still present and editable by the user",
+        "IP-based address auto-fill (city, region, country from ipapi.co) still works if previously implemented",
+        "Hidden latitude/longitude fields remain if previously added",
+        "Form layout, styling, and animations are unchanged"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/BookingFormSection.tsx",
+          "operation": "modify",
+          "description": "Remove all UI elements related to Live Location Tracking including any buttons, map components, or GPS tracking features. Ensure the address text input field remains present and editable. Preserve the IP-based auto-fill functionality using ipapi.co. Keep any hidden latitude/longitude fields if they exist. Do not modify form layout, styling, or animations."
+        },
+        {
+          "path": "frontend/src/pages/BookingPage.tsx",
+          "operation": "modify",
+          "description": "Remove all UI elements related to Live Location Tracking including any buttons, map components, or GPS tracking features. Ensure the address text input field remains present and editable. Preserve the IP-based auto-fill functionality using ipapi.co (via useIpLocation hook). Keep any hidden latitude/longitude fields if they exist. Do not modify form layout, styling, or animations."
         }
       ]
     }

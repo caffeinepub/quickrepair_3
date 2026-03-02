@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
-  "summary": "QuickRepair website — SEO keywords added across all service pages (titles, headings, meta, alt text). Now adding IP-based location detection using ipapi.co/json/ (no API key) into the contact form: auto-detect city/region/country, auto-fill address field, add hidden latitude/longitude fields, show status messages. Implementation in React/TypeScript using useEffect + fetch instead of plain script tag.",
+  "projectStateVersion": 11,
+  "summary": "QuickRepair website — SEO keywords added across all service pages. IP-based location detection added to contact form. FormSubmit email updated to amitpanday96149@gmail.com in both forms. Now removing ASAP/Within 10 minutes/Within 15 minutes/Today options from booking form timing dropdown, removing Live Location Tracking section from form, keeping address field for manual entry.",
   "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
@@ -69,6 +69,38 @@
         "REQ-8"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-in-bookingformsection-tsx-and-bookingpage-tsx-if-the-form-action-url-is-defined-there-replace-the-formsubmit-action-email-from-pandeyxkanha-gmail-com-to-amitpanday96149-gmail-com-in-the-customer-booking-form-s-action-url-e-g-https-formsubmit-co-pandeyxkanha-gmail-com-https-formsubmit-co-amitpanday96149-gmail-com-do-not-change-any-form-fields-hidden-fields-including-latitude-longitude-styling-animations-or-any-other-functionality",
+      "title": "In BookingFormSection.tsx (and BookingPage.tsx if the form action URL is defined there), replace the FormSubmit action email from 'pandeyxkanha@gmail.com' to 'amitpanday96149@gmail.com' in the customer booking form's action URL (e.g. 'https://formsubmit.co/pandeyxkanha@gmail.com' → 'https://formsubmit.co/amitpanday96149@gmail.com'). Do not change any form fields, hidden fields (including latitude/longitude), styling, animations, or any other functionality.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-mechanicregistrationpage-tsx-replace-the-formsubmit-action-email-from-pandeyxkanha-gmail-com-to-amitpanday96149-gmail-com-in-the-mechanic-registration-become-a-mechanic-form-s-action-url-e-g-https-formsubmit-co-pandeyxkanha-gmail-com-https-formsubmit-co-amitpanday96149-gmail-com-do-not-change-any-form-fields-hidden-fields-validation-logic-styling-animations-or-any-other-functionality",
+      "title": "In MechanicRegistrationPage.tsx, replace the FormSubmit action email from 'pandeyxkanha@gmail.com' to 'amitpanday96149@gmail.com' in the mechanic registration (Become a Mechanic) form's action URL (e.g. 'https://formsubmit.co/pandeyxkanha@gmail.com' → 'https://formsubmit.co/amitpanday96149@gmail.com'). Do not change any form fields, hidden fields, validation logic, styling, animations, or any other functionality.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-bookingformsection-tsx-and-bookingpage-tsx-remove-the-following-options-from-the-service-timing-dropdown-asap-within-10-minutes-within-15-minutes-and-today-keep-only-within-30-minutes-and-within-1-hour-as-valid-options-do-not-change-any-other-form-fields-layout-styling-animations-or-functionality",
+      "title": "In BookingFormSection.tsx and BookingPage.tsx, remove the following options from the Service Timing dropdown: 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today'. Keep only 'Within 30 minutes' and 'Within 1 hour' as valid options. Do not change any other form fields, layout, styling, animations, or functionality.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-bookingformsection-tsx-and-bookingpage-tsx-remove-the-live-location-tracking-section-feature-entirely-from-the-booking-form-ui-the-address-input-field-must-remain-so-users-can-manually-type-their-address-do-not-remove-the-ip-based-auto-fill-functionality-for-the-address-field-ipapi-co-do-not-change-any-other-form-fields-layout-styling-animations-or-functionality",
+      "title": "In BookingFormSection.tsx and BookingPage.tsx, remove the Live Location Tracking section/feature entirely from the booking form UI. The address input field must remain so users can manually type their address. Do not remove the IP-based auto-fill functionality for the address field (ipapi.co). Do not change any other form fields, layout, styling, animations, or functionality.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -81,6 +113,18 @@
     {
       "id": "AR-3",
       "summary": "Add IP-based location detection (ipapi.co/json/) to contact form: auto-fill address field, add hidden latitude/longitude fields, show detecting/success/error status messages. Implement in React/TypeScript using useEffect + fetch. No design or functionality changes.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Replace FormSubmit email from pandeyxkanha@gmail.com to amitpanday96149@gmail.com in both customer booking form and mechanic registration (Become a Mechanic) form action URLs. No other changes.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Remove ASAP, Within 10 minutes, Within 15 minutes, and Today options from booking form timing dropdown (keep Within 30 minutes and Within 1 hour). Remove Live Location Tracking section from booking form. Keep address field for manual user input. No other website changes.",
       "reqIds": [],
       "status": "pending"
     }

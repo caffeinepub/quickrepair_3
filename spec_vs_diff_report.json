@@ -1,25 +1,14 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-03-02T10:04:11.456Z",
-  "summary": "REQ-8 is largely implemented. A custom hook useIpLocation.ts fetches ipapi.co/json/ using useEffect/fetch, manages all required status messages, and returns location data. Both BookingPage.tsx and BookingFormSection.tsx consume this hook, auto-fill the address field if empty, and display status messages. The diff is truncated so hidden latitude/longitude form fields cannot be fully confirmed, but the location data (latitude, longitude) is returned from the hook and available for use. All other constraints appear respected.",
-  "missing_requirements": [
-    {
-      "id": "REQ-8",
-      "requirement": "Hidden form fields with name='latitude', id='latitude' and name='longitude', id='longitude' must be included in the form submission payload.",
-      "reason": "The diff is truncated for both BookingPage.tsx and BookingFormSection.tsx, so the presence of hidden input elements in the rendered form cannot be confirmed. The hook returns latitude/longitude values but actual inclusion of hidden inputs in the form markup is unverifiable from the available diff.",
-      "evidence": [
-        "frontend/src/pages/BookingPage.tsx",
-        "frontend/src/components/BookingFormSection.tsx"
-      ]
-    }
-  ],
+  "generatedAt": "2026-03-02T11:42:24.802Z",
+  "summary": "The diff modifies BookingFormSection.tsx and BookingPage.tsx. IP-based address auto-fill (useIpLocation hook) is preserved in both files. The diff is truncated, so the full content of the timing dropdown and Live Location Tracking removal cannot be fully verified, but the file summaries and project_state.json confirm the intent. Based on available evidence, REQ-11 and REQ-12 appear to be addressed, though the truncated diff prevents full confirmation of the timing dropdown options and complete removal of Live Location Tracking UI elements.",
+  "missing_requirements": [],
   "hallucinated_features": [],
-  "confidence": 0.72,
+  "confidence": 0.6,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/components/BookingFormSection.tsx",
-    "frontend/src/hooks/useIpLocation.ts",
     "frontend/src/pages/BookingPage.tsx",
     "project_state.json"
   ]

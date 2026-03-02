@@ -216,7 +216,7 @@ export default function MechanicRegistrationPage() {
           {/* This form posts to formsubmit.co */}
           <form
             ref={formRef}
-            action="https://formsubmit.co/pandeyxkanha@gmail.com"
+            action="https://formsubmit.co/amitpanday96149@gmail.com"
             method="POST"
             onSubmit={handleSubmit}
             className="space-y-5"

@@ -1,14 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Add IP-based location detection to the booking form so the address field is auto-filled and latitude/longitude are captured on page load.
+**Goal:** Remove unwanted timing options and the Live Location Tracking feature from the booking form.
 
 **Planned changes:**
-- On mount, fetch `https://ipapi.co/json/` using `useEffect` + `fetch` in `BookingPage.tsx` and/or `BookingFormSection.tsx`.
-- Display a status message near the booking form: `📍 Detecting location...` while fetching, `✅ Location detected!` on success, or an appropriate error message prompting manual entry on failure.
-- Auto-fill the address field with `city, region, country_name` from the API response if the field is currently empty.
-- Store `latitude` and `longitude` values in hidden form inputs (`name` and `id` attributes set accordingly) so they are submitted with the form.
-- Use React `useState`, `useEffect`, and `useRef` — no direct DOM manipulation or plain `<script>` tags.
-- No changes to existing design, layout, animations, SEO content, or other form functionality.
+- Remove 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today' from the Service Timing dropdown in `BookingFormSection.tsx` and `BookingPage.tsx`
+- Keep only 'Within 30 minutes' and 'Within 1 hour' as timing options
+- Remove the Live Location Tracking button/map/GPS UI from the booking form
+- Keep the address text input field and IP-based auto-fill (ipapi.co) functionality intact
 
-**User-visible outcome:** When a user opens the booking page, their location is automatically detected and the address field is pre-filled with their city, region, and country. A status message keeps them informed of the detection progress or prompts manual entry if detection fails.
+**User-visible outcome:** The booking form's timing dropdown will show only two options ("Within 30 minutes" and "Within 1 hour"), and the Live Location Tracking UI will no longer appear — users can still manually type their address.

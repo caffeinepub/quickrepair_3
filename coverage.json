@@ -1,26 +1,37 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-03-02T10:04:11.461Z",
+  "generatedAt": "2026-03-02T11:42:24.805Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-8",
-        "summary": "In BookingPage.tsx and/or BookingFormSection.tsx, implement IP-based location detection using ipapi.co/json/ (no API key required). On component mount, use a useEffect + fetch call to ipapi.co/json/. Display a status message ('📍 Detecting location...', '✅ Location detected!', or '❌ Could not detect location. Please enter manually.' / '❌ Location service unavailable. Please enter manually.' on error). Auto-fill the address field with city, region, country_name from the API response if the field is empty. Store latitude and longitude values in hidden form fields (name='latitude', id='latitude' and name='longitude', id='longitude') that are submitted along with the booking form. Use React state and refs instead of direct DOM manipulation. Do not change any existing design, layout, animations, SEO content, or other functionality.",
+        "id": "REQ-11",
+        "summary": "In BookingFormSection.tsx and BookingPage.tsx, remove the following options from the Service Timing dropdown: 'ASAP', 'Within 10 minutes', 'Within 15 MINUTES', and 'Today'. Keep only 'Within 30 minutes' and 'Within 1 hour' as valid options. Do not change any other form fields, layout, styling, animations, or functionality.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/hooks/useIpLocation.ts",
           "frontend/src/components/BookingFormSection.tsx",
           "frontend/src/pages/BookingPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/hooks/useIpLocation.ts",
+          "frontend/src/components/BookingFormSection.tsx",
+          "frontend/src/pages/BookingPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-12",
+        "summary": "In BookingFormSection.tsx and BookingPage.tsx, remove the Live Location Tracking section/feature entirely from the booking form UI. The address input field must remain so users can manually type their address. Do not remove the IP-based auto-fill functionality for the address field (ipapi.co). Do not change any other form fields, layout, styling, animations, or functionality.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/BookingFormSection.tsx",
+          "frontend/src/pages/BookingPage.tsx"
+        ],
+        "matchedFiles": [
           "frontend/src/components/BookingFormSection.tsx",
           "frontend/src/pages/BookingPage.tsx"
         ]
@@ -33,7 +44,6 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/components/BookingFormSection.tsx",
-    "frontend/src/hooks/useIpLocation.ts",
     "frontend/src/pages/BookingPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
