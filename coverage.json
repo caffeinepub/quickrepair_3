@@ -1,35 +1,28 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-03-02T03:52:17.552Z",
+  "generatedAt": "2026-03-02T10:04:11.461Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-1",
-        "summary": "Remove the anchor element and its child SVG icon identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] from the Header component. These are located in the third div group of the header's first div, and both the link wrapper and the SVG inside it must be completely removed.",
+        "id": "REQ-8",
+        "summary": "In BookingPage.tsx and/or BookingFormSection.tsx, implement IP-based location detection using ipapi.co/json/ (no API key required). On component mount, use a useEffect + fetch call to ipapi.co/json/. Display a status message ('📍 Detecting location...', '✅ Location detected!', or '❌ Could not detect location. Please enter manually.' / '❌ Location service unavailable. Please enter manually.' on error). Auto-fill the address field with city, region, country_name from the API response if the field is empty. Store latitude and longitude values in hidden form fields (name='latitude', id='latitude' and name='longitude', id='longitude') that are submitted along with the booking form. Use React state and refs instead of direct DOM manipulation. Do not change any existing design, layout, animations, SEO content, or other functionality.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Header.tsx"
+          "frontend/src/hooks/useIpLocation.ts",
+          "frontend/src/components/BookingFormSection.tsx",
+          "frontend/src/pages/BookingPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/Header.tsx"
-        ]
-      },
-      {
-        "id": "REQ-2",
-        "summary": "Remove the 'Call Now' button or link from the Header component (frontend/src/components/Header.tsx). This is the element labeled 'Call Now' visible in the top/header area of the page. It must be completely removed from the header markup.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/Header.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/Header.tsx"
+          "frontend/src/hooks/useIpLocation.ts",
+          "frontend/src/components/BookingFormSection.tsx",
+          "frontend/src/pages/BookingPage.tsx"
         ]
       }
     ]
@@ -39,7 +32,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/Header.tsx",
+    "frontend/src/components/BookingFormSection.tsx",
+    "frontend/src/hooks/useIpLocation.ts",
+    "frontend/src/pages/BookingPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

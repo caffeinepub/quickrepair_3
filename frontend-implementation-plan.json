@@ -1,37 +1,35 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Remove selected header elements and Call Now button",
+  "title": "Add IP-based location detection to booking form",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Remove the anchor element and its child SVG icon from the Header component's third div group",
+      "id": "REQ-8",
+      "summary": "Implement IP-based location detection in the booking form using ipapi.co/json/, auto-filling address and storing coordinates in hidden fields",
       "acceptanceCriteria": [
-        "The anchor element at the specified XPath no longer exists in the rendered header",
-        "The SVG icon inside that anchor no longer exists in the rendered header",
-        "No broken layout or empty space left where the removed elements were"
+        "On page load, a status message '📍 Detecting location...' appears near the booking form.",
+        "A successful ipapi.co/json/ response auto-fills the address field with 'city, region, country_name' if the field was empty.",
+        "Latitude and longitude from the API response are stored in hidden form inputs and submitted with the form.",
+        "On API success, status message updates to '✅ Location detected!'.",
+        "On API failure or network error, status message updates to an appropriate error message prompting manual entry.",
+        "Implementation uses React useEffect and fetch (no plain <script> tags or direct document.getElementById DOM manipulation).",
+        "No changes to existing layout, animations, SEO content, or other form functionality."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Header.tsx",
-          "operation": "modify",
-          "description": "Remove the anchor element and its child SVG icon located in the third div group of the header's first div. Locate the element structure matching /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] and remove both the <a> wrapper and the <svg> element inside it. Ensure the surrounding layout remains intact with no empty space or broken styling."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Remove the 'Call Now' button or link from the Header component while preserving the FloatingCallButton",
-      "acceptanceCriteria": [
-        "No 'Call Now' text, button, or link is visible in the header",
-        "The FloatingCallButton component in App.tsx (the floating fixed button) is NOT removed — only the header Call Now element is removed",
-        "Header layout remains clean and properly aligned after removal"
-      ],
-      "file_operations": [
+          "path": "frontend/src/hooks/useIpLocation.ts",
+          "operation": "create",
+          "description": "Create a custom React hook that handles IP-based location detection using ipapi.co/json/. Export useIpLocation hook that returns location state (city, region, country_name, latitude, longitude), loading status ('idle', 'detecting', 'success', 'error'), and error message. Use useEffect to fetch location data on mount, handle API response parsing, and manage state transitions. Include proper error handling for network failures and API errors."
+        },
         {
-          "path": "frontend/src/components/Header.tsx",
+          "path": "frontend/src/components/BookingFormSection.tsx",
           "operation": "modify",
-          "description": "Remove the 'Call Now' button or link element from the Header component markup. This is separate from the FloatingCallButton component (which must remain untouched). Locate and remove only the header-specific Call Now element, ensuring the header layout remains properly aligned and no visual artifacts are left behind."
+          "description": "Integrate IP-based location detection into the booking form. Import and use the useIpLocation hook. Add controlled state and refs for address field value. Display location detection status message with appropriate emoji based on loading state ('📍 Detecting location...', '✅ Location detected!', '❌ Could not detect location. Please enter manually.', '❌ Location service unavailable. Please enter manually.'). Auto-fill the address field with 'city, region, country_name' from location data only if the address field is currently empty. Add two hidden input fields (name='latitude', id='latitude' and name='longitude', id='longitude') that are populated with coordinate values from the location hook and submitted with the form. Position the status message near the address field without disrupting existing layout or design. Ensure all changes use React patterns (state, refs, controlled components) instead of direct DOM manipulation."
+        },
+        {
+          "path": "frontend/src/pages/BookingPage.tsx",
+          "operation": "modify",
+          "description": "Integrate IP-based location detection into the BookingPage form if the form implementation exists here. Import and use the useIpLocation hook. Add controlled state for the address field. Display location detection status message with appropriate emoji based on loading state. Auto-fill address field with 'city, region, country_name' from location data only if empty. Add hidden latitude and longitude input fields that capture coordinate values and are submitted with the form. Position the status message appropriately without changing existing layout, animations, or design. Use React state and refs throughout, avoiding direct DOM manipulation."
         }
       ]
     }

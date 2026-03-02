@@ -6,17 +6,37 @@ const FAQS = [
   {
     question: 'How quickly will the mechanic arrive?',
     answer:
-      'Our mechanics typically arrive within 10 minutes of booking. We have a network of verified local professionals stationed across Mahipalpur, Aerocity, Vasant Kunj, and nearby areas to ensure the fastest possible response.',
+      'Our mechanics typically arrive within 10 minutes of booking. We have a network of verified local professionals stationed across Mahipalpur, Aerocity, Vasant Kunj, RK Puram, and nearby areas to ensure the fastest possible response — whether it\'s an emergency plumber near me or a 24 hour electrician Mahipalpur.',
   },
   {
     question: 'How do I book a service?',
     answer:
-      'Booking is simple — just tap the "Book on WhatsApp" button, send us a message describing your issue, and we will dispatch the nearest available mechanic immediately. No app download or registration required.',
+      'Booking is simple — just tap the "Book on WhatsApp" button, send us a message describing your issue, and we will dispatch the nearest available mechanic immediately. Need a same day plumber Mahipalpur Extension or urgent AC repair Aerocity? We\'re ready. No app download or registration required.',
   },
   {
     question: 'What are the service charges?',
     answer:
-      'Our charges are transparent and fixed: Plumber ₹499, Electrician ₹299, Fan/Cooler Repair ₹199, AC Repair ₹479, and General Mechanic ₹399. There are no hidden charges — you only pay after the work is done.',
+      'Our charges are transparent and fixed: Plumber ₹499 (plumber charges in Mahipalpur), Electrician ₹299 (electrician rates near me), Fan/Cooler Repair ₹199 (fan repair price), AC Repair ₹479 (AC repair cost Aerocity), and General Mechanic ₹399 (mechanic service charges). There are no hidden charges — you only pay after the work is done.',
+  },
+  {
+    question: 'My tap is leaking — can you fix it today?',
+    answer:
+      'Absolutely! Leaking tap repair Mahipalpur is one of our most common requests. We also handle low water pressure solution, pipe bursts, and drainage issues. Our plumber will arrive within 10 minutes and fix it on the spot.',
+  },
+  {
+    question: 'My AC is not cooling — what should I do?',
+    answer:
+      'If your AC is not cooling Aerocity or anywhere in our service area, call us immediately. We handle AC gas refill Rangpuri, general servicing, and all cooling issues. Our 24 hour AC repair service Aerocity ensures you\'re never left in the heat.',
+  },
+  {
+    question: 'My switchboard is not working — is it an emergency?',
+    answer:
+      'Yes, a switch board not working or circuit breaker tripping can be a safety hazard. Our 24 hour electrician Mahipalpur is available for such electrical emergencies. We also handle all electrical repair RK Puram and nearby areas.',
+  },
+  {
+    question: 'My fan or cooler is not working properly — can you help?',
+    answer:
+      'Yes! Fan not working properly or cooler not throwing cool air are common issues we fix daily. We offer fan repair Mahipalpur Village, cooler repair Nagal Dewat, and all related services at affordable fan repair prices.',
   },
   {
     question: 'Do you accept cash on delivery (COD)?',
@@ -31,22 +51,17 @@ const FAQS = [
   {
     question: 'Which areas do you serve?',
     answer:
-      'We currently serve Mahipalpur Extension, Mahipalpur Village, Aerocity, Vasant Kunj, Rangpuri, and Nagal Dewat. We are expanding rapidly — contact us on WhatsApp to check availability in your area.',
+      'We currently serve Mahipalpur, Mahipalpur Extension, Mahipalpur Village, Aerocity, Vasant Kunj, RK Puram, Rangpuri, and Nagal Dewat. We are expanding rapidly — contact us on WhatsApp to check availability in your area.',
   },
   {
     question: 'What are your working hours?',
     answer:
-      'Our regular service hours are 8:00 AM to 8:00 PM, 7 days a week. For emergencies (water leaks, electrical faults, etc.), we are available 24×7. Just message us on WhatsApp anytime.',
+      'Our regular service hours are 8:00 AM to 8:00 PM, 7 days a week. For emergencies (water leaks, electrical faults, AC not cooling, etc.), we are available 24×7. Just message us on WhatsApp anytime.',
   },
   {
     question: 'What if I am not satisfied with the repair?',
     answer:
       'Customer satisfaction is our top priority. If you are not happy with the work, we will send another technician at no extra charge to fix the issue. We stand behind every repair we do.',
-  },
-  {
-    question: 'Can I get a service for my AC in summer?',
-    answer:
-      'Yes! AC repair and servicing is one of our most popular services. We handle gas refills, general servicing, split AC, window AC, and installation. Starting at just ₹479 — book now before the summer rush!',
   },
 ];
 
@@ -131,7 +146,7 @@ export default function FAQSection() {
             <span style={{ color: '#FFD700' }}>Questions</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-xl mx-auto">
-            Everything you need to know about QuickRepair services.
+            Everything you need to know about QuickRepair services in Mahipalpur, Aerocity &amp; nearby areas.
           </p>
         </div>
 

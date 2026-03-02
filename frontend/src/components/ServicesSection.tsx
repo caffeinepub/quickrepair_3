@@ -10,31 +10,31 @@ const FALLBACK_SERVICES = [
     name: 'Plumber',
     price: '499',
     icon: Droplets,
-    description: 'Pipe repairs, leakage fixes, tap installation, and all plumbing needs.',
+    description: 'Expert plumber in Mahipalpur for leaking tap repair, pipe fitting, low water pressure solution, and all plumbing services. Transparent plumber charges in Mahipalpur.',
   },
   {
     name: 'Electrician',
     price: '299',
     icon: Zap,
-    description: 'Wiring, switch repairs, electrical faults, and power-related issues.',
+    description: 'Affordable electrician near Mahipalpur Extension for switch board not working, circuit breaker tripping, wiring faults, and electrical repair RK Puram. Best electrician rates near me.',
   },
   {
     name: 'Fan / Cooler Repair',
     price: '199',
     icon: Wind,
-    description: 'Fan servicing, cooler maintenance, motor repairs, and more.',
+    description: 'Fan repair Mahipalpur Village — fan not working properly, cooler not throwing cool air, cooler repair Nagal Dewat. Affordable fan repair price with same-day service.',
   },
   {
     name: 'AC Repair',
     price: '479',
     icon: AirVent,
-    description: 'AC servicing, gas refilling, cooling issues, and full AC maintenance.',
+    description: 'Urgent AC repair Aerocity — AC not cooling, AC gas refill Rangpuri, split & window AC service. Transparent AC repair cost Aerocity. 24 hour AC repair service available.',
   },
   {
     name: 'Mechanic (General)',
     price: '399',
     icon: Wrench,
-    description: 'General mechanical repairs, appliance fixes, and home maintenance.',
+    description: 'Local mechanic for home repairs near Vasant Kunj — door repair, appliance fixes, and general home maintenance Mahipalpur. Fair mechanic service charges, no hidden fees.',
   },
 ];
 
@@ -80,7 +80,7 @@ export default function ServicesSection() {
             <span style={{ color: '#FFD700' }}>Fix</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-xl mx-auto">
-            Professional repair services at your doorstep. Transparent pricing, no hidden charges.
+            Professional repair services at your doorstep in Mahipalpur, Aerocity &amp; nearby areas. Transparent pricing, no hidden charges.
           </p>
         </div>
 

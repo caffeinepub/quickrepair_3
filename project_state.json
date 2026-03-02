@@ -1,49 +1,91 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
-  "summary": "Website project with admin panel featuring Internet Identity authentication. Work includes UI fixes, removing elements, and fixing admin dashboard to show Internet Identity login button.",
-  "architectural_notes": [
-    "Admin panel uses two-layer auth: password login first, then Internet Identity for sensitive data access",
-    "Internet Identity authentication is required for managing services, users, and mechanics in admin panel"
-  ],
-  "known_issues": [
-    "Admin Dashboard missing Internet Identity login button — users cannot authenticate to load Users/Services/Mechanics data"
-  ],
-  "isFixRequest": true,
+  "projectStateVersion": 7,
+  "summary": "QuickRepair website — SEO keywords added across all service pages (titles, headings, meta, alt text). Now adding IP-based location detection using ipapi.co/json/ (no API key) into the contact form: auto-detect city/region/country, auto-fill address field, add hidden latitude/longitude fields, show status messages. Implementation in React/TypeScript using useEffect + fetch instead of plain script tag.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-remove-the-anchor-element-and-its-child-svg-icon-identified-by-xpath-html-1-body-1-div-1-div-1-div-3-a-1-and-html-1-body-1-div-1-div-1-div-3-a-1-svg-1-from-the-header-component-these-are-located-in-the-third-div-group-of-the-header-s-first-div-and-both-the-link-wrapper-and-the-svg-inside-it-must-be-completely-removed",
-      "title": "Remove the anchor element and its child SVG icon identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] from the Header component. These are located in the third div group of the header's first div, and both the link wrapper and the SVG inside it must be completely removed.",
+      "id": "feature-update-the-html-title-tag-and-meta-description-in-frontend-index-html-to-include-primary-keywords-such-as-best-plumber-in-mahipalpur-delhi-emergency-plumber-near-me-24-hour-ac-repair-service-aerocity-and-electrician-mahipalpur-extension-with-a-clear-call-to-action-meta-description-must-be-150-160-characters",
+      "title": "Update the HTML <title> tag and meta description in frontend/index.html to include primary keywords such as 'best plumber in Mahipalpur Delhi', 'emergency plumber near me', '24 hour AC repair service Aerocity', and 'electrician Mahipalpur Extension' with a clear call to action. Meta description must be 150-160 characters.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-remove-the-call-now-button-or-link-from-the-header-component-frontend-src-components-header-tsx-this-is-the-element-labeled-call-now-visible-in-the-top-header-area-of-the-page-it-must-be-completely-removed-from-the-header-markup",
-      "title": "Remove the 'Call Now' button or link from the Header component (frontend/src/components/Header.tsx). This is the element labeled 'Call Now' visible in the top/header area of the page. It must be completely removed from the header markup.",
+      "id": "feature-in-herosection-tsx-update-the-h1-heading-and-tagline-text-to-naturally-incorporate-emergency-and-long-tail-keywords-such-as-emergency-plumber-near-me-trusted-plumbing-service-mahipalpur-and-same-day-plumber-mahipalpur-extension-update-all-image-alt-attributes-in-the-hero-background-to-include-descriptive-keyword-rich-alt-text-e-g-emergency-plumber-repair-service-mahipalpur-do-not-change-any-styling-animations-or-layout",
+      "title": "In HeroSection.tsx, update the H1 heading and tagline text to naturally incorporate emergency and long-tail keywords such as 'emergency plumber near me', 'trusted plumbing service Mahipalpur', and 'same day plumber Mahipalpur Extension'. Update all image alt attributes in the hero background to include descriptive keyword-rich alt text (e.g. 'emergency plumber repair service Mahipalpur'). Do not change any styling, animations, or layout.",
       "reqIds": [
         "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-servicessection-tsx-and-servicecard-tsx-update-or-enrich-service-descriptions-to-naturally-incorporate-service-location-keywords-e-g-plumber-in-mahipalpur-ac-repair-aerocity-electrician-mahipalpur-extension-fan-repair-mahipalpur-village-cooler-repair-nagal-dewat-ac-gas-refill-rangpuri-electrical-repair-rk-puram-and-price-based-keywords-e-g-plumber-charges-in-mahipalpur-ac-repair-cost-aerocity-fan-repair-price-update-any-service-card-image-alt-attributes-with-keyword-rich-descriptions-do-not-change-layout-icons-pricing-display-or-button-functionality",
+      "title": "In ServicesSection.tsx and ServiceCard.tsx, update or enrich service descriptions to naturally incorporate service+location keywords (e.g. 'plumber in Mahipalpur', 'AC repair Aerocity', 'electrician Mahipalpur Extension', 'fan repair Mahipalpur Village', 'cooler repair Nagal Dewat', 'AC gas refill Rangpuri', 'electrical repair RK Puram') and price-based keywords (e.g. 'plumber charges in Mahipalpur', 'AC repair cost Aerocity', 'fan repair price'). Update any service card image alt attributes with keyword-rich descriptions. Do not change layout, icons, pricing display, or button functionality.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-faqsection-tsx-update-existing-faq-questions-and-answers-to-naturally-incorporate-problem-based-keywords-such-as-leaking-tap-repair-mahipalpur-switch-board-not-working-ac-not-cooling-aerocity-fan-not-working-properly-low-water-pressure-solution-circuit-breaker-tripping-and-cooler-not-throwing-cool-air-add-or-adjust-faq-entries-as-needed-to-cover-these-topics-do-not-change-accordion-animation-or-styling",
+      "title": "In FAQSection.tsx, update existing FAQ questions and answers to naturally incorporate problem-based keywords such as 'leaking tap repair Mahipalpur', 'switch board not working', 'AC not cooling Aerocity', 'fan not working properly', 'low water pressure solution', 'circuit breaker tripping', and 'cooler not throwing cool air'. Add or adjust FAQ entries as needed to cover these topics. Do not change accordion animation or styling.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-aboutsection-tsx-update-the-company-description-and-highlight-card-text-to-naturally-include-keywords-such-as-home-maintenance-mahipalpur-affordable-electrician-near-mahipalpur-extension-local-mechanic-for-home-repairs-mechanic-near-vasant-kunj-and-24-hour-electrician-mahipalpur-update-any-images-in-this-section-with-descriptive-keyword-rich-alt-attributes-do-not-change-layout-icons-fade-in-animation-or-working-hours-badge",
+      "title": "In AboutSection.tsx, update the company description and highlight card text to naturally include keywords such as 'home maintenance Mahipalpur', 'affordable electrician near Mahipalpur Extension', 'local mechanic for home repairs', 'mechanic near Vasant Kunj', and '24 hour electrician Mahipalpur'. Update any images in this section with descriptive keyword-rich alt attributes. Do not change layout, icons, fade-in animation, or working hours badge.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-contactsection-tsx-update-the-service-area-description-and-any-headings-h2-h3-to-naturally-mention-location-keywords-such-as-mahipalpur-mahipalpur-extension-aerocity-vasant-kunj-rk-puram-rangpuri-nagal-dewat-and-mahipalpur-village-do-not-change-icons-card-styling-or-fade-in-animation",
+      "title": "In ContactSection.tsx, update the service area description and any headings (H2/H3) to naturally mention location keywords such as 'Mahipalpur', 'Mahipalpur Extension', 'Aerocity', 'Vasant Kunj', 'RK Puram', 'Rangpuri', 'Nagal Dewat', and 'Mahipalpur Village'. Do not change icons, card styling, or fade-in animation.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-or-update-open-graph-and-twitter-meta-tags-in-frontend-index-html-with-keyword-enriched-title-and-description-fields-ensure-the-existing-localbusiness-json-ld-schema-includes-the-service-areas-mahipalpur-mahipalpur-extension-aerocity-vasant-kunj-rk-puram-rangpuri-nagal-dewat-mahipalpur-village-do-not-remove-or-modify-any-existing-schema-fields-only-extend-them",
+      "title": "Add or update Open Graph and Twitter meta tags in frontend/index.html with keyword-enriched title and description fields. Ensure the existing LocalBusiness JSON-LD schema includes the service areas: Mahipalpur, Mahipalpur Extension, Aerocity, Vasant Kunj, RK Puram, Rangpuri, Nagal Dewat, Mahipalpur Village. Do not remove or modify any existing schema fields — only extend them.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-bookingpage-tsx-and-or-bookingformsection-tsx-implement-ip-based-location-detection-using-ipapi-co-json-no-api-key-required-on-component-mount-use-a-useeffect-fetch-call-to-ipapi-co-json-display-a-status-message-detecting-location-location-detected-or-could-not-detect-location-please-enter-manually-location-service-unavailable-please-enter-manually-on-error-auto-fill-the-address-field-with-city-region-country-name-from-the-api-response-if-the-field-is-empty-store-latitude-and-longitude-values-in-hidden-form-fields-name-latitude-id-latitude-and-name-longitude-id-longitude-that-are-submitted-along-with-the-booking-form-use-react-state-and-refs-instead-of-direct-dom-manipulation-do-not-change-any-existing-design-layout-animations-seo-content-or-other-functionality",
+      "title": "In BookingPage.tsx and/or BookingFormSection.tsx, implement IP-based location detection using ipapi.co/json/ (no API key required). On component mount, use a useEffect + fetch call to ipapi.co/json/. Display a status message ('📍 Detecting location...', '✅ Location detected!', or '❌ Could not detect location. Please enter manually.' / '❌ Location service unavailable. Please enter manually.' on error). Auto-fill the address field with city, region, country_name from the API response if the field is empty. Store latitude and longitude values in hidden form fields (name='latitude', id='latitude' and name='longitude', id='longitude') that are submitted along with the booking form. Use React state and refs instead of direct DOM manipulation. Do not change any existing design, layout, animations, SEO content, or other functionality.",
+      "reqIds": [
+        "REQ-8"
       ],
       "version": 1
     }
   ],
   "new_feature_requests": [
     {
-      "id": "AR-1",
-      "summary": "Add Internet Identity login button to Admin Dashboard so users can authenticate and access Users/Services/Mechanics data",
+      "id": "AR-2",
+      "summary": "Add SEO keywords (emergency, service+location, price-based, problem-based, long-tail) naturally into page titles, meta descriptions, H1/H2/H3 headings, image alt text, and content (service descriptions, FAQs, about section). Keep existing URLs, design, animations, and functionality unchanged.",
       "reqIds": [],
       "status": "pending"
     },
     {
-      "id": "AR-2",
-      "summary": "Remove two selected elements (link and SVG icon) and remove 'Call Now' button/link from header",
+      "id": "AR-3",
+      "summary": "Add IP-based location detection (ipapi.co/json/) to contact form: auto-fill address field, add hidden latitude/longitude fields, show detecting/success/error status messages. Implement in React/TypeScript using useEffect + fetch. No design or functionality changes.",
       "reqIds": [],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
-  "projectName": "Remove selected header elements and Call Now button",
+  "projectName": "Remove selected elements from section 5 (third column items)",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

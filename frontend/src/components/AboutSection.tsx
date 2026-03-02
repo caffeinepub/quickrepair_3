@@ -5,22 +5,22 @@ const highlights = [
   {
     icon: Clock,
     title: '10-Minute Response',
-    description: 'Our technicians reach your doorstep within 10 minutes of booking.',
+    description: 'Our technicians reach your doorstep within 10 minutes of booking — emergency mechanic near me, available 24/7.',
   },
   {
     icon: Shield,
     title: 'Verified Professionals',
-    description: 'All our mechanics are background-verified and trained experts.',
+    description: 'All our mechanics are background-verified and trained experts. Trusted plumbing service Mahipalpur you can rely on.',
   },
   {
     icon: ThumbsUp,
     title: 'Transparent Pricing',
-    description: 'Fixed prices with no hidden charges. What you see is what you pay.',
+    description: 'Fixed prices with no hidden charges — from plumber charges in Mahipalpur to AC repair cost Aerocity, what you see is what you pay.',
   },
   {
     icon: MapPin,
     title: 'Local Coverage',
-    description: 'Serving 6 areas across Mahipalpur and surrounding neighborhoods.',
+    description: 'Serving Mahipalpur, Aerocity, Vasant Kunj, RK Puram, Rangpuri, Nagal Dewat, and Mahipalpur Extension.',
   },
 ];
 
@@ -54,13 +54,13 @@ export default function AboutSection() {
               Service
             </h2>
             <p className="text-gray-400 text-lg leading-relaxed mb-6">
-              <strong className="text-white">QuickRepair</strong> was founded with one mission: to make home repairs fast, affordable, and stress-free for residents of Mahipalpur and surrounding areas.
+              <strong className="text-white">QuickRepair</strong> was founded with one mission: to make home maintenance Mahipalpur fast, affordable, and stress-free. We are the best plumber in Mahipalpur Delhi, a trusted 24 hour electrician Mahipalpur, and your go-to for urgent AC repair Aerocity.
             </p>
             <p className="text-gray-400 leading-relaxed mb-6">
-              We understand that a broken pipe or faulty electrical connection can't wait. That's why our team of skilled professionals is always on standby, ready to reach your doorstep in just <strong className="text-white">10 minutes</strong>.
+              We understand that a leaking tap or a faulty switchboard can't wait. That's why our team of skilled professionals — including an affordable electrician near Mahipalpur Extension and a local mechanic for home repairs near Vasant Kunj — is always on standby, ready to reach your doorstep in just <strong className="text-white">10 minutes</strong>.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              From plumbing and electrical work to AC repairs and general mechanics — we handle it all with professionalism, transparency, and a smile. No surprise bills, no delays.
+              From plumbing and electrical work to AC repairs and general mechanics — we handle it all with professionalism, transparency, and a smile. No surprise bills, no delays. Serving Mahipalpur, Aerocity, RK Puram, Rangpuri, Nagal Dewat, and beyond.
             </p>
 
             {/* Working hours badge */}

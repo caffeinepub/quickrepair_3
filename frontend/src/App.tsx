@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import TrustStatsBar from './components/TrustStatsBar';
-import HowItWorksSection from './components/HowItWorksSection';
 import AdminPage from './components/AdminPage';
 import BookingPage from './pages/BookingPage';
 import BookingHistoryPage from './pages/BookingHistoryPage';
@@ -70,7 +69,6 @@ function MainSite() {
         {/* Above-fold: loaded immediately */}
         <HeroSection />
         <TrustStatsBar />
-        <HowItWorksSection />
 
         {/* Below-fold: lazy loaded */}
         <Suspense fallback={<SectionFallback />}>

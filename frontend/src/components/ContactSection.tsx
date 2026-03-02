@@ -2,10 +2,12 @@ import { useFadeIn } from '../hooks/useFadeIn';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const serviceAreas = [
+  'Mahipalpur',
   'Mahipalpur Extension',
   'Mahipalpur Village',
   'Aerocity',
   'Vasant Kunj',
+  'RK Puram',
   'Rangpuri',
   'Nagal Dewat',
 ];
@@ -38,7 +40,7 @@ export default function ContactSection() {
             <span style={{ color: '#FFD700' }}>Touch</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-xl mx-auto">
-            We're available 8 AM to 8 PM, every day. Reach out and we'll be at your door in minutes.
+            Serving Mahipalpur, Aerocity &amp; surrounding areas — available 8 AM to 8 PM, every day. Reach out and we'll be at your door in minutes.
           </p>
         </div>
 
@@ -121,10 +123,13 @@ export default function ContactSection() {
               border: '1px solid #252525',
             }}
           >
-            <div className="flex items-center gap-2 mb-5">
+            <div className="flex items-center gap-2 mb-2">
               <MapPin className="w-5 h-5" style={{ color: '#FF8C42' }} />
               <h3 className="text-white font-bold text-lg">Service Areas</h3>
             </div>
+            <p className="text-gray-500 text-xs mb-4">
+              Plumber, electrician, AC repair &amp; mechanic services across Mahipalpur, Aerocity, Vasant Kunj &amp; nearby localities.
+            </p>
             <div className="space-y-2.5">
               {serviceAreas.map((area) => (
                 <div

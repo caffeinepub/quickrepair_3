@@ -21,6 +21,8 @@ export default function HeroSection() {
         style={{
           backgroundImage: 'url(/assets/generated/hero-bg.dim_1440x900.png)',
         }}
+        role="img"
+        aria-label="Emergency plumber and home repair service Mahipalpur Delhi – QuickRepair"
       />
       {/* Dark gradient overlay */}
       <div
@@ -72,7 +74,7 @@ export default function HeroSection() {
           }`}
           style={{ transitionDelay: '250ms' }}
         >
-          10 Minute Service at Your Doorstep
+          Same Day Plumber &amp; Emergency Repair at Your Doorstep
         </p>
 
         <p
@@ -81,7 +83,7 @@ export default function HeroSection() {
           }`}
           style={{ transitionDelay: '350ms' }}
         >
-          Professional home repair services in Mahipalpur, Delhi. Fast, reliable, and affordable.
+          Trusted plumbing service Mahipalpur, 24 hour electrician, urgent AC repair Aerocity — fast, reliable, and affordable home maintenance in Delhi.
         </p>
 
         {/* CTA Buttons */}
@@ -91,18 +93,6 @@ export default function HeroSection() {
           }`}
           style={{ transitionDelay: '450ms' }}
         >
-          <button
-            onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-            className="flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{
-              background: 'linear-gradient(135deg, #FF8C42, #FFD700)',
-              color: '#0d0d0d',
-              boxShadow: '0 8px 30px rgba(255,140,66,0.4)',
-            }}
-          >
-            Book Online Now
-          </button>
-
           <a
             href="#services"
             onClick={(e) => {
@@ -130,7 +120,7 @@ export default function HeroSection() {
           {[
             { icon: Clock, value: '10 Min', label: 'Response Time' },
             { icon: Star, value: '5 Services', label: 'Available' },
-            { icon: MapPin, value: '6 Areas', label: 'Covered' },
+            { icon: MapPin, value: '8 Areas', label: 'Covered' },
           ].map(({ icon: Icon, value, label }) => (
             <div key={label} className="flex items-center gap-2 text-center">
               <Icon className="w-5 h-5" style={{ color: '#FF8C42' }} />

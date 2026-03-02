@@ -113,24 +113,6 @@ export default function HowItWorksSection() {
             );
           })}
         </div>
-
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <a
-            href="https://wa.me/8447978940?text=Hi%2C%20I%20need%20a%20service%20from%20QuickRepair"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg"
-            style={{
-              background: 'linear-gradient(135deg, #FFD700, #FF8C42)',
-              color: '#0d0d0d',
-              boxShadow: '0 4px 20px rgba(255,215,0,0.3)',
-            }}
-          >
-            <MessageCircle size={18} />
-            Book Now on WhatsApp
-          </a>
-        </div>
       </div>
     </section>
   );

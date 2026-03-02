@@ -1,53 +1,48 @@
 {
   "kind": "build_request",
-  "title": "Remove selected header elements and Call Now button",
+  "title": "Add IP-based location detection to booking form",
+  "projectName": "QuickRepair",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Remove the anchor element and its child SVG icon identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] from the Header component. These are located in the third div group of the header's first div, and both the link wrapper and the SVG inside it must be completely removed.",
+      "id": "REQ-8",
+      "text": "In BookingPage.tsx and/or BookingFormSection.tsx, implement IP-based location detection using ipapi.co/json/ (no API key required). On component mount, use a useEffect + fetch call to ipapi.co/json/. Display a status message ('📍 Detecting location...', '✅ Location detected!', or '❌ Could not detect location. Please enter manually.' / '❌ Location service unavailable. Please enter manually.' on error). Auto-fill the address field with city, region, country_name from the API response if the field is empty. Store latitude and longitude values in hidden form fields (name='latitude', id='latitude' and name='longitude', id='longitude') that are submitted along with the booking form. Use React state and refs instead of direct DOM manipulation. Do not change any existing design, layout, animations, SEO content, or other functionality.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-6",
+          "msg-7"
         ],
         "quotes": [
-          "Ine donon ko bhi remove kar do"
+          "Add IP-based location detection using ip-api.com (no API key required).",
+          "fetch('https://ipapi.co/json/')",
+          "Auto-fill address if address field exists",
+          "Build aur jo maine code diya hai agar usme kuch galat ho to sahi kar ke daal dena"
         ]
       },
       "acceptanceCriteria": [
-        "The anchor element at the specified XPath no longer exists in the rendered header",
-        "The SVG icon inside that anchor no longer exists in the rendered header",
-        "No broken layout or empty space left where the removed elements were"
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Remove the 'Call Now' button or link from the Header component (frontend/src/components/Header.tsx). This is the element labeled 'Call Now' visible in the top/header area of the page. It must be completely removed from the header markup.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-latest"
-        ],
-        "quotes": [
-          "call now likha hai na upar mein Hi use remove kar do"
-        ]
-      },
-      "acceptanceCriteria": [
-        "No 'Call Now' text, button, or link is visible in the header",
-        "The FloatingCallButton component in App.tsx (the floating fixed button) is NOT removed — only the header Call Now element is removed",
-        "Header layout remains clean and properly aligned after removal"
+        "On page load, a status message '📍 Detecting location...' appears near the booking form.",
+        "A successful ipapi.co/json/ response auto-fills the address field with 'city, region, country_name' if the field was empty.",
+        "Latitude and longitude from the API response are stored in hidden form inputs and submitted with the form.",
+        "On API success, status message updates to '✅ Location detected!'.",
+        "On API failure or network error, status message updates to an appropriate error message prompting manual entry.",
+        "Implementation uses React useEffect and fetch (no plain <script> tags or direct document.getElementById DOM manipulation).",
+        "No changes to existing layout, animations, SEO content, or other form functionality."
       ]
     }
   ],
   "constraints": [
-    "Do not remove the FloatingCallButton component — only remove the 'Call Now' element inside the Header component",
-    "Do not modify any files listed in frontend.immutablePaths"
+    "Use ipapi.co/json/ as the location API endpoint — no API key required.",
+    "Do not use plain HTML <script> tags or direct DOM manipulation; use React hooks (useEffect, useState, useRef).",
+    "Do not change any existing design, layout, animations, SEO content, or form functionality.",
+    "Hidden latitude/longitude fields must be included in the form submission payload.",
+    "Address field should only be auto-filled if it is currently empty."
   ],
   "nonGoals": [
-    "Adding Internet Identity login button to Admin Dashboard (separate pending request)",
-    "Any changes to the FloatingWhatsAppButton or FloatingCallButton floating components",
-    "Any backend changes"
+    "GPS/browser geolocation API — only IP-based detection via ipapi.co.",
+    "Storing location data in the backend.",
+    "Any changes to SEO meta tags, headings, or existing content.",
+    "Any changes to authentication, booking logic, or success overlay behavior."
   ],
   "imageRequirements": {
     "required": [],

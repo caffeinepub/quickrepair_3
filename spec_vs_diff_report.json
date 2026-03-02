@@ -1,14 +1,26 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-03-02T03:52:17.549Z",
-  "summary": "The diff modifies frontend/src/components/Header.tsx and the file summaries indicate the header now contains 'desktop/mobile nav with Home/Services/About/Contact links only' and auth UI. The file summary for Header.tsx does not mention a 'Call Now' button or the specific anchor/SVG element, suggesting both REQ-1 and REQ-2 were addressed. The FloatingCallButton in App.tsx is noted as restored/kept. However, the Header.tsx diff is truncated so full verification of the exact XPath anchor/SVG removal (REQ-1) cannot be confirmed with certainty, though the file summary strongly implies these elements were removed.",
-  "missing_requirements": [],
+  "generatedAt": "2026-03-02T10:04:11.456Z",
+  "summary": "REQ-8 is largely implemented. A custom hook useIpLocation.ts fetches ipapi.co/json/ using useEffect/fetch, manages all required status messages, and returns location data. Both BookingPage.tsx and BookingFormSection.tsx consume this hook, auto-fill the address field if empty, and display status messages. The diff is truncated so hidden latitude/longitude form fields cannot be fully confirmed, but the location data (latitude, longitude) is returned from the hook and available for use. All other constraints appear respected.",
+  "missing_requirements": [
+    {
+      "id": "REQ-8",
+      "requirement": "Hidden form fields with name='latitude', id='latitude' and name='longitude', id='longitude' must be included in the form submission payload.",
+      "reason": "The diff is truncated for both BookingPage.tsx and BookingFormSection.tsx, so the presence of hidden input elements in the rendered form cannot be confirmed. The hook returns latitude/longitude values but actual inclusion of hidden inputs in the form markup is unverifiable from the available diff.",
+      "evidence": [
+        "frontend/src/pages/BookingPage.tsx",
+        "frontend/src/components/BookingFormSection.tsx"
+      ]
+    }
+  ],
   "hallucinated_features": [],
   "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/Header.tsx",
+    "frontend/src/components/BookingFormSection.tsx",
+    "frontend/src/hooks/useIpLocation.ts",
+    "frontend/src/pages/BookingPage.tsx",
     "project_state.json"
   ]
 }

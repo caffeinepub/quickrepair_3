@@ -1,17 +1,30 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, LogIn, Loader2 } from 'lucide-react';
 import BookingSuccessOverlay from '../components/BookingSuccessOverlay';
 import { playSuccessSound } from '../utils/playSuccessSound';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
+import { useIpLocation } from '../hooks/useIpLocation';
 
 export default function BookingPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [address, setAddress] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
 
   const { identity, login, loginStatus, isInitializing } = useInternetIdentity();
   const isAuthenticated = !!identity;
   const isLoggingIn = loginStatus === 'logging-in';
+
+  const { status: locationStatus, statusMessage, location } = useIpLocation();
+
+  // Auto-fill address from IP location only if address field is empty
+  useEffect(() => {
+    if (locationStatus === 'success' && location && address === '') {
+      const parts = [location.city, location.region, location.country_name].filter(Boolean);
+      const autoAddress = parts.join(', ');
+      if (autoAddress) setAddress(autoAddress);
+    }
+  }, [locationStatus, location]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,6 +53,7 @@ export default function BookingPage() {
   const handleOverlayClose = () => {
     setShowSuccess(false);
     setTermsAccepted(false);
+    setAddress('');
     if (formRef.current) formRef.current.reset();
   };
 
@@ -162,6 +176,19 @@ export default function BookingPage() {
                 />
                 {/* Honeypot */}
                 <input type="text" name="_honey" style={{ display: 'none' }} />
+                {/* Hidden location fields */}
+                <input
+                  type="hidden"
+                  id="bp-latitude"
+                  name="latitude"
+                  value={location?.latitude ?? ''}
+                />
+                <input
+                  type="hidden"
+                  id="bp-longitude"
+                  name="longitude"
+                  value={location?.longitude ?? ''}
+                />
 
                 {/* Full Name */}
                 <div>
@@ -286,11 +313,27 @@ export default function BookingPage() {
                   >
                     Address <span style={{ color: '#FF8C42' }}>*</span>
                   </label>
+                  {/* Location status message */}
+                  <p
+                    className="text-xs mb-1.5"
+                    style={{
+                      color:
+                        locationStatus === 'success'
+                          ? '#4ade80'
+                          : locationStatus === 'error'
+                          ? '#f87171'
+                          : '#9ca3af',
+                    }}
+                  >
+                    {statusMessage}
+                  </p>
                   <textarea
                     id="bp-address"
                     name="Address"
                     required
                     rows={3}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     placeholder="Enter your full address"
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
                     style={{
@@ -446,17 +489,6 @@ export default function BookingPage() {
               </form>
             </div>
           )}
-
-          {/* Back link */}
-          <div className="text-center mt-8">
-            <a
-              href="/"
-              className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-300 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </a>
-          </div>
         </div>
       </main>
 
