@@ -1,112 +1,53 @@
 {
   "kind": "build_request",
-  "title": "Remove selected elements, smooth layout, and add visible Terms & Policy link",
-  "projectName": "QuickRepair",
+  "title": "Remove selected header elements and Call Now button",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Remove the scroll-to-top button (SVG icon and its anchor wrapper) identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] — this is the floating scroll-to-top anchor element in the page layout.",
+      "text": "Remove the anchor element and its child SVG icon identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] from the Header component. These are located in the third div group of the header's first div, and both the link wrapper and the SVG inside it must be completely removed.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-latest"
         ],
         "quotes": [
-          "Jo Jo select Kiya hai in sabko Remove kar do"
+          "Ine donon ko bhi remove kar do"
         ]
       },
       "acceptanceCriteria": [
-        "The scroll-to-top button/anchor is no longer rendered anywhere on the page",
-        "No broken layout or empty space left where the button was"
+        "The anchor element at the specified XPath no longer exists in the rendered header",
+        "The SVG icon inside that anchor no longer exists in the rendered header",
+        "No broken layout or empty space left where the removed elements were"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Remove the paragraph element (REQ XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/p[1]) and the button element (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/button[1]) from section 4 (likely the ServicesSection or a related section). Adjust surrounding layout to remain clean and smooth after removal.",
+      "text": "Remove the 'Call Now' button or link from the Header component (frontend/src/components/Header.tsx). This is the element labeled 'Call Now' visible in the top/header area of the page. It must be completely removed from the header markup.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-latest"
         ],
         "quotes": [
-          "Jo Jo select Kiya hai in sabko Remove kar do",
-          "website ko adjust aur smooth kar do"
+          "call now likha hai na upar mein Hi use remove kar do"
         ]
       },
       "acceptanceCriteria": [
-        "The paragraph and button in section 4's third column/card are no longer rendered",
-        "Section 4 layout adjusts gracefully with no orphaned empty containers or awkward spacing"
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Remove the logo text div from the header (XPath: /html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[1]/a[1]/div[2]) — this is the text label next to the logo image in the Header component. Keep the logo image/icon intact; only remove the text div.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "Jo Jo select Kiya hai in sabko Remove kar do"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The header logo text div is no longer visible",
-        "The header logo icon/image remains visible and the header layout stays balanced"
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Remove the entire card/container div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]), including the inner content div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/div[1]) and anchor link (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/a[1]) from section 7 (likely ContactSection or FAQSection). Adjust the grid or flex layout of the parent container so remaining cards/items fill the space evenly.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "Jo Jo select Kiya hai in sabko Remove kar do",
-          "website ko adjust aur smooth kar do"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The third card/div in section 7's second row/column group is removed",
-        "Remaining cards in section 7 are evenly distributed without empty gaps",
-        "No layout breakage on mobile or desktop"
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Add a clearly visible Terms & Policy link in the website footer (Footer.tsx). The link should navigate to the /terms route. Place it in the navigation links area of the footer alongside existing footer links. Ensure it is styled consistently with other footer links.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "terms and policy ka link website me bhi de do kahi pe dikh hi nahi Raha hai"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A 'Terms & Policy' link is visible in the footer",
-        "Clicking the link navigates to /terms",
-        "The link is styled consistently with other footer navigation links",
-        "The link is visible on both mobile and desktop viewports"
+        "No 'Call Now' text, button, or link is visible in the header",
+        "The FloatingCallButton component in App.tsx (the floating fixed button) is NOT removed — only the header Call Now element is removed",
+        "Header layout remains clean and properly aligned after removal"
       ]
     }
   ],
   "constraints": [
-    "Only make the changes described in REQ-1 through REQ-5 — no other UI, logic, or style changes",
-    "Do not modify backend code",
-    "Do not alter any immutable frontend paths (hooks, main.tsx, ui components)",
-    "Keep all other existing sections, components, and styles exactly as they are"
+    "Do not remove the FloatingCallButton component — only remove the 'Call Now' element inside the Header component",
+    "Do not modify any files listed in frontend.immutablePaths"
   ],
   "nonGoals": [
-    "Adding new sections or features beyond the specified changes",
-    "Redesigning any existing section",
-    "Changing color schemes, typography, or branding",
-    "Modifying the Terms page content itself",
-    "Adding Terms & Policy link in the header or any location other than the footer"
+    "Adding Internet Identity login button to Admin Dashboard (separate pending request)",
+    "Any changes to the FloatingWhatsAppButton or FloatingCallButton floating components",
+    "Any backend changes"
   ],
   "imageRequirements": {
     "required": [],

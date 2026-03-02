@@ -3,7 +3,7 @@
   "frontend/tailwind.config.js": "Extended Tailwind config with Inter/Poppins font families, brand color tokens (yellow, orange, green), surface shades, custom box shadows, and keyframe animations for fade-in, pulse-ring, and slide-in effects.",
   "frontend/src/hooks/useFadeIn.ts": "Custom React hook using IntersectionObserver to trigger fade-in visibility state when a section scrolls into view.",
   "frontend/src/hooks/useScrollSpy.ts": "Custom React hook that tracks scroll position and returns the currently active section ID for navigation highlighting.",
-  "frontend/src/components/Header.tsx": "Sticky header with QuickRepair branding (text logo without the trailing dot), desktop/mobile nav, and auth UI — includes Booking History link in the user profile dropdown visible only to authenticated users.",
+  "frontend/src/components/Header.tsx": "Sticky header with QuickRepair branding (text logo), desktop/mobile nav with Home/Services/About/Contact links only (Become a Mechanic link removed), and auth UI — includes Booking History link in the user profile dropdown visible only to authenticated users.",
   "frontend/src/components/Overlay.tsx": "Semi-transparent blurred backdrop overlay that appears behind the mobile navigation drawer and closes it on click.",
   "frontend/src/components/NavigationDrawer.tsx": "Slide-in mobile navigation drawer with \"Booking History\" for authenticated users and \"👨‍🔧 Mechanic Registration\" link (replacing the old \"Become a Mechanic\" WhatsApp link) navigating to /mechanic-registration.",
   "frontend/src/components/HeroSection.tsx": "Full-viewport hero section with background image, dark gradient overlay, staggered fade-in animations, tagline, and CTA buttons — 📅 emoji removed from the \"Book Online Now\" button.",

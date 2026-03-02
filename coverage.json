@@ -1,66 +1,35 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-03-02T03:24:03.271Z",
+  "generatedAt": "2026-03-02T03:52:17.552Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 5,
-    "implemented": 4,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Remove the scroll-to-top button (SVG icon and its anchor wrapper) identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] — this is the floating scroll-to-top anchor element in the page layout.",
-        "status": "missing",
+        "summary": "Remove the anchor element and its child SVG icon identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] from the Header component. These are located in the third div group of the header's first div, and both the link wrapper and the SVG inside it must be completely removed.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/App.tsx"
+          "frontend/src/components/Header.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/components/Header.tsx"
+        ]
       },
       {
         "id": "REQ-2",
-        "summary": "Remove the paragraph element (REQ XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/p[1]) and the button element (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/button[1]) from section 4 (likely the ServicesSection or a related section). Adjust surrounding layout to remain clean and smooth after removal.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/ServicesSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/ServicesSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Remove the logo text div from the header (XPath: /html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[1]/a[1]/div[2]) — this is the text label next to the logo image in the Header component. Keep the logo image/icon intact; only remove the text div.",
+        "summary": "Remove the 'Call Now' button or link from the Header component (frontend/src/components/Header.tsx). This is the element labeled 'Call Now' visible in the top/header area of the page. It must be completely removed from the header markup.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/Header.tsx"
         ],
         "matchedFiles": [
           "frontend/src/components/Header.tsx"
-        ]
-      },
-      {
-        "id": "REQ-4",
-        "summary": "Remove the entire card/container div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]), including the inner content div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/div[1]) and anchor link (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/a[1]) from section 7 (likely ContactSection or FAQSection). Adjust the grid or flex layout of the parent container so remaining cards/items fill the space evenly.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/ContactSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/ContactSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-5",
-        "summary": "Add a clearly visible Terms & Policy link in the website footer (Footer.tsx). The link should navigate to the /terms route. Place it in the navigation links area of the footer alongside existing footer links. Ensure it is styled consistently with other footer links.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/Footer.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/Footer.tsx"
         ]
       }
     ]
@@ -70,10 +39,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/ContactSection.tsx",
-    "frontend/src/components/Footer.tsx",
     "frontend/src/components/Header.tsx",
-    "frontend/src/components/ServicesSection.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

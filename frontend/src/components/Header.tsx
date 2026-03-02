@@ -128,18 +128,6 @@ export default function Header() {
                   {section.charAt(0).toUpperCase() + section.slice(1)}
                 </a>
               ))}
-              <a
-                href="https://wa.me/8447978940?text=Hi%2C%20I%20want%20to%20become%20a%20mechanic%20at%20QuickRepair"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-2 px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 hover:scale-105 active:scale-95"
-                style={{
-                  background: 'linear-gradient(135deg, #FFD700, #FF8C42)',
-                  color: '#0d0d0d',
-                }}
-              >
-                Become a Mechanic
-              </a>
 
               {/* Auth Button */}
               <div className="ml-2 relative">

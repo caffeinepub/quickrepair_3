@@ -2,27 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-remove-the-paragraph-element-req-xpath-html-1-body-1-div-1-div-1-main-1-section-4-div-1-div-3-p-1-and-the-button-element-xpath-html-1-body-1-div-1-div-1-main-1-section-4-div-1-div-3-button-1-from-section-4-likely-the-servicessection-or-a-related-section-adjust-surrounding-layout-to-remain-clean-and-smooth-after-removal",
-      "featureTitle": "Remove the paragraph element (REQ XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/p[1]) and the button element (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[4]/div[1]/div[3]/button[1]) from section 4 (likely the ServicesSection or a related section). Adjust surrounding layout to remain clean and smooth after removal.",
-      "files": [
-        "frontend/src/components/ServicesSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-remove-the-logo-text-div-from-the-header-xpath-html-1-body-1-div-1-div-1-header-1-div-1-div-1-a-1-div-2-this-is-the-text-label-next-to-the-logo-image-in-the-header-component-keep-the-logo-image-icon-intact-only-remove-the-text-div",
-      "featureTitle": "Remove the logo text div from the header (XPath: /html[1]/body[1]/div[1]/div[1]/header[1]/div[1]/div[1]/a[1]/div[2]) — this is the text label next to the logo image in the Header component. Keep the logo image/icon intact; only remove the text div.",
+      "featureId": "feature-remove-the-anchor-element-and-its-child-svg-icon-identified-by-xpath-html-1-body-1-div-1-div-1-div-3-a-1-and-html-1-body-1-div-1-div-1-div-3-a-1-svg-1-from-the-header-component-these-are-located-in-the-third-div-group-of-the-header-s-first-div-and-both-the-link-wrapper-and-the-svg-inside-it-must-be-completely-removed",
+      "featureTitle": "Remove the anchor element and its child SVG icon identified by XPath /html[1]/body[1]/div[1]/div[1]/div[3]/a[1] and /html[1]/body[1]/div[1]/div[1]/div[3]/a[1]/svg[1] from the Header component. These are located in the third div group of the header's first div, and both the link wrapper and the SVG inside it must be completely removed.",
       "files": [
         "frontend/src/components/Header.tsx"
       ],
@@ -35,15 +16,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-3"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-remove-the-entire-card-container-div-xpath-html-1-body-1-div-1-div-1-main-1-section-7-div-1-div-2-div-3-including-the-inner-content-div-xpath-html-1-body-1-div-1-div-1-main-1-section-7-div-1-div-2-div-3-div-1-and-anchor-link-xpath-html-1-body-1-div-1-div-1-main-1-section-7-div-1-div-2-div-3-a-1-from-section-7-likely-contactsection-or-faqsection-adjust-the-grid-or-flex-layout-of-the-parent-container-so-remaining-cards-items-fill-the-space-evenly",
-      "featureTitle": "Remove the entire card/container div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]), including the inner content div (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/div[1]) and anchor link (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[7]/div[1]/div[2]/div[3]/a[1]) from section 7 (likely ContactSection or FAQSection). Adjust the grid or flex layout of the parent container so remaining cards/items fill the space evenly.",
+      "featureId": "feature-remove-the-call-now-button-or-link-from-the-header-component-frontend-src-components-header-tsx-this-is-the-element-labeled-call-now-visible-in-the-top-header-area-of-the-page-it-must-be-completely-removed-from-the-header-markup",
+      "featureTitle": "Remove the 'Call Now' button or link from the Header component (frontend/src/components/Header.tsx). This is the element labeled 'Call Now' visible in the top/header area of the page. It must be completely removed from the header markup.",
       "files": [
-        "frontend/src/components/ContactSection.tsx"
+        "frontend/src/components/Header.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -54,26 +35,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-4"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-clearly-visible-terms-policy-link-in-the-website-footer-footer-tsx-the-link-should-navigate-to-the-terms-route-place-it-in-the-navigation-links-area-of-the-footer-alongside-existing-footer-links-ensure-it-is-styled-consistently-with-other-footer-links",
-      "featureTitle": "Add a clearly visible Terms & Policy link in the website footer (Footer.tsx). The link should navigate to the /terms route. Place it in the navigation links area of the footer alongside existing footer links. Ensure it is styled consistently with other footer links.",
-      "files": [
-        "frontend/src/components/Footer.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-5"
+        "REQ-2"
       ],
       "confidence": "high"
     }

@@ -1,13 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Clean up selected UI elements from the QuickRepair website and add a visible Terms & Policy footer link.
+**Goal:** Remove specific elements from the Header component — a phone/SVG icon link and the "Call Now" button.
 
 **Planned changes:**
-- Remove the floating scroll-to-top button (SVG icon and its anchor wrapper) from the page layout
-- Remove the paragraph and button from section 4's third column/card and adjust surrounding layout
-- Remove the logo text div from the header, keeping only the logo image/icon
-- Remove the third card/container from section 7 and adjust the grid/flex layout so remaining cards fill the space evenly
-- Add a "Terms & Policy" link in the footer navigation area, styled consistently with other footer links, navigating to `/terms`
+- Remove the anchor element (and its child SVG icon) located in the third div group of the header from `Header.tsx`
+- Remove the "Call Now" button/link from the header in `Header.tsx`
+- Leave the FloatingCallButton component in `App.tsx` untouched
 
-**User-visible outcome:** The website has a cleaner layout with the specified elements removed, no broken or empty spaces left behind, and a visible Terms & Policy link in the footer that navigates to the terms page.
+**User-visible outcome:** The header will no longer display the SVG icon link or the "Call Now" button, while the floating call button remains functional elsewhere on the page.
