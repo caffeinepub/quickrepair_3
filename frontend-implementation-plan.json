@@ -1,86 +1,139 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Collect phone number at sign-in, remove ✅ emoji from Confirm Booking button, fix Book Online redirect, show all user data in admin panel",
+  "title": "Mechanic Registration Page, Admin Panel Fixes, and UI Cleanup",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Collect phone number during first-time sign-in via ProfileModal and display it in the admin panel",
+      "summary": "Replace 'Become a Mechanic' WhatsApp link with '👨‍🔧 Mechanic Registration' navigation item in NavigationDrawer",
       "acceptanceCriteria": [
-        "ProfileModal includes a required phone number input field",
-        "Phone number is submitted and saved to the backend user profile via registerUser",
-        "Admin panel displays the stored phone number for each user",
-        "Phone number field is validated (numeric, reasonable length)"
+        "Hamburger menu no longer shows 'Become a Mechanic'",
+        "'👨‍🔧 Mechanic Registration' appears in the NavigationDrawer",
+        "Clicking it navigates to /mechanic-registration",
+        "All other menu items remain unchanged"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/ProfileModal.tsx",
+          "path": "frontend/src/components/NavigationDrawer.tsx",
           "operation": "modify",
-          "description": "The modal already collects name, phone, and service area. Verify that the phone field includes proper validation (numeric, reasonable length such as 10-15 digits) and that it is marked as required. Ensure the phone value is passed correctly to the useRegisterUser mutation hook."
-        },
-        {
-          "path": "frontend/src/components/AdminPage.tsx",
-          "operation": "modify",
-          "description": "Update the Users tab to display the phone number column for each registered user. The backend interface already returns phone as part of UserProfile via getUsers(). Add a table column or card field showing userProfile.phone for each user entry fetched from the backend."
+          "description": "Remove the existing WhatsApp link for 'Become a Mechanic' and replace it with a new menu item '👨‍🔧 Mechanic Registration' that navigates to '/mechanic-registration' using the same pattern as other menu items. Keep all other navigation links (Home, Services, About, Contact, Terms, Booking History) unchanged. Ensure the new item appears in the natural flow of the menu items and triggers drawer close on click."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Remove the ✅ emoji from the 'Confirm Booking' button label",
+      "summary": "Remove FloatingCallButton component from the website",
       "acceptanceCriteria": [
-        "The Confirm Booking button contains no ✅ emoji anywhere in its label or children",
-        "Button text reads exactly 'Confirm Booking'"
+        "The circular 'Call Now' floating button is no longer visible anywhere on the website",
+        "FloatingWhatsAppButton remains intact and functional",
+        "No console errors related to the removed component"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/BookingFormSection.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Locate the 'Confirm Booking' button element in the form submission section and remove any ✅ emoji from its label or children. Ensure the button text reads exactly 'Confirm Booking' with no emoji characters."
+          "description": "Remove the import statement for FloatingCallButton and remove its usage from the component tree. Ensure FloatingWhatsAppButton remains rendered and functional. Verify no other files import or reference FloatingCallButton."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Fix 'Book Online' button on ServiceCard to navigate to a dedicated /booking page with the full booking form",
+      "summary": "Create MechanicRegistrationPage with form, formsubmit.co integration, and GPay-style success overlay",
       "acceptanceCriteria": [
-        "Clicking 'Book Online' on any ServiceCard navigates to a /booking route",
-        "The /booking route renders a full booking form",
-        "The booking form is functional and submits correctly",
-        "Navigation back to the main page is available from the booking page"
+        "Navigating to /mechanic-registration shows the registration form page",
+        "All specified fields are present with correct input types",
+        "Required fields show validation errors if left empty on submit",
+        "Form submits via POST to https://formsubmit.co/pandeyxkanha@gmail.com",
+        "All hidden fields (_subject, _template, _captcha, _next, _honey) are present",
+        "On submit, a full-screen success overlay with animated green checkmark appears",
+        "playSuccessSound() is called on successful submission",
+        "Submit button is orange (#ff8c42) and scales on hover",
+        "Page is fully mobile-responsive"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/ServiceCard.tsx",
-          "operation": "modify",
-          "description": "Replace the 'Book Online' label or button with a clickable element that uses React Router's Link or useNavigate to navigate to '/booking'. Ensure the entire card or button triggers navigation when clicked."
-        },
-        {
-          "path": "frontend/src/components/BookingPage.tsx",
+          "path": "frontend/src/pages/MechanicRegistrationPage.tsx",
           "operation": "create",
-          "description": "Create a new BookingPage component that renders the full booking form. Extract the form logic and fields from BookingFormSection.tsx (name, phone, service selection, date/time, address, issue description, FormSubmit submission) into this dedicated page. Include a back navigation link or button to return to the home page. Style consistently with the existing dark theme and fade-in animations."
+          "description": "Create a full-page registration form component with the following fields: Full Name (text, required), Phone Number (tel, required), Email (email, optional), Service Type (dropdown: Plumber, Electrician, Fan/Cooler Repair, AC Repair, Mechanic, required), Experience (dropdown: Less than 1 year, 1-3 years, 3-5 years, 5+ years, required), Address in Mahipalpur (textarea, required), Age (number, optional), Preferred Area (dropdown: Mahipalpur Extension, Village, Aerocity, Other, optional), Why want to join? (textarea, optional). Include hidden fields: _subject='👨‍🔧 New Mechanic Registration', _template='table', _captcha='false', _next='https://quickrepair-84g.caffeine.xyz/mechanic-thankyou.html', _honey (display:none honeypot). On form submit, show a full-screen success overlay matching BookingSuccessOverlay pattern with animated green checkmark SVG, call playSuccessSound(), then allow formsubmit redirect after ~2 seconds. Submit button: '📝 Register as Mechanic', bg #ff8c42, hover scale 1.05. Use dark theme colors (#0a2b3c background, #ff8c42 orange, #FFD700 yellow). Ensure mobile-responsive layout. Before the formsubmit redirect occurs, also call submitMechanicRegistration() on the backend actor (using useActor hook and useMutation pattern from useQueries.ts) to store the data in the canister. Handle both the formsubmit POST and the backend call, allowing the formsubmit redirect to proceed after the success overlay."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Register the /booking route in the router configuration. Import the new BookingPage component and add a Route element that renders BookingPage at path='/booking'. Ensure the route is accessible without authentication if the existing booking form is publicly accessible."
+          "description": "Add a new useMutation hook useSubmitMechanicRegistration that calls actor.submitMechanicRegistration(name, phone, email, serviceType, experience, address, age, preferredArea, whyJoin) to store mechanic registration data in the backend. Follow the existing mutation pattern used by useAddFeedback and useRegisterUser."
         }
       ]
     },
     {
       "id": "REQ-4",
-      "summary": "Update Admin panel to display comprehensive user data including phone number, principal ID, service area, and registration time for all registered users",
+      "summary": "Add /mechanic-registration route to App.tsx",
       "acceptanceCriteria": [
-        "Admin panel Users tab shows name, phone number, principal ID, service area, and registration timestamp for every registered user",
-        "All user records fetched from backend are displayed in a table or card list",
-        "Backend admin query returns phone number as part of user profile data",
-        "Admin panel is only accessible to the designated admin principal"
+        "Visiting /mechanic-registration renders MechanicRegistrationPage",
+        "Existing routes (/admin, /booking, /booking-history, /) continue to work"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import MechanicRegistrationPage and add a route condition that renders it when pathname is '/mechanic-registration'. Follow the existing routing pattern used for /admin, /booking, and /booking-history. Ensure all existing routes remain functional."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Fix admin panel authorization for service CRUD operations",
+      "acceptanceCriteria": [
+        "Admin can add a new service from /admin without getting 'Unauthorized User' error",
+        "Admin can edit and delete existing services",
+        "Added services persist after page refresh"
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/AdminPage.tsx",
           "operation": "modify",
-          "description": "Expand the Users tab display to show all user profile fields: name (userProfile.name), phone number (userProfile.phone), principal ID (user principal toString()), service area (userProfile.area), and registration timestamp (userProfile.signupTime converted to readable date format). The backend getUsers() already returns Array<[Principal, UserProfile]> with all required fields including phone. Present the data in a table with columns for each field or as detailed cards. Ensure the admin panel remains protected by the existing authorization checks."
+          "description": "Review the admin authentication flow and ensure the component correctly passes the authenticated actor to all service CRUD operations (add, edit, delete). Verify that the password session state is properly maintained and that the actor used in mutations is the authenticated one from useActor. Check error handling and display clear error messages if authorization fails. Note: The backend authorization logic is handled separately; this file operation ensures the frontend correctly uses the authenticated actor."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Replace hardcoded services in ServicesSection with dynamic backend data",
+      "acceptanceCriteria": [
+        "Services added in the admin panel appear in the ServicesSection on the homepage",
+        "If no services are stored in backend, a reasonable fallback (empty state or default services) is shown",
+        "ServicesSection re-fetches when services are updated"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add a new useQuery hook useGetAllServices that calls actor.getAllServices() to fetch the services list from the backend. Follow the existing query pattern used by useGetAllFeedback. Include proper enabled/retry/staleTime configuration to ensure services are fetched when the actor is available."
+        },
+        {
+          "path": "frontend/src/components/ServicesSection.tsx",
+          "operation": "modify",
+          "description": "Replace the hardcoded services array with a dynamic fetch using the new useGetAllServices hook. Map over the fetched services to render ServiceCard components. If the backend returns an empty array or the query is loading, display a loading state or fallback to the existing hardcoded services. Ensure the ServiceCard receives the correct service data structure (id, name, description, icon, startingPrice). Handle loading and error states gracefully."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add Mechanic Registrations section to AdminPage to display stored registration data",
+      "acceptanceCriteria": [
+        "Admin panel /admin shows a 'Mechanic Registrations' section with all submitted registrations",
+        "Each registration shows: Full Name, Phone, Email, Service Type, Experience, Address, Age, Preferred Area, Why Join",
+        "New mechanic registrations submitted via the form appear in the admin panel",
+        "Only admin can view mechanic registrations (auth-protected)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add a new useQuery hook useGetMechanicRegistrations that calls actor.getMechanicRegistrations() to fetch all mechanic registration records from the backend. Follow the existing admin query pattern (e.g., useGetAllBookings). Ensure the query is only enabled when the actor is available."
+        },
+        {
+          "path": "frontend/src/components/AdminPage.tsx",
+          "operation": "modify",
+          "description": "Add a new 'Mechanic Registrations' section/tab to the admin dashboard using the useGetMechanicRegistrations hook. Display all registrations in a table or card layout with columns: Full Name, Phone, Email, Service Type, Experience, Address, Age, Preferred Area, Why Join. Include timestamp if available. Handle loading and error states. Ensure the section is only visible to authenticated admins (leveraging the existing password session or admin check). Format the data for readability and ensure mobile responsiveness."
         }
       ]
     }

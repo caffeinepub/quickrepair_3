@@ -1,172 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --radius: 0.75rem;
-
-    /* Dark theme as default */
-    --background: 0.1 0 0;
-    --foreground: 0.95 0 0;
-    --card: 0.14 0 0;
-    --card-foreground: 0.95 0 0;
-    --popover: 0.14 0 0;
-    --popover-foreground: 0.95 0 0;
-    --primary: 0.82 0.18 85;
-    --primary-foreground: 0.1 0 0;
-    --secondary: 0.18 0 0;
-    --secondary-foreground: 0.95 0 0;
-    --muted: 0.18 0 0;
-    --muted-foreground: 0.6 0 0;
-    --accent: 0.72 0.19 50;
-    --accent-foreground: 0.1 0 0;
-    --destructive: 0.577 0.245 27.325;
-    --destructive-foreground: 0.985 0 0;
-    --border: 0.25 0 0;
-    --input: 0.22 0 0;
-    --ring: 0.82 0.18 85;
-
-    /* Brand colors */
-    --brand-yellow: #FFD700;
-    --brand-orange: #FF8C42;
-    --brand-green: #25D366;
-    --brand-green-dark: #128C7E;
-    --surface-1: #0d0d0d;
-    --surface-2: #161616;
-    --surface-3: #1e1e1e;
-    --surface-4: #252525;
-  }
-
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: var(--surface-1);
-    color: #f0f0f0;
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-  }
+:root {
+  --background: oklch(0.12 0.005 240);
+  --foreground: oklch(0.95 0.005 240);
+  --card: oklch(0.15 0.005 240);
+  --card-foreground: oklch(0.95 0.005 240);
+  --popover: oklch(0.15 0.005 240);
+  --popover-foreground: oklch(0.95 0.005 240);
+  --primary: oklch(0.75 0.18 55);
+  --primary-foreground: oklch(0.1 0.005 240);
+  --secondary: oklch(0.2 0.005 240);
+  --secondary-foreground: oklch(0.9 0.005 240);
+  --muted: oklch(0.2 0.005 240);
+  --muted-foreground: oklch(0.6 0.005 240);
+  --accent: oklch(0.65 0.2 35);
+  --accent-foreground: oklch(0.98 0.005 240);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 240);
+  --border: oklch(0.22 0.005 240);
+  --input: oklch(0.22 0.005 240);
+  --ring: oklch(0.75 0.18 55);
+  --radius: 0.75rem;
+  --success: oklch(0.65 0.2 145);
+  --success-foreground: oklch(0.98 0.005 240);
 }
 
-@layer utilities {
-  .text-brand-yellow {
-    color: var(--brand-yellow);
-  }
-  .text-brand-orange {
-    color: var(--brand-orange);
-  }
-  .text-brand-green {
-    color: var(--brand-green);
-  }
-  .bg-brand-yellow {
-    background-color: var(--brand-yellow);
-  }
-  .bg-brand-orange {
-    background-color: var(--brand-orange);
-  }
-  .bg-brand-green {
-    background-color: var(--brand-green);
-  }
-  .bg-surface-1 {
-    background-color: var(--surface-1);
-  }
-  .bg-surface-2 {
-    background-color: var(--surface-2);
-  }
-  .bg-surface-3 {
-    background-color: var(--surface-3);
-  }
-  .bg-surface-4 {
-    background-color: var(--surface-4);
-  }
-  .border-surface-3 {
-    border-color: var(--surface-3);
-  }
-  .border-surface-4 {
-    border-color: var(--surface-4);
-  }
+* {
+  border-color: var(--border);
 }
 
-/* Keyframe animations — only used via scroll-triggered classes */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
-  }
-  70% {
-    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-/* These classes are applied programmatically (not on body/global selectors) */
-.animate-fade-in-up {
-  animation: fadeInUp 0.7s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-.animate-pulse-ring {
-  animation: pulse-ring 2s infinite;
-}
-
-/* Scroll-triggered fade-in — starts hidden, becomes visible via JS class toggle */
+/* ─── Scroll-triggered fade-in ─── */
 .fade-in-section {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .fade-in-section.is-visible {
@@ -174,36 +53,210 @@
   transform: translateY(0);
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-orange));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Card hover effect */
+/* ─── Service card hover ─── */
 .service-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .service-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(255, 140, 66, 0.2), 0 8px 16px rgba(0, 0, 0, 0.4);
-  border-color: var(--brand-orange);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(255, 140, 66, 0.18);
 }
 
-/* Scrollbar */
+/* ─── Pulse ring animation ─── */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 140, 66, 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 12px rgba(255, 140, 66, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 140, 66, 0);
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+
+/* ─── Custom scrollbar ─── */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--surface-1);
+  background: #0d0d0d;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-4);
+  background: #2e2e2e;
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-orange);
+  background: #FF8C42;
+}
+
+/* ─── Tailwind animation utilities ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ════════════════════════════════════════════════════
+   GPay-style Booking Success Overlay
+════════════════════════════════════════════════════ */
+
+/* Backdrop */
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Card pop-in */
+@keyframes cardPopIn {
+  0%   { opacity: 0; transform: scale(0.72); }
+  60%  { opacity: 1; transform: scale(1.04); }
+  80%  { transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* SVG circle stroke draw */
+@keyframes drawCircle {
+  from { stroke-dashoffset: 339.29; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Checkmark fade + scale in */
+@keyframes fadeInCheck {
+  0%   { opacity: 0; stroke-dashoffset: 120; }
+  100% { opacity: 1; stroke-dashoffset: 0; }
+}
+
+/* Text slide up */
+@keyframes textSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Overlay backdrop ── */
+.booking-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: overlayFadeIn 0.25s ease forwards;
+  cursor: pointer;
+}
+
+/* ── Card ── */
+.booking-success-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  border-radius: 24px;
+  padding: 40px 36px 32px;
+  max-width: 340px;
+  width: 90%;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.04);
+  animation: cardPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  cursor: default;
+}
+
+/* ── Icon wrapper ── */
+.booking-success-icon-wrap {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* ── SVG ── */
+.booking-success-svg {
+  display: block;
+}
+
+/* ── Animated circle stroke ── */
+.booking-success-circle {
+  stroke-dasharray: 339.29;
+  stroke-dashoffset: 339.29;
+  animation: drawCircle 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+}
+
+/* ── Animated checkmark ── */
+.booking-success-check {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  opacity: 0;
+  animation: fadeInCheck 0.35s ease 0.6s forwards;
+}
+
+/* ── Text block ── */
+.booking-success-text-wrap {
+  text-align: center;
+  animation: textSlideUp 0.4s ease 0.65s both;
+}
+
+.booking-success-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.booking-success-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #22c55e;
+  margin: 0 0 6px;
+}
+
+.booking-success-hint {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 0;
+}
+
+/* ── Dismiss button ── */
+.booking-success-dismiss {
+  margin-top: 24px;
+  padding: 10px 40px;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, transform 0.15s;
+  animation: textSlideUp 0.4s ease 0.75s both;
+}
+
+.booking-success-dismiss:hover {
+  background: #16a34a;
+  transform: scale(1.04);
+}
+
+.booking-success-dismiss:active {
+  transform: scale(0.97);
 }

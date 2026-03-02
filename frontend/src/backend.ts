@@ -89,6 +89,33 @@ export class ExternalBlob {
         return this;
     }
 }
+export interface Service {
+    id: bigint;
+    startingPrice: bigint;
+    icon: string;
+    name: string;
+    description: string;
+}
+export interface MechanicRegistration {
+    age: bigint;
+    serviceType: string;
+    name: string;
+    email: string;
+    experience: string;
+    preferredArea: string;
+    address: string;
+    timestamp: bigint;
+    phone: string;
+    whyJoin: string;
+}
+export interface Booking {
+    bookingId: bigint;
+    user: Principal;
+    mobileNumber: string;
+    address: string;
+    bookingTime: bigint;
+    serviceId: bigint;
+}
 export interface UserProfile {
     area: string;
     signupTime: bigint;
@@ -102,24 +129,36 @@ export enum UserRole {
 }
 export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
+    addBooking(serviceId: bigint, address: string, mobileNumber: string, bookingTime: bigint): Promise<void>;
     addFeedback(name: string, stars: bigint, message: string): Promise<void>;
+    addService(name: string, description: string, icon: string, startingPrice: bigint): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    deleteBooking(bookingId: bigint): Promise<void>;
     deleteFeedback(id: bigint): Promise<void>;
+    deleteService(id: bigint): Promise<void>;
     deleteUser(p: Principal): Promise<void>;
+    getAllBookings(): Promise<Array<Booking>>;
     getAllFeedback(): Promise<Array<[bigint, string, bigint, string, bigint]>>;
+    getAllServices(): Promise<Array<Service>>;
     getAverageRating(): Promise<number>;
+    getBookingsForCaller(): Promise<Array<Booking>>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getFeedbackCount(): Promise<bigint>;
+    getMechanicRegistrations(): Promise<Array<MechanicRegistration>>;
     getMyProfile(): Promise<UserProfile | null>;
+    getService(id: bigint): Promise<Service | null>;
     getStars(): Promise<Array<bigint>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     getUsers(): Promise<Array<[Principal, UserProfile]>>;
     isCallerAdmin(): Promise<boolean>;
     registerUser(name: string, phone: string, area: string): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    submitMechanicRegistration(name: string, phone: string, email: string, serviceType: string, experience: string, address: string, age: bigint, preferredArea: string, whyJoin: string): Promise<void>;
+    updateBooking(bookingId: bigint, serviceId: bigint, address: string, mobileNumber: string, bookingTime: bigint): Promise<void>;
+    updateService(id: bigint, name: string, description: string, icon: string, startingPrice: bigint): Promise<void>;
 }
-import type { UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
+import type { Service as _Service, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
     async _initializeAccessControlWithSecret(arg0: string): Promise<void> {
@@ -133,6 +172,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor._initializeAccessControlWithSecret(arg0);
+            return result;
+        }
+    }
+    async addBooking(arg0: bigint, arg1: string, arg2: string, arg3: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addBooking(arg0, arg1, arg2, arg3);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addBooking(arg0, arg1, arg2, arg3);
             return result;
         }
     }
@@ -150,6 +203,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async addService(arg0: string, arg1: string, arg2: string, arg3: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addService(arg0, arg1, arg2, arg3);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addService(arg0, arg1, arg2, arg3);
+            return result;
+        }
+    }
     async assignCallerUserRole(arg0: Principal, arg1: UserRole): Promise<void> {
         if (this.processError) {
             try {
@@ -161,6 +228,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
+            return result;
+        }
+    }
+    async deleteBooking(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteBooking(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteBooking(arg0);
             return result;
         }
     }
@@ -178,6 +259,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async deleteService(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteService(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteService(arg0);
+            return result;
+        }
+    }
     async deleteUser(arg0: Principal): Promise<void> {
         if (this.processError) {
             try {
@@ -189,6 +284,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.deleteUser(arg0);
+            return result;
+        }
+    }
+    async getAllBookings(): Promise<Array<Booking>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllBookings();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllBookings();
             return result;
         }
     }
@@ -206,6 +315,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getAllServices(): Promise<Array<Service>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllServices();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllServices();
+            return result;
+        }
+    }
     async getAverageRating(): Promise<number> {
         if (this.processError) {
             try {
@@ -217,6 +340,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.getAverageRating();
+            return result;
+        }
+    }
+    async getBookingsForCaller(): Promise<Array<Booking>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getBookingsForCaller();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getBookingsForCaller();
             return result;
         }
     }
@@ -262,6 +399,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getMechanicRegistrations(): Promise<Array<MechanicRegistration>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getMechanicRegistrations();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getMechanicRegistrations();
+            return result;
+        }
+    }
     async getMyProfile(): Promise<UserProfile | null> {
         if (this.processError) {
             try {
@@ -274,6 +425,20 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.getMyProfile();
             return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getService(arg0: bigint): Promise<Service | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getService(arg0);
+                return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getService(arg0);
+            return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
         }
     }
     async getStars(): Promise<Array<bigint>> {
@@ -360,11 +525,56 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async submitMechanicRegistration(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string, arg6: bigint, arg7: string, arg8: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.submitMechanicRegistration(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.submitMechanicRegistration(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+            return result;
+        }
+    }
+    async updateBooking(arg0: bigint, arg1: bigint, arg2: string, arg3: string, arg4: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateBooking(arg0, arg1, arg2, arg3, arg4);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateBooking(arg0, arg1, arg2, arg3, arg4);
+            return result;
+        }
+    }
+    async updateService(arg0: bigint, arg1: string, arg2: string, arg3: string, arg4: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateService(arg0, arg1, arg2, arg3, arg4);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateService(arg0, arg1, arg2, arg3, arg4);
+            return result;
+        }
+    }
 }
 function from_candid_UserRole_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
     return from_candid_variant_n5(_uploadFile, _downloadFile, value);
 }
 function from_candid_opt_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Service]): Service | null {
     return value.length === 0 ? null : value[0];
 }
 function from_candid_variant_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {

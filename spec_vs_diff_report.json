@@ -1,22 +1,22 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-03-01T12:38:17.969Z",
-  "summary": "The diff implements most of the four requirements. REQ-1 (phone number in ProfileModal + backend), REQ-3 (BookingPage + /booking route), and REQ-4 (backend returns phone, admin query updated) are substantially addressed. REQ-2 (remove ✅ emoji from Confirm Booking button) cannot be confirmed from the diff — the BookingFormSection.tsx diff is truncated and neither it nor any other file shows the submit button text being changed.",
+  "generatedAt": "2026-03-02T02:30:42.804Z",
+  "summary": "Most requirements are implemented. REQ-1 through REQ-4 are clearly addressed. REQ-2 (FloatingCallButton removal) is confirmed in App.tsx summary. REQ-3 MechanicRegistrationPage is created with all fields and success overlay. REQ-4 route is added in App.tsx. REQ-5 admin authorization fix appears addressed via AccessControl/MixinAuthorization. REQ-6 ServicesSection now uses dynamic backend fetch with fallback. REQ-7 mechanic registrations backend storage and admin panel section appear implemented. However, some details around REQ-5 and REQ-7 cannot be fully verified due to truncation.",
   "missing_requirements": [
     {
-      "id": "REQ-2",
-      "requirement": "Remove the ✅ emoji from the 'Confirm Booking' button label in the booking form. Button text should read exactly 'Confirm Booking'.",
-      "reason": "The diff for BookingFormSection.tsx is truncated before the submit button is shown, and no other modified file demonstrates the emoji was removed from the Confirm Booking button. There is no evidence this change was made.",
+      "id": "REQ-3",
+      "requirement": "The form must POST to https://formsubmit.co/pandeyxkanha@gmail.com with all specified hidden fields (_subject, _template, _captcha, _next, _honey)",
+      "reason": "The MechanicRegistrationPage.tsx file is truncated before the form HTML is visible, so the presence of all required hidden fields cannot be confirmed from the diff.",
       "evidence": [
-        "frontend/src/components/BookingFormSection.tsx"
+        "frontend/src/pages/MechanicRegistrationPage.tsx"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "A migration module (backend/migration.mo) was added to handle actor upgrades.",
-      "reason": "The BuildRequest does not request any migration module or upgrade logic. This is an unrequested addition to the backend.",
+      "description": "backend/migration.mo module added for data migration support",
+      "reason": "The build request does not mention adding a migration module or any migration infrastructure. This is an additional file not requested in any REQ.",
       "evidence": [
         "backend/migration.mo"
       ]
@@ -28,10 +28,11 @@
     "backend/migration.mo",
     "frontend-file-summaries.txt",
     "frontend/src/App.tsx",
-    "frontend/src/components/BookingFormSection.tsx",
-    "frontend/src/components/ProfileModal.tsx",
-    "frontend/src/components/ServiceCard.tsx",
-    "frontend/src/pages/BookingPage.tsx",
+    "frontend/src/components/AdminPage.tsx",
+    "frontend/src/components/NavigationDrawer.tsx",
+    "frontend/src/components/ServicesSection.tsx",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/MechanicRegistrationPage.tsx",
     "project_state.json"
   ]
 }

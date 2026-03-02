@@ -2,11 +2,12 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
-import FloatingCallButton from './components/FloatingCallButton';
 import TrustStatsBar from './components/TrustStatsBar';
 import HowItWorksSection from './components/HowItWorksSection';
 import AdminPage from './components/AdminPage';
 import BookingPage from './pages/BookingPage';
+import BookingHistoryPage from './pages/BookingHistoryPage';
+import MechanicRegistrationPage from './pages/MechanicRegistrationPage';
 
 // Lazy-load below-fold sections for faster initial paint
 const ServicesSection = lazy(() => import('./components/ServicesSection'));
@@ -16,6 +17,7 @@ const AboutSection = lazy(() => import('./components/AboutSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
 const FAQSection = lazy(() => import('./components/FAQSection'));
 const Footer = lazy(() => import('./components/Footer'));
+const FloatingWhatsAppButton = lazy(() => import('./components/FloatingWhatsAppButton'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -95,8 +97,10 @@ function MainSite() {
         <Footer />
       </Suspense>
 
-      {/* Floating action button */}
-      <FloatingCallButton />
+      {/* Floating WhatsApp button only */}
+      <Suspense fallback={null}>
+        <FloatingWhatsAppButton />
+      </Suspense>
     </div>
   );
 }
@@ -105,6 +109,9 @@ export default function App() {
   const path = useCurrentPath();
   const isAdminRoute = path === '/admin' || path === '/admin/';
   const isBookingRoute = path === '/booking' || path === '/booking/';
+  const isBookingHistoryRoute = path === '/booking-history' || path === '/booking-history/';
+  const isMechanicRegistrationRoute =
+    path === '/mechanic-registration' || path === '/mechanic-registration/';
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -112,6 +119,10 @@ export default function App() {
         <AdminPage />
       ) : isBookingRoute ? (
         <BookingPage />
+      ) : isBookingHistoryRoute ? (
+        <BookingHistoryPage />
+      ) : isMechanicRegistrationRoute ? (
+        <MechanicRegistrationPage />
       ) : (
         <MainSite />
       )}

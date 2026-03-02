@@ -1,23 +1,23 @@
-import Map "mo:core/Map";
 import List "mo:core/List";
-import Principal "mo:core/Principal";
+import Nat "mo:core/Nat";
+import Text "mo:core/Text";
 
 module {
-  // Old actors types did not change
-  type Actor = {
-    feedbackStore : List.List<(Nat, Text, Nat, Text, Int)>;
-    ratingStore : List.List<Nat>;
-    userStore : Map.Map<Principal, {
+  public func run(old : { feedbackCounter : Nat }) : {
+    feedbackCounter : Nat;
+    mechanicRegistrationsStore : List.List<{
       name : Text;
       phone : Text;
-      area : Text;
-      signupTime : Int;
+      email : Text;
+      serviceType : Text;
+      experience : Text;
+      address : Text;
+      age : Nat;
+      preferredArea : Text;
+      whyJoin : Text;
+      timestamp : Int;
     }>;
-    feedbackCounter : Nat;
-  };
-
-  // New versions keep the same structure
-  public func run(old : Actor) : Actor {
-    old;
+  } {
+    { old with mechanicRegistrationsStore = List.empty() };
   };
 };

@@ -10,6 +10,33 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface Booking {
+  'bookingId' : bigint,
+  'user' : Principal,
+  'mobileNumber' : string,
+  'address' : string,
+  'bookingTime' : bigint,
+  'serviceId' : bigint,
+}
+export interface MechanicRegistration {
+  'age' : bigint,
+  'serviceType' : string,
+  'name' : string,
+  'email' : string,
+  'experience' : string,
+  'preferredArea' : string,
+  'address' : string,
+  'timestamp' : bigint,
+  'phone' : string,
+  'whyJoin' : string,
+}
+export interface Service {
+  'id' : bigint,
+  'startingPrice' : bigint,
+  'icon' : string,
+  'name' : string,
+  'description' : string,
+}
 export interface UserProfile {
   'area' : string,
   'signupTime' : bigint,
@@ -21,25 +48,46 @@ export type UserRole = { 'admin' : null } |
   { 'guest' : null };
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'addBooking' : ActorMethod<[bigint, string, string, bigint], undefined>,
   'addFeedback' : ActorMethod<[string, bigint, string], undefined>,
+  'addService' : ActorMethod<[string, string, string, bigint], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'deleteBooking' : ActorMethod<[bigint], undefined>,
   'deleteFeedback' : ActorMethod<[bigint], undefined>,
+  'deleteService' : ActorMethod<[bigint], undefined>,
   'deleteUser' : ActorMethod<[Principal], undefined>,
+  'getAllBookings' : ActorMethod<[], Array<Booking>>,
   'getAllFeedback' : ActorMethod<
     [],
     Array<[bigint, string, bigint, string, bigint]>
   >,
+  'getAllServices' : ActorMethod<[], Array<Service>>,
   'getAverageRating' : ActorMethod<[], number>,
+  'getBookingsForCaller' : ActorMethod<[], Array<Booking>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getFeedbackCount' : ActorMethod<[], bigint>,
+  'getMechanicRegistrations' : ActorMethod<[], Array<MechanicRegistration>>,
   'getMyProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getService' : ActorMethod<[bigint], [] | [Service]>,
   'getStars' : ActorMethod<[], Array<bigint>>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'getUsers' : ActorMethod<[], Array<[Principal, UserProfile]>>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'registerUser' : ActorMethod<[string, string, string], undefined>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'submitMechanicRegistration' : ActorMethod<
+    [string, string, string, string, string, string, bigint, string, string],
+    undefined
+  >,
+  'updateBooking' : ActorMethod<
+    [bigint, bigint, string, string, bigint],
+    undefined
+  >,
+  'updateService' : ActorMethod<
+    [bigint, string, string, string, bigint],
+    undefined
+  >,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

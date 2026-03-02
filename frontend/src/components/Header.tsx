@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import NavigationDrawer from './NavigationDrawer';
 import Overlay from './Overlay';
 import ProfileModal from './ProfileModal';
-import { Menu, X, User, LogOut, Loader2, ChevronDown } from 'lucide-react';
+import { Menu, X, User, LogOut, Loader2, ChevronDown, History } from 'lucide-react';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useMyProfile } from '../hooks/useQueries';
 import { useQueryClient } from '@tanstack/react-query';
@@ -209,6 +209,14 @@ export default function Header() {
                       <User className="w-4 h-4" />
                       Edit Profile
                     </button>
+                    <a
+                      href="/booking-history"
+                      onClick={() => setProfileMenuOpen(false)}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <History className="w-4 h-4" />
+                      Booking History
+                    </a>
                     <button
                       onClick={() => {
                         setProfileMenuOpen(false);
@@ -291,6 +299,14 @@ export default function Header() {
               <User className="w-4 h-4" />
               Edit Profile
             </button>
+            <a
+              href="/booking-history"
+              onClick={() => setProfileMenuOpen(false)}
+              className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+            >
+              <History className="w-4 h-4" />
+              Booking History
+            </a>
             <button
               onClick={() => {
                 setProfileMenuOpen(false);

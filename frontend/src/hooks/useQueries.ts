@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
 import { useEffect, useState } from 'react';
-import type { UserProfile } from '../backend';
+import type { UserProfile, Service, Booking, MechanicRegistration } from '../backend';
 import type { Principal } from '@dfinity/principal';
 
 export interface FeedbackItem {
@@ -222,5 +222,165 @@ export function useDeleteFeedback() {
       queryClient.invalidateQueries({ queryKey: ['averageRating'] });
       queryClient.invalidateQueries({ queryKey: ['feedbackCount'] });
     },
+  });
+}
+
+// ─── Services Hooks ───────────────────────────────────────────────────────────
+
+export function useGetAllServices() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<Service[]>({
+    queryKey: ['allServices'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getAllServices();
+    },
+    enabled: !!actor && !isFetching,
+    retry: false,
+  });
+}
+
+export function useAddService() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      name,
+      description,
+      icon,
+      startingPrice,
+    }: {
+      name: string;
+      description: string;
+      icon: string;
+      startingPrice: number;
+    }) => {
+      if (!actor) throw new Error('Actor not initialized');
+      await actor.addService(name, description, icon, BigInt(startingPrice));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['allServices'] });
+    },
+  });
+}
+
+export function useUpdateService() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      id,
+      name,
+      description,
+      icon,
+      startingPrice,
+    }: {
+      id: bigint;
+      name: string;
+      description: string;
+      icon: string;
+      startingPrice: number;
+    }) => {
+      if (!actor) throw new Error('Actor not initialized');
+      await actor.updateService(id, name, description, icon, BigInt(startingPrice));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['allServices'] });
+    },
+  });
+}
+
+export function useDeleteService() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: bigint) => {
+      if (!actor) throw new Error('Actor not initialized');
+      await actor.deleteService(id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['allServices'] });
+    },
+  });
+}
+
+// ─── Booking Hooks ────────────────────────────────────────────────────────────
+
+export function useGetBookingsForCaller(isAuthenticated: boolean) {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<Booking[]>({
+    queryKey: ['bookingsForCaller'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getBookingsForCaller();
+    },
+    enabled: !!actor && !isFetching && isAuthenticated,
+    retry: false,
+  });
+}
+
+// ─── Mechanic Registration Hooks ──────────────────────────────────────────────
+
+export function useSubmitMechanicRegistration() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      name,
+      phone,
+      email,
+      serviceType,
+      experience,
+      address,
+      age,
+      preferredArea,
+      whyJoin,
+    }: {
+      name: string;
+      phone: string;
+      email: string;
+      serviceType: string;
+      experience: string;
+      address: string;
+      age: number;
+      preferredArea: string;
+      whyJoin: string;
+    }) => {
+      if (!actor) throw new Error('Actor not initialized');
+      await actor.submitMechanicRegistration(
+        name,
+        phone,
+        email,
+        serviceType,
+        experience,
+        address,
+        BigInt(age),
+        preferredArea,
+        whyJoin
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['mechanicRegistrations'] });
+    },
+  });
+}
+
+export function useGetMechanicRegistrations() {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<MechanicRegistration[]>({
+    queryKey: ['mechanicRegistrations'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getMechanicRegistrations();
+    },
+    enabled: !!actor && !isFetching,
+    retry: false,
   });
 }

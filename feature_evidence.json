@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-when-a-user-signs-in-via-internet-identity-for-the-first-time-collect-their-phone-number-as-part-of-the-profile-setup-modal-in-addition-to-name-and-service-area-already-collected-in-profilemodal-store-the-phone-number-in-the-backend-user-profile",
-      "featureTitle": "When a user signs in via Internet Identity for the first time, collect their phone number as part of the profile setup modal (in addition to name and service area already collected in ProfileModal). Store the phone number in the backend user profile.",
+      "featureId": "feature-in-navigationdrawer-tsx-remove-the-existing-become-a-mechanic-whatsapp-link-and-replace-it-with-a-mechanic-registration-menu-item-that-navigates-to-mechanic-registration-route-keep-all-other-menu-options-home-services-about-contact-terms-booking-history-unchanged",
+      "featureTitle": "In NavigationDrawer.tsx, remove the existing 'Become a Mechanic' WhatsApp link and replace it with a '👨‍🔧 Mechanic Registration' menu item that navigates to '/mechanic-registration' route. Keep all other menu options (Home, Services, About, Contact, Terms, Booking History) unchanged.",
       "files": [
-        "frontend/src/components/ProfileModal.tsx"
+        "frontend/src/components/NavigationDrawer.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -21,10 +21,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-remove-the-emoji-from-the-confirm-booking-button-label-in-the-booking-form-the-button-text-should-read-confirm-booking-without-any-emoji",
-      "featureTitle": "Remove the ✅ emoji from the 'Confirm Booking' button label in the booking form. The button text should read 'Confirm Booking' without any emoji.",
+      "featureId": "feature-remove-the-floatingcallbutton-component-the-fixed-circular-call-now-button-from-the-website-entirely-remove-its-import-and-usage-from-wherever-it-is-rendered-likely-app-tsx-or-the-main-layout-the-floatingwhatsappbutton-should-remain-untouched",
+      "featureTitle": "Remove the FloatingCallButton component (the fixed circular 'Call Now' button) from the website entirely. Remove its import and usage from wherever it is rendered (likely App.tsx or the main layout). The FloatingWhatsAppButton should remain untouched.",
       "files": [
-        "frontend/src/components/BookingFormSection.tsx"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -40,11 +40,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-fix-the-book-online-button-on-each-servicecard-so-that-clicking-it-navigates-the-user-to-a-dedicated-booking-page-e-g-booking-create-a-bookingpage-component-if-it-does-not-already-exist-containing-the-full-booking-form-wire-the-servicecard-button-to-route-to-this-page",
-      "featureTitle": "Fix the 'Book Online' button on each ServiceCard so that clicking it navigates the user to a dedicated booking page (e.g. /booking). Create a BookingPage component if it does not already exist, containing the full booking form. Wire the ServiceCard button to route to this page.",
+      "featureId": "feature-create-a-new-mechanicregistrationpage-component-at-frontend-src-pages-mechanicregistrationpage-tsx-this-is-a-standalone-full-page-not-a-modal-with-the-following-form-fields-full-name-text-required-phone-number-tel-required-email-email-optional-service-type-dropdown-plumber-electrician-fan-cooler-repair-ac-repair-mechanic-required-experience-dropdown-less-than-1-year-1-3-years-3-5-years-5-years-required-address-in-mahipalpur-textarea-required-age-number-optional-preferred-area-dropdown-mahipalpur-extension-village-aerocity-other-optional-why-want-to-join-textarea-optional-the-form-must-post-to-https-formsubmit-co-pandeyxkanha-gmail-com-with-these-hidden-fields-subject-new-mechanic-registration-template-table-captcha-false-next-https-quickrepair-84g-caffeine-xyz-mechanic-thankyou-html-and-a-honeypot-honey-field-display-none-on-form-submit-before-redirect-show-a-full-screen-gpay-style-success-overlay-with-animated-green-checkmark-svg-and-play-the-ascending-c-e-g-chime-using-the-existing-playsuccesssound-utility-then-after-2-seconds-allow-the-formsubmit-redirect-to-proceed-submit-button-text-register-as-mechanic-background-ff8c42-hover-scale-1-05-page-styling-must-match-website-theme-dark-background-0a2b3c-orange-ff8c42-yellow-ffd700-mobile-friendly",
+      "featureTitle": "Create a new MechanicRegistrationPage component at frontend/src/pages/MechanicRegistrationPage.tsx. This is a standalone full page (not a modal) with the following form fields: Full Name (text, required), Phone Number (tel, required), Email (email, optional), Service Type (dropdown: Plumber, Electrician, Fan/Cooler Repair, AC Repair, Mechanic, required), Experience (dropdown: Less than 1 year, 1-3 years, 3-5 years, 5+ years, required), Address in Mahipalpur (textarea, required), Age (number, optional), Preferred Area (dropdown: Mahipalpur Extension, Village, Aerocity, Other, optional), Why want to join? (textarea, optional). The form must POST to https://formsubmit.co/pandeyxkanha@gmail.com with these hidden fields: _subject='👨‍🔧 New Mechanic Registration', _template='table', _captcha='false', _next='https://quickrepair-84g.caffeine.xyz/mechanic-thankyou.html', and a honeypot _honey field (display:none). On form submit (before redirect), show a full-screen GPay-style success overlay with animated green checkmark SVG and play the ascending C-E-G chime using the existing playSuccessSound utility, then after ~2 seconds allow the formsubmit redirect to proceed. Submit button text: '📝 Register as Mechanic', background: #ff8c42, hover scale 1.05. Page styling must match website theme: dark background (#0a2b3c), orange (#ff8c42), yellow (#FFD700), mobile-friendly.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/ServiceCard.tsx"
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/MechanicRegistrationPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -56,6 +56,84 @@
       ],
       "testIds": [
         "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-the-mechanic-registration-route-to-app-tsx-so-that-navigating-to-that-path-renders-the-new-mechanicregistrationpage-component",
+      "featureTitle": "Add the /mechanic-registration route to App.tsx so that navigating to that path renders the new MechanicRegistrationPage component.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-fix-the-admin-panel-authorization-issue-in-the-backend-main-mo-the-addservice-and-editservice-deleteservice-functions-currently-return-an-unauthorized-error-for-the-admin-audit-the-role-based-access-control-logic-the-admin-principal-check-must-correctly-identify-the-logged-in-admin-and-permit-service-crud-operations-ensure-the-admin-password-session-stored-in-adminpage-tsx-frontend-state-correctly-pairs-with-whatever-backend-auth-mechanism-is-used-or-if-the-backend-uses-caller-based-auth-ensure-the-frontend-passes-the-authenticated-actor-services-added-edited-deleted-via-admin-must-be-persisted-in-backend-stable-storage",
+      "featureTitle": "Fix the admin panel authorization issue: in the backend (main.mo), the 'addService' (and editService/deleteService) functions currently return an unauthorized error for the admin. Audit the role-based access control logic — the admin principal check must correctly identify the logged-in admin and permit service CRUD operations. Ensure the admin password session stored in AdminPage.tsx frontend state correctly pairs with whatever backend auth mechanism is used (or if the backend uses caller-based auth, ensure the frontend passes the authenticated actor). Services added/edited/deleted via admin must be persisted in backend stable storage.",
+      "files": [
+        "frontend/src/components/AdminPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-services-added-via-the-admin-panel-must-appear-on-the-website-s-servicessection-currently-servicessection-tsx-renders-five-hardcoded-services-replace-the-hardcoded-list-with-a-dynamic-fetch-from-the-backend-using-the-existing-react-query-hooks-e-g-useservices-or-equivalent-if-no-such-query-exists-add-a-getservices-query-in-usequeries-ts-and-a-corresponding-getservices-query-function-in-backend-main-mo-that-returns-the-stored-services-list-servicecard-should-render-dynamically-fetched-services-alongside-or-replacing-any-static-defaults",
+      "featureTitle": "Services added via the admin panel must appear on the website's ServicesSection. Currently ServicesSection.tsx renders five hardcoded services. Replace the hardcoded list with a dynamic fetch from the backend using the existing React Query hooks (e.g., useServices or equivalent). If no such query exists, add a getServices query in useQueries.ts and a corresponding getServices() query function in backend/main.mo that returns the stored services list. ServiceCard should render dynamically fetched services alongside (or replacing) any static defaults.",
+      "files": [
+        "frontend/src/components/ServicesSection.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-fix-the-admin-panel-to-display-mechanic-registration-details-since-mechanic-registrations-are-submitted-via-formsubmit-co-external-service-and-not-stored-in-the-icp-backend-add-a-mechanism-to-also-store-mechanic-registration-data-in-the-backend-add-a-submitmechanicregistration-name-phone-email-servicetype-experience-address-age-preferredarea-whyjoin-public-shared-func-in-main-mo-that-stores-registrations-in-a-stable-array-list-add-a-getmechanicregistrations-admin-only-query-func-that-returns-all-registrations-in-adminpage-tsx-add-a-mechanic-registrations-tab-section-that-fetches-and-displays-all-registrations-with-columns-full-name-phone-email-service-type-experience-address-age-preferred-area-why-join-in-mechanicregistrationpage-after-the-form-is-built-for-formsubmit-co-also-call-submitmechanicregistration-on-the-backend-canister-fire-and-forget-or-alongside-the-form-post-so-data-is-captured-in-the-admin-panel",
+      "featureTitle": "Fix the admin panel to display mechanic registration details. Since mechanic registrations are submitted via formsubmit.co (external service) and not stored in the ICP backend, add a mechanism to also store mechanic registration data in the backend. Add a submitMechanicRegistration(name, phone, email, serviceType, experience, address, age, preferredArea, whyJoin) public shared func in main.mo that stores registrations in a stable array/list. Add a getMechanicRegistrations() admin-only query func that returns all registrations. In AdminPage.tsx, add a 'Mechanic Registrations' tab/section that fetches and displays all registrations with columns: Full Name, Phone, Email, Service Type, Experience, Address, Age, Preferred Area, Why Join. In MechanicRegistrationPage, after the form is built for formsubmit.co, also call submitMechanicRegistration() on the backend canister (fire-and-forget or alongside the form POST) so data is captured in the admin panel.",
+      "files": [
+        "frontend/src/components/AdminPage.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
       ],
       "confidence": "high"
     }

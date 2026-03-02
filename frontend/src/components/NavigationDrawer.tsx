@@ -1,5 +1,6 @@
 import { useScrollSpy } from '../hooks/useScrollSpy';
-import { Home, Wrench, Info, Phone, ChevronRight } from 'lucide-react';
+import { Home, Wrench, Info, Phone, ChevronRight, UserCog, History } from 'lucide-react';
+import { useInternetIdentity } from '../hooks/useInternetIdentity';
 
 interface NavigationDrawerProps {
   isOpen: boolean;
@@ -15,6 +16,8 @@ const navItems = [
 
 export default function NavigationDrawer({ isOpen, onClose }: NavigationDrawerProps) {
   const activeSection = useScrollSpy(['home', 'services', 'about', 'contact']);
+  const { identity } = useInternetIdentity();
+  const isAuthenticated = !!identity;
 
   const handleNavClick = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
@@ -47,7 +50,7 @@ export default function NavigationDrawer({ isOpen, onClose }: NavigationDrawerPr
       </div>
 
       {/* Nav Items */}
-      <nav className="flex-1 px-4 py-6 space-y-1">
+      <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
         {navItems.map(({ id, label, icon: Icon }) => {
           const isActive = activeSection === id;
           return (
@@ -75,6 +78,28 @@ export default function NavigationDrawer({ isOpen, onClose }: NavigationDrawerPr
             </button>
           );
         })}
+
+        {/* Booking History — only for authenticated users */}
+        {isAuthenticated && (
+          <a
+            href="/booking-history"
+            onClick={onClose}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 text-gray-400 hover:text-white hover:bg-white/5"
+          >
+            <History className="w-5 h-5 flex-shrink-0" style={{ color: '#FF8C42' }} />
+            <span className="font-medium text-sm">Booking History</span>
+          </a>
+        )}
+
+        {/* Mechanic Registration */}
+        <a
+          href="/mechanic-registration"
+          onClick={onClose}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 text-gray-400 hover:text-white hover:bg-white/5"
+        >
+          <UserCog className="w-5 h-5 flex-shrink-0" style={{ color: '#FF8C42' }} />
+          <span className="font-medium text-sm">👨‍🔧 Mechanic Registration</span>
+        </a>
 
         {/* Book Online CTA */}
         <div className="pt-4">

@@ -13,29 +13,69 @@ export const UserRole = IDL.Variant({
   'user' : IDL.Null,
   'guest' : IDL.Null,
 });
+export const Booking = IDL.Record({
+  'bookingId' : IDL.Nat,
+  'user' : IDL.Principal,
+  'mobileNumber' : IDL.Text,
+  'address' : IDL.Text,
+  'bookingTime' : IDL.Int,
+  'serviceId' : IDL.Nat,
+});
+export const Service = IDL.Record({
+  'id' : IDL.Nat,
+  'startingPrice' : IDL.Nat,
+  'icon' : IDL.Text,
+  'name' : IDL.Text,
+  'description' : IDL.Text,
+});
 export const UserProfile = IDL.Record({
   'area' : IDL.Text,
   'signupTime' : IDL.Int,
   'name' : IDL.Text,
   'phone' : IDL.Text,
 });
+export const MechanicRegistration = IDL.Record({
+  'age' : IDL.Nat,
+  'serviceType' : IDL.Text,
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+  'experience' : IDL.Text,
+  'preferredArea' : IDL.Text,
+  'address' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'phone' : IDL.Text,
+  'whyJoin' : IDL.Text,
+});
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'addBooking' : IDL.Func([IDL.Nat, IDL.Text, IDL.Text, IDL.Int], [], []),
   'addFeedback' : IDL.Func([IDL.Text, IDL.Nat, IDL.Text], [], []),
+  'addService' : IDL.Func([IDL.Text, IDL.Text, IDL.Text, IDL.Nat], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'deleteBooking' : IDL.Func([IDL.Nat], [], []),
   'deleteFeedback' : IDL.Func([IDL.Nat], [], []),
+  'deleteService' : IDL.Func([IDL.Nat], [], []),
   'deleteUser' : IDL.Func([IDL.Principal], [], []),
+  'getAllBookings' : IDL.Func([], [IDL.Vec(Booking)], ['query']),
   'getAllFeedback' : IDL.Func(
       [],
       [IDL.Vec(IDL.Tuple(IDL.Nat, IDL.Text, IDL.Nat, IDL.Text, IDL.Int))],
       ['query'],
     ),
+  'getAllServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
   'getAverageRating' : IDL.Func([], [IDL.Float64], ['query']),
+  'getBookingsForCaller' : IDL.Func([], [IDL.Vec(Booking)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getFeedbackCount' : IDL.Func([], [IDL.Nat], ['query']),
+  'getMechanicRegistrations' : IDL.Func(
+      [],
+      [IDL.Vec(MechanicRegistration)],
+      ['query'],
+    ),
   'getMyProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getService' : IDL.Func([IDL.Nat], [IDL.Opt(Service)], ['query']),
   'getStars' : IDL.Func([], [IDL.Vec(IDL.Nat)], ['query']),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
@@ -50,6 +90,31 @@ export const idlService = IDL.Service({
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'registerUser' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'submitMechanicRegistration' : IDL.Func(
+      [
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Nat,
+        IDL.Text,
+        IDL.Text,
+      ],
+      [],
+      [],
+    ),
+  'updateBooking' : IDL.Func(
+      [IDL.Nat, IDL.Nat, IDL.Text, IDL.Text, IDL.Int],
+      [],
+      [],
+    ),
+  'updateService' : IDL.Func(
+      [IDL.Nat, IDL.Text, IDL.Text, IDL.Text, IDL.Nat],
+      [],
+      [],
+    ),
 });
 
 export const idlInitArgs = [];
@@ -60,29 +125,69 @@ export const idlFactory = ({ IDL }) => {
     'user' : IDL.Null,
     'guest' : IDL.Null,
   });
+  const Booking = IDL.Record({
+    'bookingId' : IDL.Nat,
+    'user' : IDL.Principal,
+    'mobileNumber' : IDL.Text,
+    'address' : IDL.Text,
+    'bookingTime' : IDL.Int,
+    'serviceId' : IDL.Nat,
+  });
+  const Service = IDL.Record({
+    'id' : IDL.Nat,
+    'startingPrice' : IDL.Nat,
+    'icon' : IDL.Text,
+    'name' : IDL.Text,
+    'description' : IDL.Text,
+  });
   const UserProfile = IDL.Record({
     'area' : IDL.Text,
     'signupTime' : IDL.Int,
     'name' : IDL.Text,
     'phone' : IDL.Text,
   });
+  const MechanicRegistration = IDL.Record({
+    'age' : IDL.Nat,
+    'serviceType' : IDL.Text,
+    'name' : IDL.Text,
+    'email' : IDL.Text,
+    'experience' : IDL.Text,
+    'preferredArea' : IDL.Text,
+    'address' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'phone' : IDL.Text,
+    'whyJoin' : IDL.Text,
+  });
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'addBooking' : IDL.Func([IDL.Nat, IDL.Text, IDL.Text, IDL.Int], [], []),
     'addFeedback' : IDL.Func([IDL.Text, IDL.Nat, IDL.Text], [], []),
+    'addService' : IDL.Func([IDL.Text, IDL.Text, IDL.Text, IDL.Nat], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'deleteBooking' : IDL.Func([IDL.Nat], [], []),
     'deleteFeedback' : IDL.Func([IDL.Nat], [], []),
+    'deleteService' : IDL.Func([IDL.Nat], [], []),
     'deleteUser' : IDL.Func([IDL.Principal], [], []),
+    'getAllBookings' : IDL.Func([], [IDL.Vec(Booking)], ['query']),
     'getAllFeedback' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(IDL.Nat, IDL.Text, IDL.Nat, IDL.Text, IDL.Int))],
         ['query'],
       ),
+    'getAllServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
     'getAverageRating' : IDL.Func([], [IDL.Float64], ['query']),
+    'getBookingsForCaller' : IDL.Func([], [IDL.Vec(Booking)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getFeedbackCount' : IDL.Func([], [IDL.Nat], ['query']),
+    'getMechanicRegistrations' : IDL.Func(
+        [],
+        [IDL.Vec(MechanicRegistration)],
+        ['query'],
+      ),
     'getMyProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getService' : IDL.Func([IDL.Nat], [IDL.Opt(Service)], ['query']),
     'getStars' : IDL.Func([], [IDL.Vec(IDL.Nat)], ['query']),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
@@ -97,6 +202,31 @@ export const idlFactory = ({ IDL }) => {
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'registerUser' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'submitMechanicRegistration' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Nat,
+          IDL.Text,
+          IDL.Text,
+        ],
+        [],
+        [],
+      ),
+    'updateBooking' : IDL.Func(
+        [IDL.Nat, IDL.Nat, IDL.Text, IDL.Text, IDL.Int],
+        [],
+        [],
+      ),
+    'updateService' : IDL.Func(
+        [IDL.Nat, IDL.Text, IDL.Text, IDL.Text, IDL.Nat],
+        [],
+        [],
+      ),
   });
 };
 

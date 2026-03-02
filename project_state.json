@@ -1,47 +1,99 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "A service booking website with admin panel. Features include service cards with 'Book Online' redirect to booking page, user sign-in with phone number collection, booking form submission, and admin panel showing all user data and bookings.",
+  "summary": "QuickRepair website — a service repair platform for Mahipalpur area. Features include mechanic registration, admin panel, and service listings.",
   "architectural_notes": [
-    "Service card 'Book Online' button redirects to a separate booking page",
-    "User sign-in collects phone number in addition to other details",
-    "Admin panel displays all signed-in users' full data including name, Principal ID, phone number, booking details, and sign-in time"
+    "Website theme: Dark Blue (#0a2b3c), Orange (#ff8c42), Yellow (#FFD700)",
+    "Form submissions go to pandeyxkanha@gmail.com via formsubmit.co with hidden fields for subject, template, captcha, and honeypot",
+    "Admin panel is at /admin route; services added there should reflect on the main website"
   ],
-  "known_issues": [],
+  "known_issues": [
+    "Admin panel shows 'Unauthorized User' error when trying to add services",
+    "User/mechanic registration data not visible in admin panel",
+    "Services added via admin panel do not appear on the website"
+  ],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-when-a-user-signs-in-via-internet-identity-for-the-first-time-collect-their-phone-number-as-part-of-the-profile-setup-modal-in-addition-to-name-and-service-area-already-collected-in-profilemodal-store-the-phone-number-in-the-backend-user-profile",
-      "title": "When a user signs in via Internet Identity for the first time, collect their phone number as part of the profile setup modal (in addition to name and service area already collected in ProfileModal). Store the phone number in the backend user profile.",
+      "id": "feature-in-navigationdrawer-tsx-remove-the-existing-become-a-mechanic-whatsapp-link-and-replace-it-with-a-mechanic-registration-menu-item-that-navigates-to-mechanic-registration-route-keep-all-other-menu-options-home-services-about-contact-terms-booking-history-unchanged",
+      "title": "In NavigationDrawer.tsx, remove the existing 'Become a Mechanic' WhatsApp link and replace it with a '👨‍🔧 Mechanic Registration' menu item that navigates to '/mechanic-registration' route. Keep all other menu options (Home, Services, About, Contact, Terms, Booking History) unchanged.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-remove-the-emoji-from-the-confirm-booking-button-label-in-the-booking-form-the-button-text-should-read-confirm-booking-without-any-emoji",
-      "title": "Remove the ✅ emoji from the 'Confirm Booking' button label in the booking form. The button text should read 'Confirm Booking' without any emoji.",
+      "id": "feature-remove-the-floatingcallbutton-component-the-fixed-circular-call-now-button-from-the-website-entirely-remove-its-import-and-usage-from-wherever-it-is-rendered-likely-app-tsx-or-the-main-layout-the-floatingwhatsappbutton-should-remain-untouched",
+      "title": "Remove the FloatingCallButton component (the fixed circular 'Call Now' button) from the website entirely. Remove its import and usage from wherever it is rendered (likely App.tsx or the main layout). The FloatingWhatsAppButton should remain untouched.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-fix-the-book-online-button-on-each-servicecard-so-that-clicking-it-navigates-the-user-to-a-dedicated-booking-page-e-g-booking-create-a-bookingpage-component-if-it-does-not-already-exist-containing-the-full-booking-form-wire-the-servicecard-button-to-route-to-this-page",
-      "title": "Fix the 'Book Online' button on each ServiceCard so that clicking it navigates the user to a dedicated booking page (e.g. /booking). Create a BookingPage component if it does not already exist, containing the full booking form. Wire the ServiceCard button to route to this page.",
+      "id": "feature-create-a-new-mechanicregistrationpage-component-at-frontend-src-pages-mechanicregistrationpage-tsx-this-is-a-standalone-full-page-not-a-modal-with-the-following-form-fields-full-name-text-required-phone-number-tel-required-email-email-optional-service-type-dropdown-plumber-electrician-fan-cooler-repair-ac-repair-mechanic-required-experience-dropdown-less-than-1-year-1-3-years-3-5-years-5-years-required-address-in-mahipalpur-textarea-required-age-number-optional-preferred-area-dropdown-mahipalpur-extension-village-aerocity-other-optional-why-want-to-join-textarea-optional-the-form-must-post-to-https-formsubmit-co-pandeyxkanha-gmail-com-with-these-hidden-fields-subject-new-mechanic-registration-template-table-captcha-false-next-https-quickrepair-84g-caffeine-xyz-mechanic-thankyou-html-and-a-honeypot-honey-field-display-none-on-form-submit-before-redirect-show-a-full-screen-gpay-style-success-overlay-with-animated-green-checkmark-svg-and-play-the-ascending-c-e-g-chime-using-the-existing-playsuccesssound-utility-then-after-2-seconds-allow-the-formsubmit-redirect-to-proceed-submit-button-text-register-as-mechanic-background-ff8c42-hover-scale-1-05-page-styling-must-match-website-theme-dark-background-0a2b3c-orange-ff8c42-yellow-ffd700-mobile-friendly",
+      "title": "Create a new MechanicRegistrationPage component at frontend/src/pages/MechanicRegistrationPage.tsx. This is a standalone full page (not a modal) with the following form fields: Full Name (text, required), Phone Number (tel, required), Email (email, optional), Service Type (dropdown: Plumber, Electrician, Fan/Cooler Repair, AC Repair, Mechanic, required), Experience (dropdown: Less than 1 year, 1-3 years, 3-5 years, 5+ years, required), Address in Mahipalpur (textarea, required), Age (number, optional), Preferred Area (dropdown: Mahipalpur Extension, Village, Aerocity, Other, optional), Why want to join? (textarea, optional). The form must POST to https://formsubmit.co/pandeyxkanha@gmail.com with these hidden fields: _subject='👨‍🔧 New Mechanic Registration', _template='table', _captcha='false', _next='https://quickrepair-84g.caffeine.xyz/mechanic-thankyou.html', and a honeypot _honey field (display:none). On form submit (before redirect), show a full-screen GPay-style success overlay with animated green checkmark SVG and play the ascending C-E-G chime using the existing playSuccessSound utility, then after ~2 seconds allow the formsubmit redirect to proceed. Submit button text: '📝 Register as Mechanic', background: #ff8c42, hover scale 1.05. Page styling must match website theme: dark background (#0a2b3c), orange (#ff8c42), yellow (#FFD700), mobile-friendly.",
       "reqIds": [
         "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-mechanic-registration-route-to-app-tsx-so-that-navigating-to-that-path-renders-the-new-mechanicregistrationpage-component",
+      "title": "Add the /mechanic-registration route to App.tsx so that navigating to that path renders the new MechanicRegistrationPage component.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-admin-panel-authorization-issue-in-the-backend-main-mo-the-addservice-and-editservice-deleteservice-functions-currently-return-an-unauthorized-error-for-the-admin-audit-the-role-based-access-control-logic-the-admin-principal-check-must-correctly-identify-the-logged-in-admin-and-permit-service-crud-operations-ensure-the-admin-password-session-stored-in-adminpage-tsx-frontend-state-correctly-pairs-with-whatever-backend-auth-mechanism-is-used-or-if-the-backend-uses-caller-based-auth-ensure-the-frontend-passes-the-authenticated-actor-services-added-edited-deleted-via-admin-must-be-persisted-in-backend-stable-storage",
+      "title": "Fix the admin panel authorization issue: in the backend (main.mo), the 'addService' (and editService/deleteService) functions currently return an unauthorized error for the admin. Audit the role-based access control logic — the admin principal check must correctly identify the logged-in admin and permit service CRUD operations. Ensure the admin password session stored in AdminPage.tsx frontend state correctly pairs with whatever backend auth mechanism is used (or if the backend uses caller-based auth, ensure the frontend passes the authenticated actor). Services added/edited/deleted via admin must be persisted in backend stable storage.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-services-added-via-the-admin-panel-must-appear-on-the-website-s-servicessection-currently-servicessection-tsx-renders-five-hardcoded-services-replace-the-hardcoded-list-with-a-dynamic-fetch-from-the-backend-using-the-existing-react-query-hooks-e-g-useservices-or-equivalent-if-no-such-query-exists-add-a-getservices-query-in-usequeries-ts-and-a-corresponding-getservices-query-function-in-backend-main-mo-that-returns-the-stored-services-list-servicecard-should-render-dynamically-fetched-services-alongside-or-replacing-any-static-defaults",
+      "title": "Services added via the admin panel must appear on the website's ServicesSection. Currently ServicesSection.tsx renders five hardcoded services. Replace the hardcoded list with a dynamic fetch from the backend using the existing React Query hooks (e.g., useServices or equivalent). If no such query exists, add a getServices query in useQueries.ts and a corresponding getServices() query function in backend/main.mo that returns the stored services list. ServiceCard should render dynamically fetched services alongside (or replacing) any static defaults.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-admin-panel-to-display-mechanic-registration-details-since-mechanic-registrations-are-submitted-via-formsubmit-co-external-service-and-not-stored-in-the-icp-backend-add-a-mechanism-to-also-store-mechanic-registration-data-in-the-backend-add-a-submitmechanicregistration-name-phone-email-servicetype-experience-address-age-preferredarea-whyjoin-public-shared-func-in-main-mo-that-stores-registrations-in-a-stable-array-list-add-a-getmechanicregistrations-admin-only-query-func-that-returns-all-registrations-in-adminpage-tsx-add-a-mechanic-registrations-tab-section-that-fetches-and-displays-all-registrations-with-columns-full-name-phone-email-service-type-experience-address-age-preferred-area-why-join-in-mechanicregistrationpage-after-the-form-is-built-for-formsubmit-co-also-call-submitmechanicregistration-on-the-backend-canister-fire-and-forget-or-alongside-the-form-post-so-data-is-captured-in-the-admin-panel",
+      "title": "Fix the admin panel to display mechanic registration details. Since mechanic registrations are submitted via formsubmit.co (external service) and not stored in the ICP backend, add a mechanism to also store mechanic registration data in the backend. Add a submitMechanicRegistration(name, phone, email, serviceType, experience, address, age, preferredArea, whyJoin) public shared func in main.mo that stores registrations in a stable array/list. Add a getMechanicRegistrations() admin-only query func that returns all registrations. In AdminPage.tsx, add a 'Mechanic Registrations' tab/section that fetches and displays all registrations with columns: Full Name, Phone, Email, Service Type, Experience, Address, Age, Preferred Area, Why Join. In MechanicRegistrationPage, after the form is built for formsubmit.co, also call submitMechanicRegistration() on the backend canister (fire-and-forget or alongside the form POST) so data is captured in the admin panel.",
+      "reqIds": [
+        "REQ-7"
       ],
       "version": 1
     }
   ],
   "new_feature_requests": [
     {
+      "id": "AR-1",
+      "summary": "Replace 'Become a Mechanic' in hamburger menu with '👨‍🔧 Mechanic Registration' option",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Create separate Mechanic Registration page with all required fields (Name, Phone, Service Type, Experience, Address, Age, Preferred Area, Why join), formsubmit.co POST to pandeyxkanha@gmail.com, and GPay-style success animation (green checkmark + sound)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Remove 'Call Now' circle button from the website",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
       "id": "AR-4",
-      "summary": "Update the Admin panel to display a comprehensive list of all registered users with their full profile data: name, phone number, principal ID, service area, and sign-in/registration time. Also display all submitted bookings linked to each user where available.",
-      "reqIds": [
-        "REQ-4"
-      ],
+      "summary": "Fix admin panel (/admin): show mechanic registration details (name, mobile, email, service type, address), fix 'Unauthorized User' error when adding services, and make added services appear on the website",
+      "reqIds": [],
       "status": "pending"
     }
   ],

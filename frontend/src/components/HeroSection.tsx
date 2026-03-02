@@ -100,7 +100,7 @@ export default function HeroSection() {
               boxShadow: '0 8px 30px rgba(255,140,66,0.4)',
             }}
           >
-            📅 Book Online Now
+            Book Online Now
           </button>
 
           <a

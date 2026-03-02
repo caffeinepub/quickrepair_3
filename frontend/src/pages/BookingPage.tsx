@@ -1,6 +1,41 @@
-import { ArrowLeft } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { ArrowLeft, LogIn, Loader2 } from 'lucide-react';
+import BookingSuccessOverlay from '../components/BookingSuccessOverlay';
+import { playSuccessSound } from '../utils/playSuccessSound';
+import { useInternetIdentity } from '../hooks/useInternetIdentity';
 
 export default function BookingPage() {
+  const [showSuccess, setShowSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const { identity, login, loginStatus, isInitializing } = useInternetIdentity();
+  const isAuthenticated = !!identity;
+  const isLoggingIn = loginStatus === 'logging-in';
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    // Submit form data to FormSubmit via fetch (fire-and-forget)
+    const formData = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { Accept: 'application/json' },
+    }).catch(() => {
+      // Silently ignore network errors — confirmation still shown
+    });
+
+    // Show GPay-style success overlay and play sound
+    playSuccessSound();
+    setShowSuccess(true);
+  };
+
+  const handleOverlayClose = () => {
+    setShowSuccess(false);
+    if (formRef.current) formRef.current.reset();
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0d0d0d' }}>
       {/* Simple Header */}
@@ -38,251 +73,302 @@ export default function BookingPage() {
               Online Booking
             </span>
             <h1 className="font-display text-3xl sm:text-4xl font-black text-white mb-3">
-              📅 Book a Service
+              Book a Service
             </h1>
             <p className="text-gray-400 text-base max-w-lg mx-auto">
               Fill in the form below and our team will confirm your booking right away.
             </p>
           </div>
 
-          {/* Booking Form Card */}
-          <div
-            className="rounded-2xl p-6 sm:p-8"
-            style={{
-              backgroundColor: '#161616',
-              border: '1px solid #252525',
-              boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
-            }}
-          >
-            <form
-              action="https://formsubmit.co/pandeyxkanha@gmail.com"
-              method="POST"
-              className="space-y-5"
+          {/* Initializing */}
+          {isInitializing && (
+            <div className="flex items-center justify-center py-20">
+              <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#FF8C42' }} />
+            </div>
+          )}
+
+          {/* Not Authenticated — Sign In Prompt */}
+          {!isInitializing && !isAuthenticated && (
+            <div
+              className="rounded-2xl p-8 text-center"
+              style={{
+                backgroundColor: '#161616',
+                border: '1px solid #252525',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
+              }}
             >
-              {/* Hidden fields */}
-              <input type="hidden" name="_subject" value="🔧 New Booking from QuickRepair" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="hidden"
-                name="_next"
-                value="https://quickrepair-84g.caffeine.xyz/thankyou.html"
-              />
-              {/* Honeypot */}
-              <input type="text" name="_honey" style={{ display: 'none' }} />
-
-              {/* Full Name */}
-              <div>
-                <label
-                  htmlFor="bp-fullName"
-                  className="block text-sm font-semibold mb-1.5"
-                  style={{ color: '#e0e0e0' }}
-                >
-                  Full Name <span style={{ color: '#FF8C42' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="bp-fullName"
-                  name="Full Name"
-                  required
-                  placeholder="Enter your full name"
-                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                  style={{
-                    backgroundColor: '#1e1e1e',
-                    border: '1px solid #2e2e2e',
-                    color: '#fff',
-                    caretColor: '#FF8C42',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
-                />
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                style={{ background: 'rgba(255,140,66,0.12)', border: '1px solid rgba(255,140,66,0.25)' }}
+              >
+                <LogIn className="w-7 h-7" style={{ color: '#FF8C42' }} />
               </div>
-
-              {/* Phone Number */}
-              <div>
-                <label
-                  htmlFor="bp-phone"
-                  className="block text-sm font-semibold mb-1.5"
-                  style={{ color: '#e0e0e0' }}
-                >
-                  Phone Number <span style={{ color: '#FF8C42' }}>*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="bp-phone"
-                  name="Phone Number"
-                  required
-                  placeholder="Enter your phone number"
-                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                  style={{
-                    backgroundColor: '#1e1e1e',
-                    border: '1px solid #2e2e2e',
-                    color: '#fff',
-                    caretColor: '#FF8C42',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label
-                  htmlFor="bp-email"
-                  className="block text-sm font-semibold mb-1.5"
-                  style={{ color: '#e0e0e0' }}
-                >
-                  Email <span className="text-gray-600 font-normal">(optional)</span>
-                </label>
-                <input
-                  type="email"
-                  id="bp-email"
-                  name="Email"
-                  placeholder="Enter your email address"
-                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
-                  style={{
-                    backgroundColor: '#1e1e1e',
-                    border: '1px solid #2e2e2e',
-                    color: '#fff',
-                    caretColor: '#FF8C42',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
-                />
-              </div>
-
-              {/* Service */}
-              <div>
-                <label
-                  htmlFor="bp-service"
-                  className="block text-sm font-semibold mb-1.5"
-                  style={{ color: '#e0e0e0' }}
-                >
-                  Service <span style={{ color: '#FF8C42' }}>*</span>
-                </label>
-                <select
-                  id="bp-service"
-                  name="Service"
-                  required
-                  defaultValue=""
-                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
-                  style={{
-                    backgroundColor: '#1e1e1e',
-                    border: '1px solid #2e2e2e',
-                    color: '#fff',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
-                >
-                  <option value="" disabled style={{ color: '#666' }}>
-                    Select a service
-                  </option>
-                  <option value="Plumber ₹499">Plumber ₹499</option>
-                  <option value="Electrician ₹299">Electrician ₹299</option>
-                  <option value="Fan/Cooler ₹199">Fan/Cooler ₹199</option>
-                  <option value="AC Repair ₹499">AC Repair ₹499</option>
-                  <option value="Mechanic ₹349">Mechanic ₹349</option>
-                </select>
-              </div>
-
-              {/* Address */}
-              <div>
-                <label
-                  htmlFor="bp-address"
-                  className="block text-sm font-semibold mb-1.5"
-                  style={{ color: '#e0e0e0' }}
-                >
-                  Address <span style={{ color: '#FF8C42' }}>*</span>
-                </label>
-                <textarea
-                  id="bp-address"
-                  name="Address"
-                  required
-                  rows={3}
-                  placeholder="Enter your full address"
-                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
-                  style={{
-                    backgroundColor: '#1e1e1e',
-                    border: '1px solid #2e2e2e',
-                    color: '#fff',
-                    caretColor: '#FF8C42',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
-                />
-              </div>
-
-              {/* Problem Description */}
-              <div>
-                <label
-                  htmlFor="bp-problem"
-                  className="block text-sm font-semibold mb-1.5"
-                  style={{ color: '#e0e0e0' }}
-                >
-                  Problem Description{' '}
-                  <span className="text-gray-600 font-normal">(optional)</span>
-                </label>
-                <textarea
-                  id="bp-problem"
-                  name="Problem Description"
-                  rows={3}
-                  placeholder="Describe the issue briefly"
-                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
-                  style={{
-                    backgroundColor: '#1e1e1e',
-                    border: '1px solid #2e2e2e',
-                    color: '#fff',
-                    caretColor: '#FF8C42',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
-                />
-              </div>
-
-              {/* Preferred Time */}
-              <div>
-                <label
-                  htmlFor="bp-preferredTime"
-                  className="block text-sm font-semibold mb-1.5"
-                  style={{ color: '#e0e0e0' }}
-                >
-                  Preferred Time
-                </label>
-                <select
-                  id="bp-preferredTime"
-                  name="Preferred Time"
-                  className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
-                  style={{
-                    backgroundColor: '#1e1e1e',
-                    border: '1px solid #2e2e2e',
-                    color: '#fff',
-                  }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
-                >
-                  <option value="ASAP">ASAP</option>
-                  <option value="Within 10 minutes">Within 10 minutes</option>
-                  <option value="Within 15 MINUTES">Within 15 MINUTES</option>
-                  <option value="Within 30 minutes">Within 30 minutes</option>
-                  <option value="Within 1 hour">Within 1 hour</option>
-                  <option value="Today">Today</option>
-                </select>
-              </div>
-
-              {/* Submit Button */}
+              <h2 className="text-xl font-bold text-white mb-2">Sign In Required</h2>
+              <p className="text-gray-400 text-sm mb-6">
+                Booking karne ke liye pehle sign in karein.
+              </p>
               <button
-                type="submit"
-                className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-[1.02] active:scale-95 mt-2"
+                onClick={login}
+                disabled={isLoggingIn}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 disabled:opacity-60"
                 style={{
                   backgroundColor: '#ff8c42',
                   color: '#fff',
                   boxShadow: '0 6px 24px rgba(255,140,66,0.4)',
                 }}
               >
-                Confirm Booking
+                {isLoggingIn ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <LogIn className="w-4 h-4" />
+                )}
+                {isLoggingIn ? 'Signing in…' : 'Sign In'}
               </button>
-            </form>
-          </div>
+            </div>
+          )}
+
+          {/* Authenticated — Booking Form Card */}
+          {!isInitializing && isAuthenticated && (
+            <div
+              className="rounded-2xl p-6 sm:p-8"
+              style={{
+                backgroundColor: '#161616',
+                border: '1px solid #252525',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
+              }}
+            >
+              <form
+                ref={formRef}
+                action="https://formsubmit.co/pandeyxkanha@gmail.com"
+                method="POST"
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+                {/* Hidden fields */}
+                <input type="hidden" name="_subject" value="🔧 New Booking from QuickRepair" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input
+                  type="hidden"
+                  name="_next"
+                  value="https://quickrepair-84g.caffeine.xyz/thankyou.html"
+                />
+                {/* Honeypot */}
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+
+                {/* Full Name */}
+                <div>
+                  <label
+                    htmlFor="bp-fullName"
+                    className="block text-sm font-semibold mb-1.5"
+                    style={{ color: '#e0e0e0' }}
+                  >
+                    Full Name <span style={{ color: '#FF8C42' }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="bp-fullName"
+                    name="Full Name"
+                    required
+                    placeholder="Enter your full name"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
+                    style={{
+                      backgroundColor: '#1e1e1e',
+                      border: '1px solid #2e2e2e',
+                      color: '#fff',
+                      caretColor: '#FF8C42',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
+                  />
+                </div>
+
+                {/* Phone Number */}
+                <div>
+                  <label
+                    htmlFor="bp-phone"
+                    className="block text-sm font-semibold mb-1.5"
+                    style={{ color: '#e0e0e0' }}
+                  >
+                    Phone Number <span style={{ color: '#FF8C42' }}>*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="bp-phone"
+                    name="Phone Number"
+                    required
+                    placeholder="Enter your phone number"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
+                    style={{
+                      backgroundColor: '#1e1e1e',
+                      border: '1px solid #2e2e2e',
+                      color: '#fff',
+                      caretColor: '#FF8C42',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label
+                    htmlFor="bp-email"
+                    className="block text-sm font-semibold mb-1.5"
+                    style={{ color: '#e0e0e0' }}
+                  >
+                    Email <span className="text-gray-600 font-normal">(optional)</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="bp-email"
+                    name="Email"
+                    placeholder="Enter your email address"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
+                    style={{
+                      backgroundColor: '#1e1e1e',
+                      border: '1px solid #2e2e2e',
+                      color: '#fff',
+                      caretColor: '#FF8C42',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
+                  />
+                </div>
+
+                {/* Service */}
+                <div>
+                  <label
+                    htmlFor="bp-service"
+                    className="block text-sm font-semibold mb-1.5"
+                    style={{ color: '#e0e0e0' }}
+                  >
+                    Service <span style={{ color: '#FF8C42' }}>*</span>
+                  </label>
+                  <select
+                    id="bp-service"
+                    name="Service"
+                    required
+                    defaultValue=""
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
+                    style={{
+                      backgroundColor: '#1e1e1e',
+                      border: '1px solid #2e2e2e',
+                      color: '#fff',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
+                  >
+                    <option value="" disabled style={{ color: '#666' }}>
+                      Select a service
+                    </option>
+                    <option value="Plumber ₹499">Plumber ₹499</option>
+                    <option value="Electrician ₹299">Electrician ₹299</option>
+                    <option value="Fan/Cooler ₹199">Fan/Cooler ₹199</option>
+                    <option value="AC Repair ₹499">AC Repair ₹499</option>
+                    <option value="Mechanic ₹349">Mechanic ₹349</option>
+                  </select>
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label
+                    htmlFor="bp-address"
+                    className="block text-sm font-semibold mb-1.5"
+                    style={{ color: '#e0e0e0' }}
+                  >
+                    Address <span style={{ color: '#FF8C42' }}>*</span>
+                  </label>
+                  <textarea
+                    id="bp-address"
+                    name="Address"
+                    required
+                    rows={3}
+                    placeholder="Enter your full address"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
+                    style={{
+                      backgroundColor: '#1e1e1e',
+                      border: '1px solid #2e2e2e',
+                      color: '#fff',
+                      caretColor: '#FF8C42',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
+                  />
+                </div>
+
+                {/* Problem Description */}
+                <div>
+                  <label
+                    htmlFor="bp-problem"
+                    className="block text-sm font-semibold mb-1.5"
+                    style={{ color: '#e0e0e0' }}
+                  >
+                    Problem Description{' '}
+                    <span className="text-gray-600 font-normal">(optional)</span>
+                  </label>
+                  <textarea
+                    id="bp-problem"
+                    name="Problem Description"
+                    rows={3}
+                    placeholder="Describe the issue briefly"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 resize-none"
+                    style={{
+                      backgroundColor: '#1e1e1e',
+                      border: '1px solid #2e2e2e',
+                      color: '#fff',
+                      caretColor: '#FF8C42',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
+                  />
+                </div>
+
+                {/* Preferred Time */}
+                <div>
+                  <label
+                    htmlFor="bp-preferredTime"
+                    className="block text-sm font-semibold mb-1.5"
+                    style={{ color: '#e0e0e0' }}
+                  >
+                    Preferred Time
+                  </label>
+                  <select
+                    id="bp-preferredTime"
+                    name="Preferred Time"
+                    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
+                    style={{
+                      backgroundColor: '#1e1e1e',
+                      border: '1px solid #2e2e2e',
+                      color: '#fff',
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = '#FF8C42')}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = '#2e2e2e')}
+                  >
+                    <option value="ASAP">ASAP</option>
+                    <option value="Within 10 minutes">Within 10 minutes</option>
+                    <option value="Within 15 MINUTES">Within 15 MINUTES</option>
+                    <option value="Within 30 minutes">Within 30 minutes</option>
+                    <option value="Within 1 hour">Within 1 hour</option>
+                    <option value="Today">Today</option>
+                  </select>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-[1.02] active:scale-95 mt-2"
+                  style={{
+                    backgroundColor: '#ff8c42',
+                    color: '#fff',
+                    boxShadow: '0 6px 24px rgba(255,140,66,0.4)',
+                  }}
+                >
+                  Confirm Booking
+                </button>
+              </form>
+            </div>
+          )}
 
           {/* Back link */}
           <div className="text-center mt-8">
@@ -296,6 +382,9 @@ export default function BookingPage() {
           </div>
         </div>
       </main>
+
+      {/* GPay-style booking success overlay */}
+      <BookingSuccessOverlay visible={showSuccess} onClose={handleOverlayClose} />
     </div>
   );
 }

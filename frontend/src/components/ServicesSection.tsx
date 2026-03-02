@@ -1,9 +1,11 @@
 import { useRef } from 'react';
 import { useFadeIn } from '../hooks/useFadeIn';
 import ServiceCard from './ServiceCard';
-import { Droplets, Zap, Wind, AirVent, Wrench } from 'lucide-react';
+import { Droplets, Zap, Wind, AirVent, Wrench, Loader2 } from 'lucide-react';
+import { useGetAllServices } from '../hooks/useQueries';
 
-const services = [
+// Fallback services shown when backend has no services yet
+const FALLBACK_SERVICES = [
   {
     name: 'Plumber',
     price: '499',
@@ -36,8 +38,22 @@ const services = [
   },
 ];
 
+// Map icon emoji/text to a Lucide icon component
+function getIconComponent(iconStr: string) {
+  const lower = iconStr.toLowerCase();
+  if (lower.includes('drop') || lower.includes('water') || lower.includes('plumb') || iconStr === '🚿' || iconStr === '💧') return Droplets;
+  if (lower.includes('zap') || lower.includes('elec') || iconStr === '⚡') return Zap;
+  if (lower.includes('wind') || lower.includes('fan') || lower.includes('cool') || iconStr === '💨') return Wind;
+  if (lower.includes('ac') || lower.includes('air') || iconStr === '❄️') return AirVent;
+  return Wrench;
+}
+
 export default function ServicesSection() {
   const { ref, isVisible } = useFadeIn();
+  const { data: backendServices, isLoading } = useGetAllServices();
+
+  // Use backend services if available, otherwise fall back to hardcoded
+  const hasBackendServices = backendServices && backendServices.length > 0;
 
   return (
     <section
@@ -68,16 +84,36 @@ export default function ServicesSection() {
           </p>
         </div>
 
+        {/* Loading state */}
+        {isLoading && (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#FF8C42' }} />
+          </div>
+        )}
+
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={service.name}
-              {...service}
-              delay={index * 80}
-            />
-          ))}
-        </div>
+        {!isLoading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {hasBackendServices
+              ? backendServices.map((service, index) => (
+                  <ServiceCard
+                    key={service.id.toString()}
+                    name={service.name}
+                    price={service.startingPrice.toString()}
+                    icon={getIconComponent(service.icon)}
+                    description={service.description}
+                    delay={index * 80}
+                  />
+                ))
+              : FALLBACK_SERVICES.map((service, index) => (
+                  <ServiceCard
+                    key={service.name}
+                    {...service}
+                    delay={index * 80}
+                  />
+                ))}
+          </div>
+        )}
 
         {/* Bottom CTA — scroll to booking form */}
         <div className="text-center mt-12">
